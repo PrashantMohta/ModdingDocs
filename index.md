@@ -11,7 +11,7 @@ The next few sections will give you a deeper idea of what modding hollow knight 
  - Concepts
 	 - [Logging](#todo-section)
 	 - [Hooks](#todo-section)
-	 - [Preloads](#todo-section)
+	 - [Preloads](preloads)
 	 - [FSMs](#todo-section)
 	 - [Hollow Knight Classes](#todo-section)
 	 - [Dependency Mods](#todo-section)
