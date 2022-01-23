@@ -61,8 +61,8 @@ Output:
 
 ## Log Levels:  
 There are 5 different types of logs:  
-|Level| Function |Description|  
   
+|Level| Function |Description|  
 |-|-|-|  
 |Error| `LogError();`| Should be used to log errors that occured when code is running.|  
 |Warn| `LogWarn();`| Should be used to log warning to users.|  
@@ -76,8 +76,8 @@ By default, `LogDebug` and `LogFine` will not be seen in the modlog and/or ingam
 ```
 
 The acceptable levels for this range from 0-6 where 5 is the least and 0 is the most:  
-|Level|Amount of logging|  
   
+|Level|Amount of logging|  
 |--|--|  
 |5|None|  
 |4|Error.|  
