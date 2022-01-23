@@ -9,7 +9,7 @@
 The next few sections will give you a better idea of what modding hollow knight looks like beyond simple mods, tools & techniques that exist to make the job easier. It goes without saying that the [Unity Scripting Reference](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/) and [Microsoft .NET API browser](https://docs.microsoft.com/en-us/dotnet/api/?view=netframework-4.7.2) are absolutely invaluable references when working within unity. In the context of hollow knight modding though, there are a few more concepts and resources that you want to be looking it. 
 
  - Concepts
-	 - [Logging](https://prashantmohta.github.io/ModdingDocs/logging)
+	 - [Logging](logging.md)
 	 - [Hooks](#todo-section)
 	 - [Preloads](preloads.md)
 	 - [PlaymakerFSMs](#todo-section)
