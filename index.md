@@ -1,13 +1,13 @@
-# Getting started with Modding Hollow Knight 
+# Getting started with Modding Hollow Knight  
 
 > Please note that this documentation is being written with the latest patch of the game in mind, for older patches you can refer to the documentation at [radiance.host](https://radiance.host/apidocs/Getting-Started.html)
 
-## Introduction
-Hollow Knight ( patch 1.5.x.x onwards ) is a game built with Unity 2020.2.2 and  C# ( .NET Framework 4.7.2 ) , This means that a mod in the context of hollow knight is a `dll` or a Dynamic-link library that allows players to modify the behavior of the game, fix issues or add new features. This is achieved with the help of a Modding Api that handles loading the mods and giving us ways of injecting our code in the middle of normal logic.
+## Introduction:  
+Hollow Knight (patch 1.5.x.x onwards) is a game built with Unity 2020.2.2 and C# (.NET Framework 4.7.2), this means that a mod in the context of hollow knight is a `dll` or a Dynamic-Link Library that allows players to modify the behavior of the game, fix issues or add new features. This is achieved with the help of a Modding Api that handles the loading of mods and giving us ways of injecting ourv own code in the middle of normal logic.
 
-The [Hollow Knight Modding Api](https://github.com/hk-modding/api)   is based on [MonoMod](https://github.com/MonoMod/MonoMod), a General purpose .NET assembly modding "basework".
+The [Hollow Knight Modding Api](https://github.com/hk-modding/api) is based on [MonoMod](https://github.com/MonoMod/MonoMod), a General purpose .NET assembly modding "basework".
 
-## What you will need
+## What you will need:  
 
  - A Windows / Linux / Mac device that you can code on.
  - A Legitimate copy of Hollow Knight on PC (Steam / GoG / HumbleBundle).
@@ -15,7 +15,7 @@ The [Hollow Knight Modding Api](https://github.com/hk-modding/api)   is based on
  - A copy of the [Hollow Knight Modding Api](https://github.com/hk-modding/api) binary (dll) files
  - Visual Studio Community and .NET Framework 4.7.2 
 
-## System Setup 
+## System Setup:  
 
 To Setup your system for modding, you need to do the following steps. if you prefer, you can refer to the video guides below and follow along as well.
 
@@ -27,11 +27,10 @@ To Setup your system for modding, you need to do the following steps. if you pre
 
 You're now done setting up your system for creating your first hollow knight mod.
 
-### Windows 
+### Windows:  
 [![Windows guide video](https://prashantmohta.github.io/ModdingDocs/Images/step1guidewin.jpg)](https://www.youtube.com/watch?v=qT9a0k0fqqM)
 
-### Mac 
-> TODO Add a video here that goes over setting up and installing all of this
-### Linux 
-> TODO Add a video here that goes over setting up and installing all of this
-
+### Mac:  
+> **TODO:** Add a video here that goes over setting up and installing all of this
+### Linux:  
+> **TODO:** Add a video here that goes over setting up and installing all of this
