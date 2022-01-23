@@ -22,6 +22,8 @@ In the list returned by `GetPreloadNames` each element is of the form `(SceneNam
 
 Gameobjects can have a parent child relationship, so the GameObjectPath is the list of all ancesstors in the order of decending seniority separated by a `/`   i.e. `GreatGrandParent/GrandParent/Parent/Child` for loading Child.
 
+>Note: you can use the [Scene Dump](https://prashantmohta.github.io/ModdingDocs/#todo-section) to find the path of a particular gameobject
+
 The Scene name and this path allow the modding api to locate the exact object that is desired and this object will be provided to your mod during initialization. for this reason your mod must implement a `Initialize` method similar to this when expecting preloads :
 
 ```cs
