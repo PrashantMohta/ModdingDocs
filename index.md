@@ -6,7 +6,7 @@
   
 # Deeper dive into modding
 
-The next few sections will give you a deeper idea of what modding hollow knight looks like beyond simple mods and what are some of the tools & techniques that exist that can make the job easier.
+The next few sections will give you a deeper idea of what modding hollow knight looks like beyond simple mods and what are some of the tools & techniques that exist that can make the job easier. It goes without saying that the [Unity Scripting Reference](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/) and [Microsoft .NET API browser](https://docs.microsoft.com/en-us/dotnet/api/?view=netframework-4.7.2) are absolutely invaluable references when working within unity, in the context of hollow knight modding though, there are a few more concepts and resources that you want to be looking it. 
 
  - Concepts
 	 - [Logging](#todo-section)
@@ -15,19 +15,22 @@ The next few sections will give you a deeper idea of what modding hollow knight 
 	 - [FSMs](#todo-section)
 	 - [Hollow Knight Classes](#todo-section)
 	 - [Dependency Mods](#todo-section)
-  	 - [Mod Menu](#todo-section)
+	 - [Mod Menu](#todo-section)
 	 - [Scripting](#todo-section)
 
  - Investigative tools
 	   <br>These tools can help investigate how a system works in the game so that you can figure out the best way to modify it.
 	 - [Ilspy](#todo-section)
-	 - [FSMAvalonia](#todo-section) 
+	 - [FSMAvalonia](#todo-section)
 	 - [Unity Explorer](#todo-section)
 	 - [Scene Dump](#todo-section)
 
  - Advanced Concepts
-  	 - [Reflection](#todo-section)
+	 - [Reflection](#todo-section)
 	 - [IL Hooks](#todo-section)
+	 - [Custom NPC](#todo-section)
+	 - [Custom Enemy](#todo-section)
+	 - [Custom Scene](#todo-section)
 
 # Publishing and distributing your mod
 
