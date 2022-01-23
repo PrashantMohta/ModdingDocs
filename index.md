@@ -15,6 +15,7 @@ The next few sections will give you a deeper idea of what modding hollow knight 
 	 - [FSMs](#todo-section)
 	 - [Hollow Knight Classes](#todo-section)
 	 - [Dependency Mods](#todo-section)
+  	 - [Mod Menu](#todo-section)
 	 - [Scripting](#todo-section)
 
  - Investigative tools
@@ -23,6 +24,10 @@ The next few sections will give you a deeper idea of what modding hollow knight 
 	 - [FSMAvalonia](#todo-section) 
 	 - [Unity Explorer](#todo-section)
 	 - [Scene Dump](#todo-section)
+
+ - Advanced Concepts
+  	 - [Reflection](#todo-section)
+	 - [IL Hooks](#todo-section)
 
 # Publishing and distributing your mod
 
