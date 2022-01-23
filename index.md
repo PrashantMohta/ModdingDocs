@@ -12,7 +12,7 @@ The next few sections will give you a better idea of what modding hollow knight 
 	 - [Logging](logging.md)
 	 - [Hooks](#todo-section)
 	 - [Preloads](preloads.md)
-	 - [PlaymakerFSMs](#todo-section)
+	 - [PlaymakerFSMs](understanding-fsms.md)
 	 - [Hollow Knight Classes](#todo-section)
 	 - [Dependency Mods](#todo-section)
 	 - [Mod Menu](#todo-section)
