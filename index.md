@@ -27,9 +27,10 @@ To Setup your system for modding, you need to do the following steps. if you pre
 
 You're now done setting up your system for creating your first hollow knight mod.
 
-### Mac 
-> TODO Add a video here that goes over setting up and installing all of this
 ### Windows 
+[![Windows guide video](https://prashantmohta.github.io/ModdingDocs/Images/step1guidewin.jpg)](https://www.youtube.com/watch?v=qT9a0k0fqqM)
+
+### Mac 
 > TODO Add a video here that goes over setting up and installing all of this
 ### Linux 
 > TODO Add a video here that goes over setting up and installing all of this
