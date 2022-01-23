@@ -16,8 +16,8 @@ While modifying FSMs directly via code is possible, because it is such a common 
 
 ### Common Tasks with FSMs
  - [Access an FSM](#access-an-fsm)
- - [Working with States](#working-with-state)
- - [Working with Actions](#working-with-action)
+ - [Working with States](#working-with-states)
+ - [Working with Actions](#working-with-actions)
  - [Custom Action](#custom-action)
  - [Working with Transitions](#working-with-transitions)
 
