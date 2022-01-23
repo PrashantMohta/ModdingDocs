@@ -61,7 +61,8 @@ Strictly speaking, there is no need to use a template to create your mod. it wil
 
 To install the template : 
  - Download the [Template Zip](https://cdn.discordapp.com/attachments/879130756146954240/931586813729075270/Hollow_Knight_1.5_Mod.zip) 
-- Move this zip to `{documents folder}\Visual Studio 2022\Templates\ProjectTemplates` - Restart visual studio 
+ - Move this zip to `{documents folder}\Visual Studio 2022\Templates\ProjectTemplates`
+ - Restart visual studio 
 
 ## Create your Mod using the Mod Template
 
@@ -76,4 +77,15 @@ To install the template :
 The Mod Template automatically copies the compiled `dll` of your mod into the right folder when a successful build is created (and the game is not running), so all you have to do next is start the game and you should see your mod in the top - left.
 if you start a save and press `O` your `modlog.txt` will now contain the text `Key Pressed`
 
->TODO add instructions to enable modlog console and path to modlog.txt
+>TODO add instructions to enable modlog console
+
+## Finding your modlog 
+`ModLog.txt` can be found in the same folder as your save files:
+- Windows: `%APPDATA%\..\LocalLow\Team Cherry\Hollow Knight\`
+- MacOS  : `~/Library/Application Support/unity.Team Cherry.Hollow Knight/`
+- Linux  : `~/.config/unity3d/Team Cherry/Hollow Knight/`
+
+To easily get ModLog on Windows:
+- Press Windows logo key + R
+- Copy and paste this into it `%appdata%\..\LocalLow\Team Cherry\Hollow Knight` and hit "OK"
+- ModLog.txt is in this folder.
