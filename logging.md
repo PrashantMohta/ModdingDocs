@@ -60,30 +60,30 @@ Output:
 > Note: You can use the use `Modding.Logger` from the Modding API but it is not recommended to do so as it doesnt display the name of your mod in the log.
 
 ## Log Levels:  
-There are 5 different types of logs
-|Level| Function |Description|
-|-|-|-|
-|Error| `LogError();`| Should be used to log errors that occured when code is running.|
-|Warn| `LogWarn();`| Should be used to log warning to users.|
-|Info| `Log();`| Should be used for normal logs.|
-|Debug| `LogDebug();`| Should be used for log to debug code. Using default settings, it won't be seen on regular user's modlog|
-|Fine|`LogFine();`| Used by Modding API to log. Could be used but is bloated by logs from Modding API.|
-
+There are 5 different types of logs:  
+|Level| Function |Description|  
+|-|-|-|  
+|Error| `LogError();`| Should be used to log errors that occured when code is running.|  
+|Warn| `LogWarn();`| Should be used to log warning to users.|  
+|Info| `Log();`| Should be used for normal logs.|  
+|Debug| `LogDebug();`| Should be used for log to debug code. Using default settings, it won't be seen on regular user's modlog|  
+|Fine|`LogFine();`| Used by Modding API to log. Could be used but is bloated by logs from Modding API.|  
+  
 By default, `LogDebug` and `LogFine` will not be seen in the modlog and/or ingame console, To change the level of logs you can see, locate the `ModdingApi.GlobalSettings.json` in the saves folder. There you will be able to see a setting called `LoggingLevel`. the default is 2 but it is recommeded to set it to 1:
 ```txt 
 "LoggingLevel": 1,
 ```
 
 The acceptable levels for this range from 0-6 where 5 is the least and 0 is the most:  
-|Level|Amount of logging|
-|--|--|
-|5|None|
-|4|Error.|
-|3|Error, Warn.|
-|2|Error, Warn, Info. (This is the default setting)| 
-|1| Error, Warn, Info, Debug.|
-|0| Error, Warn, Info, Debug, Fine.|
-
+|Level|Amount of logging|  
+|--|--|  
+|5|None|  
+|4|Error.|  
+|3|Error, Warn.|  
+|2|Error, Warn, Info. (This is the default setting)|   
+|1| Error, Warn, Info, Debug.|   
+|0| Error, Warn, Info, Debug, Fine.|   
+   
 ## Player.log:  
 Some unity errors are not logged to `modlog.txt` but rather to `player.log`. This can be found in the folder as `modlog.txt`. It is very useful especially because it provides the stack traces of the errors.
 If you want this can also be logged to by using `UnityEngine.Debug.Log();`
