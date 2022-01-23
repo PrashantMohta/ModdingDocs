@@ -68,7 +68,7 @@ To install the template :
 > TODO add steps here 
 
  - Fix the assembly references in your mod project
- - Add the Code from the mod in [Basic structure of a mod](#Basic-structure-of-a-mod) section in a new file named `MyFirstMod.cs`
+ - Add the Code from the mod in [Basic structure of a mod](#basic-structure-of-a-mod) section in a new file named `MyFirstMod.cs`
  - Create a build to compile your first mod
 
 ## Time to load your mod into game
