@@ -1,8 +1,8 @@
 # Getting started guide
-  If you're just getting started with modding hollow knight, you should start with the [Getting Started Guide](getting-started) to get your system setup for modding.  
+  If you're just getting started with modding hollow knight, you should start with the [Getting Started Guide](getting-started.md) to get your system setup for modding.  
 
 # Your first mod
-  Once you have your system set-up, you can move on to creating [your first mod](your-first-mod).  
+  Once you have your system set-up, you can move on to creating [your first mod](your-first-mod.md).  
   
 # Deeper dive into modding
 
