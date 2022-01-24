@@ -75,7 +75,7 @@ By default, `LogDebug` and `LogFine` will not be seen in the modlog and/or ingam
 "LoggingLevel": 1,
 ```
 
-The acceptable levels for this range from 0-6 where 5 is the least and 0 is the most:  
+The acceptable levels for this range from 0-5 where 5 is the least and 0 is the most:  
   
 |Level|Amount of logging|  
 |--|--|  
