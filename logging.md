@@ -1,18 +1,18 @@
 # Logging
-Mods currently don't have a way to attach a debugger to the game. So the best way to debug your code is to add logs to it. When initially developping the mod it is good to add logs to make sure the sequence of code execution is as you expect, and the values supplied to your code is what you expect. 
+Mods currently don't have a way to attach a debugger to the game, so the best way to debug your code is to add logs to it. When initially developping the mod it is good to add logs to make sure the sequence of code execution is as you expect, and the values supplied to your code are what you expect. 
 ## Where Can I see Logs?
 There are 2 ways to see your logs:
 
- 1. By [locating your modlog.txt](#finding-your-modlog) in the saves folder (see below), which contains all the logs of the current game session. This can be requested from the user of your mods if they have encountered some unexpected results.
+ 1. By [locating your modlog.txt](#finding-your-modlog) in the saves folder. This contains all the logs of the current game session. This can be requested from the user of your mods if they have encountered some unexpected results.  
 > To access previous sessions modlogs, open the `Old ModLogs` folder in the saves folder.
 2. By enabling the in-game console so view logs in-game in real time.
 To do this, in the saves folder open `ModdingApi.GlobalSettings.json` and setting `ShowDebugLogInGame` to true.
-```txt 
+``` 
 "ShowDebugLogInGame": true,
 ```
 
 ## Creating a Log:
-To create a log in your main class (the one that inherts from `Mod`, it  as as easy as calling the log functions 
+To create a log in your main class, the one that inherts from `Mod`, it is as easy as calling the log functions:  
 ```cs 
 public class MyFirstMod : Mod
 {
@@ -22,22 +22,22 @@ public class MyFirstMod : Mod
 	}
 }
 ```
-This will create the line (in the modlog and/or ingame console
-```txt 
+This will create the line (in the modlog and/or ingame console):  
+``` 
 [MyFirstMod] - Initialize is running.
 ```
 
-However in your other classes you will need to create a static variable of your main class and using that.
+However in your other classes you will need to create a static variable of your main class and using that.   
 Example:
 ```cs 
 public class MyFirstMod : Mod
 {
-	//create a public static variable of your main class that can be accessed from other classes
+	//Create a public static variable of your main class that can be accessed from other classes:
 	public static MyFirstMod Instance;
 	
 	public override void Initialize()
 	{
-		//Assign the variable named 'Instance' to the current instance of your main class using the keyword 'this'
+		//Assign the current instance of your main class using the keyword 'this' to the variable named 'Instance':
 		Instance = this;
 		//Now the variable 'Instance' is useable in other classes to provide functionality that the main class has such as Logging.
 	}
@@ -49,12 +49,12 @@ public class MyMonoBehaviour: MonoBehaviour
 	public void Start()
 	{
 		MyFirstMod.Instance.Log("My MonoBehaviour has been created.");
-		//Other code
+		//Other code.
 	}
 }
 ```
 Output:
-```txt 
+``` 
 [MyFirstMod] - My MonoBehaviour has been created.
 ```
 > Note: You can use the use `Modding.Logger` from the Modding API but it is not recommended to do so as it doesnt display the name of your mod in the log.
@@ -71,7 +71,7 @@ There are 5 different types of logs:
 |Fine|`LogFine();`| Used by Modding API to log. Could be used but is bloated by logs from Modding API.|  
   
 By default, `LogDebug` and `LogFine` will not be seen in the modlog and/or ingame console, To change the level of logs you can see, locate the `ModdingApi.GlobalSettings.json` in the saves folder. There you will be able to see a setting called `LoggingLevel`. the default is 2 but it is recommeded to set it to 1:
-```txt 
+``` 
 "LoggingLevel": 1,
 ```
 
