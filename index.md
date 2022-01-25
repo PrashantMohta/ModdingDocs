@@ -19,24 +19,24 @@ The next few sections will give you a better idea of what modding hollow knight 
 
  - Concepts
 	 - [Logging](logging.md)
-	 - [Hooks](#todo-section)
+	 - [Hooks](hooks.md)
 	 - [Preloads](preloads.md)
 	 - [PlaymakerFSMs](understanding-fsms.md)
-	 - [Hollow Knight Classes](#todo-section)
-	 - [Dependency Mods](#todo-section)
-	 - [Mod Menu](#todo-section)
+	 - [Hollow Knight Classes](hkclasses.md)
+	 - [Dependency Mods](dependencymods.md)
+	 - [Mod Menu](modmenu.md)
 	 - [Scripting](#todo-section)
 
  - Investigative tools
 	   <br>These tools can help investigate how a system works in the game so that you can figure out the best way to modify it.
-	 - [Ilspy](#todo-section)
-	 - [FSMAvalonia](#todo-section)
-	 - [Unity Explorer](#todo-section)
-	 - [Scene Dump](#todo-section)
+	 - [Dnspy](Tools/decompilers.md)
+	 - [FSM Viewer](Tools/fsmviewer.md)
+	 - [Unity Explorer](Tools/unityexplorer.md)
+	 - [Scene Dump](Tools/scenedump.md)
 
  - Advanced Concepts
-	 - [Reflection](#todo-section)
-	 - [IL Hooks](#todo-section)
+	 - [Reflection](reflection.md)
+	 - [IL Hooks](Hooks/ilhooks.md)
 	 - [Custom NPC](#todo-section)
 	 - [Custom Enemy](#todo-section)
 	 - [Custom Scene](#todo-section)

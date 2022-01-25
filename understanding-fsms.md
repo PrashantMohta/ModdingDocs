@@ -89,3 +89,15 @@ To change the existing transition from state "fromStateName" on event "onEventNa
 ```cs
 fsm.ChangeTransition("fromStateName","onEventName","toStateName")
 ```
+
+### TODO
+- when and how to access FSMs 
+  - if object already exist, use GameObject.Find().LocateMyFSM
+  - if you have reference of GameObject use go.LocateMyFSM, 
+  - if you want general use On.PlayMakerFSM.Awake
+- how to create custom fsm state actions to do what you want 
+- how to edit actions 
+- how to use fsm variables 
+- explanation of resources.assets and how to access
+- how to take the go-fsmName from fsm viewer and get it into code 
+
