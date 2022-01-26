@@ -8,4 +8,7 @@
   - FrogCore (if RedFrog wants)
   - MenuChanger (if Homothety wants)
   - ItemChanger (if Homothety wants)
+  - MagicUI (if BadMagic wants)
+- Other Uses
   - DebugMod (Adding to keybinds and such)
+  - Rando adding to pools?

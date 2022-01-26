@@ -7,8 +7,10 @@
 - Explain GotoNext(); GotoNext(params bool predicate); TryGoToNext(params bool predicate);
 - Explain Emit, EmitDelegate
 - Explain Remove();
-- How to replace value in a function
-- how to "insert code" in a function
+- Explain common patterns for replacing
+  - cursor.EmitDelegate<Func<float,float>>
+  - cursor.Remove(); cursor.Emit(OpCodes, val)/ cursor.EmitDelegate(() => val)
+  - cursor.Next.Operand = newval
 - understand common errors such as
     - invalid stack
         - when stack has a value thats not used
@@ -18,3 +20,4 @@
         - when remove is used to remove an instruction that is used to transfer control (in if statement)
 - While vs If in matching
 - Ienumarator IL hooking and how to do it
+- - how to run your code mid function (will probably not be able to change value of parameters of functions tho)
