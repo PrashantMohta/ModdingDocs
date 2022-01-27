@@ -1,7 +1,7 @@
 # IL Hooks
 
 ### TODO
-- reading IL code from Dnspy
+- reading IL code from ILspy
 - explanation of matching, how to match
 - list common OpCodes and what they do
 - Explain GotoNext(); GotoNext(params bool predicate); TryGoToNext(params bool predicate);

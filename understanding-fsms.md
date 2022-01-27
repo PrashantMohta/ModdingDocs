@@ -19,6 +19,7 @@ While modifying FSMs directly via code is possible; it is such a common task mos
  - [Working with Actions](#working-with-actions)
  - [Custom Action](#custom-action)
  - [Working with Transitions](#working-with-transitions)
+ - [Creating custom FSM Actions](#creating-custom-fsm-actions)
 
 ### Access an FSM:  
 To get Access to an FSM you need to know two things about it, the GameObject it is attached to and the `FsmName` of the FSM. This information can be obtained by [logging](logging.md) or using [FSMViewAvalonia](https://prashantmohta.github.io/ModdingDocs/#todo-section). 
@@ -96,7 +97,7 @@ If you want to do something specific to an FSM but there isn't an action that al
 For this example I would like to conditionally flip the isTrue and isFalse events in this fsm.  
 ![An action from the "Direction Wall" state in Knight-Superdash](Images/customfsmstateexample.jpg).     
 The easiest way to do this would be to create a "ConditionallyFlip_BoolTest" Action.  
-To get started, open [Dnspy](Tools/decompilers.md) and search for the original Action (BoolTest in this case). Other than the attributes above the
+To get started, open [ILspy](Tools/decompilers.md) and search for the original Action (BoolTest in this case). Other than the attributes above the
 fields, the code is copy paste friendly which can be used as a reference when creating the custom FSM action.  
 The first step is create a new class and have it inherit from `FsmStateAction`. Then create the necessary variables to do the action. In our case it would look something like this
 ```cs

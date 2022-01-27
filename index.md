@@ -29,9 +29,9 @@ The next few sections will give you a better idea of what modding hollow knight 
 
  - Investigative tools
 	   <br>These tools can help investigate how a system works in the game so that you can figure out the best way to modify it.
-	 - [Dnspy](Tools/decompilers.md)
+	 - [ILspy](Tools/decompilers.md)
 	 - [FSM Viewer](Tools/fsmviewer.md)
-	 - [Unity Explorer](Tools/unityexplorer.md)
+	 - [Unity Explorer](https://github.com/sinai-dev/UnityExplorer/blob/master/README.md#features)
 	 - [Scene Dump](Tools/scenedump.md)
 
  - Advanced Concepts
