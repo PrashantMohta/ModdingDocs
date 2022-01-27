@@ -1,6 +1,7 @@
 # ModHooks Reference
 Here you can find a list of all hooks and an explanation of what they do and how to use it.  
-However, not all hooks are listed here. Please refer to the [API Documentation](https://hk-modding.github.io/api/api/Modding.ModHooks.html#events) for a list of all hooks
+However, not all hooks are listed here. Please refer to the 
+[API Documentation](https://hk-modding.github.io/api/api/Modding.ModHooks.html#events) for a list of all hooks.
 
 ### HeroUpdateHook
 This event is called in `HeroController.Update`.  
@@ -21,7 +22,8 @@ public string HeroUpdate()
 ### LanguageGetHook
 This hook is the main way to change ingame text. The way it works is that each time the game wants to find what text to display, 
 it uses `Language.Language.Get` (which is where this hook is called) to get the text based on the text's "key". The text is also 
-organized in sheets so the key and sheet uniquely identify the text. To get a full list of all keys and sheets [view it here](https://docs.google.com/spreadsheets/d/1_sQ5ygsrN42toz3VnKy-8v6bwrh0UoaV/edit?usp=sharing&ouid=105022867698529839659&rtpof=true&sd=true).
+organized in sheets so the key and sheet uniquely identify the text. To see what key and sheet a text is in, refer to 
+[the full list of all keys and sheets](https://docs.google.com/spreadsheets/d/1_sQ5ygsrN42toz3VnKy-8v6bwrh0UoaV/edit?usp=sharing&ouid=105022867698529839659&rtpof=true&sd=true). or add logging to the hook
 To use the hook, check the `key` and `sheetTitle` and return the new text you want to display if the key/sheetTitle is the one you want to change.
 Alternatively, you can use `orig` to check for text and return new text. However this is not recommended because it may cause unexpected text changes.
 An example for both is given below
@@ -32,7 +34,7 @@ public string LanguageGet(string key, string sheetTitle, string orig)
     //Check for the key and sheet for MainMenu "Yes" text
     if (key == "NAV_YES" && sheetTitle == "MainMenu")
     {
-        //return the new text you want to display. if 
+        //return the new text you want to display. 
         return "Yee";
     }
     

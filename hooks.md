@@ -76,7 +76,7 @@ To be able to do this, [Reflection](reflection.md) is the best way to do it.
 For more information about OnHooks please refer to the [OnHooks Page](Hooks/onhooks.md)
 > Note: Your IDE (Visual Studio Community/Jetbrains Rider) can generate this function for you with the correct parameters. To do this, type in `On.HeroController.AddGeo += OnHCAddGeo;`, Then right click on the now red highlighted `OnHCAwake` and click on the light bulb icon (called 'Quick actions and Refactoring') and choose 'Generate Method'.
 
-> Note: To be able to write OnHooks, you will need to import `MMHOOK_Assembly-CSharp.dll` from your managed folder.
+> Note: To be able to write OnHooks, you will need to import `MMHOOK_Assembly-CSharp.dll` and `MMHOOK_PlayMaker.dll` from your managed folder.
 ## IL Hooks
 ### TODO IL Hooks
 - simple explanation of what they are and what is IL
