@@ -12,7 +12,7 @@ To do this, in the saves folder open `ModdingApi.GlobalSettings.json` and settin
 ```
 
 ## Creating a Log:
-To create a log in your main class, the one that inherts from `Mod`, it is as easy as calling the log functions:  
+To create a log in your main class, the one that inherits from `Mod`, it is as easy as calling the log functions:  
 ```cs 
 public class MyFirstMod : Mod
 {
@@ -100,3 +100,5 @@ To easily get ModLog on Windows:
 - Press Windows logo key + R
 - Copy and paste this into it `%appdata%\..\LocalLow\Team Cherry\Hollow Knight` and hit "OK"
 - ModLog.txt is in this folder.
+
+Additionally a [shortcut to the folder](https://www.howtogeek.com/436615/how-to-create-desktop-shortcuts-on-windows-10-the-easy-way/) can be created to make it easier to access.

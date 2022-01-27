@@ -20,8 +20,10 @@ using System.Collections.Generic;
 using Modding;
 using UnityEngine;
 
-namespace MyFirstMod{
-    public class MyFirstMod: Mod {
+namespace MyFirstMod
+{
+    public class MyFirstMod: Mod 
+    {
         new public string GetName() => "My First Mod";
         public override string GetVersion() => "v1";
         public override void Initialize()
@@ -30,7 +32,8 @@ namespace MyFirstMod{
         }
         public void OnHeroUpdate()
         {
-           if(Input.GetKeyDown(KeyCode.O)){
+           if(Input.GetKeyDown(KeyCode.O))
+           {
                Log("Key Pressed")
            }
         }

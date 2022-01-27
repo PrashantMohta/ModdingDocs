@@ -66,7 +66,7 @@ To call the original method we would do: `orig(self, amount)`. We call orig and 
 In the case the function has no other arguments we would just do `orig(self)`. If the function had more arguments, we would pass those in too after self.
 
 While using OnHooks we need to be careful of a few things
-1. If your goal is to insert code before/after a method has run, don't forget to call `orig(self)` or it might cause some unexpected behaviour especially for importance functions like HeroController.Start and PlayerMakerFSM.Awake.
+1. If your goal is to insert code before/after a method has run, don't forget to call `orig(self)` or it might cause some unexpected behaviour especially for important functions like HeroController.Start and PlayerMakerFSM.Awake.
 2. Unless necessary for the mod, dont replace the method with your own because if `orig(self)` is not called, other mods that also OnHooked this method will not be able to run their code. 
 This is because the second mod's onHook will only be called when the first mod's onHook calls `orig(self)` (i.e. if first mod never calls `orig(self)` second mod's hook wont be called). 
 If the vanilla game code is conflicting with your mod then by all means do replace the method but just make sure to keep this in mind.
