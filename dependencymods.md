@@ -20,14 +20,14 @@ A core mod made by SFGrenade.
 Some of the core features are:
 
 - Helpers: Easier ways to simply add miscellaneous content.
-  - E.g. achievements, charms, enviroment particles, items, menu styles and title logos.
+  - E.g. achievements, charms, environment particles, items, menu styles and title logos.
   - Provides events and methods that allows you to add your content.
 - Generic mod classes
   - This abstracts code used to have global and save settings.
 - ModInterOp
   - This allows mods to register methods with a name so other mods can call them without having a hard dependency.
 - MonoBehaviours
-  - These are usefull for making custom scenes.
+  - These are useful for making custom scenes.
   - Abstract generation of Hollow Knight's MonoBehaviours for simple use.
     - Some of these require editor scripts to be easily usable.
 - Util
@@ -51,7 +51,7 @@ A core mod made by Homothety.
 Relevant Links:
 - [Documentation](https://homothetyhk.github.io/HollowKnight.ItemChanger/)
 
-## [MagicUI](https://github.com/BadMagic100/HollowKnight.MagicUI) (if BadMagic wants)
+## [MagicUI](https://github.com/BadMagic100/HollowKnight.MagicUI)
 
 A core mod made by BadMagic.
 Relevant Links:
