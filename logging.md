@@ -24,7 +24,7 @@ To Enable the In-game console :
  - open `ModdingApi.GlobalSettings.json` 
  - set the value of `ShowDebugLogInGame` to true.
 ``` json
-"ShowDebugLogInGame": true,
+"ShowDebugLogInGame": true
 ```
  - you can show and hide the log in-game now by hitting F10
 
@@ -115,7 +115,7 @@ There are 5 different levels of logs:
 By default, `LogDebug` and `LogFine` will not be seen in the modlog and/or ingame console, To change the level of logs you can see, locate the `ModdingApi.GlobalSettings.json` in the saves folder. There you will be able to see a setting called `LoggingLevel`.  The default is 2 but it is recommended to set it to 1, so that you can `LogDebug` while you develop, and share the same dll file as release ( where it won't spam the player's modlog due to settings ) :
 
 ```  json
-"LoggingLevel": 1,
+"LoggingLevel": 1
 ```
 
 The acceptable values for this range from 0-5 where 5 is the least amount of logging  and 0 is the most:  
