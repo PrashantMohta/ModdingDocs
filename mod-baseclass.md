@@ -18,13 +18,20 @@ The Mod base class is the class that allows the Modloader (Modding Api) to load 
   - [Add a Mod Menu](#add-a-mod-menu)
  
  ### Set your load priority
-By default Mods are loaded in the alphabetical order of their names, if for some reason you need to ensure that your mod loads earlier or later than some other mods, you can use the load priority to determine that.
-To do this add the following function to your Mod class :
+By default Mods are loaded in an unspecified order, if for some reason you need to ensure that your mod loads earlier or later than some other mods, you can use the load priority to denote that. 
+
+To do this add the following method to your Mod class :
 
 ``` cs
 public override int LoadPriority() => PRIORITY;
 ```
-Where `PRIORITY` is an int, higher values of priority will load your mod later and lower values will load your mod earlier in relation to other mods. i.e any Mod with priority 5 loads after any Mods priority 4 or lower
+
+Where `PRIORITY` is an int, higher values of priority will load your mod later and lower values will load your mod earlier in relation to other mods. i.e any Mod with priority 5 loads after any Mods priority 4 or lower.
+
+>Note: if no priority is specified, then the default priority of `0` is used
+
+By "load" order we strictly mean the order in which the `Initialize` method is called, the Mod class constructors may be called out of this order, do not rely on constructor order.
+
 
  ### Set your Mods Name
  The Default name of your mod is the name of the Mod class, if you need to change that, you can do so by passing the name to the base class constructor, like so :
