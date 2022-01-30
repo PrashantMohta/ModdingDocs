@@ -18,6 +18,8 @@ If you're just getting started with modding hollow knight, you should start with
 The next few sections will give you a better idea of what modding hollow knight looks like beyond simple mods, Covering the concepts, tools & techniques that exist to make the job easier. It goes without saying that the [Unity Scripting Reference](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/) and [Microsoft .NET API browser](https://docs.microsoft.com/en-us/dotnet/api/?view=netframework-4.7.2) are absolutely invaluable references when working within unity. In the context of hollow knight modding though, there are a few more concepts and resources that you want to be looking at. 
 
  - Concepts
+	 - [The Mod Class](mod-baseclass.md)
+	 - [The Mod Lifecycle](mod-lifecycle.md) 
 	 - [Logging](logging.md)
 	 - [Hooks](hooks.md)
 	 - [Preloads](preloads.md)
