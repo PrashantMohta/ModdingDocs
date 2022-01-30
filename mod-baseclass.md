@@ -60,13 +60,13 @@ The Mod base class allows your mod to [receive the Preloaded objects](https://pr
 
 Global settings are the way mods can save settings that should persist across save games
 
->Todo 
+refer to [creating global settings](saving-mod-data.md#creating-global-settings)
 
 ### Add local settings
 
 Local settings are the way mods can save data per save game, this may be settings but for more involved mods this may include saving play state for example : if a player has acquired a custom item or not in this save, could be saved here.
 
->Todo
+refer to [creating local settings](saving-mod-data.md#creating-local-settings)
 
 ### Add a mod menu
 
