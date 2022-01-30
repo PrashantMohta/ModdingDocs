@@ -53,10 +53,8 @@ so what is going on here ?
 
 ## The Mod base Class & Mod Lifecycle 
 For further reference into what the mod base class is and the lifecycle of a mod you can visit these reference docs. 
-
- - [The Mod Class](https://radiance.host/apidocs/ModdingAPI.html) *slightly outdated*
-
-> TODO add an up to date reference doc each for the Mod lifecycle and Base class 
+ - [The Mod Class](mod-baseclass.md)
+ - [The Mod Lifecycle](mod-lifecycle.md) 
 
 ## Installing the Mod Template
 
@@ -78,17 +76,8 @@ To install the template :
 ## Time to load your mod into game
 
 The Mod Template automatically copies the compiled `dll` of your mod into the right folder when a successful build is created (and the game is not running), so all you have to do next is start the game and you should see your mod in the top - left.
-if you start a save and press `O` your `modlog.txt` will now contain the text `Key Pressed`
+
+if you start a save and press `O` your `modlog.txt` will now contain the text `Key Pressed`. you can find your modlog by following the steps outlined [here](https://prashantmohta.github.io/ModdingDocs/logging.html#finding-your-modlog)
 
 >TODO add instructions to enable modlog console
 
-## Finding your modlog 
-`ModLog.txt` can be found in the same folder as your save files:
-- Windows: `%APPDATA%\..\LocalLow\Team Cherry\Hollow Knight\`
-- MacOS  : `~/Library/Application Support/unity.Team Cherry.Hollow Knight/`
-- Linux  : `~/.config/unity3d/Team Cherry/Hollow Knight/`
-
-To easily get ModLog on Windows:
-- Press Windows logo key + R
-- Copy and paste this into it `%appdata%\..\LocalLow\Team Cherry\Hollow Knight` and hit "OK"
-- ModLog.txt is in this folder.
