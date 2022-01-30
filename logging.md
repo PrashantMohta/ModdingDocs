@@ -1,81 +1,124 @@
 # Logging
-Mods currently don't have a way to attach a debugger to the game, so the best way to debug your code is to add logs to it. When initially developping the mod it is good to add logs to make sure the sequence of code execution is as you expect, and the values supplied to your code are what you expect. 
-## Where Can I see Logs?
-There are 2 ways to see your logs:
 
- 1. By [locating your modlog.txt](#finding-your-modlog) in the saves folder. This contains all the logs of the current game session. This can be requested from the user of your mods if they have encountered some unexpected results.  
-> To access previous sessions modlogs, open the `Old ModLogs` folder in the saves folder.
-2. By enabling the in-game console so view logs in-game in real time.
-To do this, in the saves folder open `ModdingApi.GlobalSettings.json` and setting `ShowDebugLogInGame` to true.
-``` 
+## Introduction 
+
+Logging is saving arbitrary text or values that you want to inspect, into a text file. This allows you to confirm that the sequence of code execution is as you expect & allows you to inspect the values of variables at the given state. Modding Api has logging support built into it, so you can create and view existing logs easily.
+
+Simplest way to write something out to the log is having the following line in your code : 
+``` cs
+	Modding.Logger.Log("Hello World");
+```
+This will write the text `Hello World` to your modlog.txt [ in your saves folder](#finding-your-modlog). 
+
+> Note : There are some recommended best practices to follow when creating logs in your mods, see [Creating a log](#creating-a-log) for more details on how to create a log that will be most helpful during development and after releasing your mod.
+
+## Viewing logs
+
+ - The logs of the last game session can be found in the [modlog.txt](#finding-your-modlog), this will be the current session if the game is still open.
+ - You can also enable the in-game console so that the logs can be viewed in-game in real time.
+
+To Enable the In-game console :
+
+ - Make sure the game is closed
+ - Navigate to the saves folder 
+ - open `ModdingApi.GlobalSettings.json` 
+ - set the value of `ShowDebugLogInGame` to true.
+``` json
 "ShowDebugLogInGame": true,
 ```
+ - you can show and hide the log in-game now by hitting F10
+
+> Hint: Older sessions' modlogs, are preserved in the `Old ModLogs` folder inside the saves folder.
+
 
 ## Creating a Log:
-To create a log in your main class, the one that inherits from `Mod`, it is as easy as calling the log functions:  
+
+To write to the log in your mod's main class, the one that inherits from the [Mod baseclass](https://prashantmohta.github.io/ModdingDocs/mod-baseclass.html), you can simply call the log functions, for example :  
+
 ```cs 
 public class MyFirstMod : Mod
 {
 	public override void Initialize()
 	{
-		Log("Initialize is running.");
+		Log("Initialize!.");
 	}
 }
 ```
-This will create the line (in the modlog and/or ingame console):  
+This will create the following line in the log:  
 ``` 
-[MyFirstMod] - Initialize is running.
+[MyFirstMod] - Initialize!.
 ```
 
-However in your other classes you will need to create a static variable of your main class and using that.   
+To write to the log from any of the other classes you create, you should use the Log function by accessing the instance of your mod class, this is to ensure that the name of your Mod prefixes your log, to allow you to search for it easier and to distinguish it from logs made by other mods.
+   
 Example:
 ```cs 
 public class MyFirstMod : Mod
 {
-	//Create a public static variable of your main class that can be accessed from other classes:
+	//Create a static variable that holds the instance of your main mod class
 	public static MyFirstMod Instance;
 	
 	public override void Initialize()
 	{
-		//Assign the current instance of your main class using the keyword 'this' to the variable named 'Instance':
+		//Assign the current instance of your mod using the keyword 'this`
 		Instance = this;
-		//Now the variable 'Instance' is useable in other classes to provide functionality that the main class has such as Logging.
+		//Now the variable 'Instance' can be used in other classes to get hold of the current Mod instance.
 	}
 }
 
-//create a MonoBehaviour so I can attach  it to a gameobject to run some code on it
-public class MyMonoBehaviour: MonoBehaviour
+//In a different class you can access it like so
+public class OtherClass
 {
 	public void Start()
 	{
-		MyFirstMod.Instance.Log("My MonoBehaviour has been created.");
-		//Other code.
+		MyFirstMod.Instance.Log("Start called from OtherClass.");
 	}
 }
 ```
 Output:
 ``` 
-[MyFirstMod] - My MonoBehaviour has been created.
+[MyFirstMod] - Start called from OtherClass.
 ```
-> Note: You can use the use `Modding.Logger` from the Modding API but it is not recommended to do so as it doesnt display the name of your mod in the log.
+
+> Note: You can use the use `Modding.Logger` from the Modding API but it is not recommended to do in release builds because it doesn't display the name of your mod in the log, making it difficult for anyone looking at the log to resolve issues.
+
+
+## Player.log:  
+Some unity errors & crashes are not logged to `modlog.txt` but rather to `player.log`. This can be found in the folder as `modlog.txt`. It is very useful especially because it provides the stack traces of the errors.
+
+you can log to this file by using standard unity logging, for example `UnityEngine.Debug.Log();`
+
+
+## Using Logs 
+
+### During development
+ - Isolate issues by logging around suspect code, and seeing which logs show up
+ - Check values that are passed to or generated by your code
+ - Inspect in-game data structures 
+
+### For troubleshooting
+ - Request the modlog from the players of your mods to debug issues as they come up.
+ - For this reason if you expect some information to be valuable to resolve issues, you should log it even when you know the expected values.
 
 ## Log Levels:  
-There are 5 different types of logs:  
+
+There are 5 different levels of logs:  
 
 | Level | Function      | Description                                                                                             |
 |-------|---------------|---------------------------------------------------------------------------------------------------------|
-| Error | `LogError();` | Should be used to log errors that occured when code is running.                                         |
+| Error | `LogError();` | Should be used to log errors that occurred.                                         |
 | Warn  | `LogWarn();`  | Should be used to log warning to users.                                                                 |  
 | Info  | `Log();`      | Should be used for normal logs.                                                                         | 
 | Debug | `LogDebug();` | Should be used for log to debug code. Using default settings, it won't be seen on regular user's modlog |  
-| Fine  | `LogFine();`  | Used by Modding API to log. Could be used but is bloated by logs from Modding API.                      |  
+| Fine  | `LogFine();`  | Use when you are going to spam a log of content into the modlog.                      |  
 
-By default, `LogDebug` and `LogFine` will not be seen in the modlog and/or ingame console, To change the level of logs you can see, locate the `ModdingApi.GlobalSettings.json` in the saves folder. There you will be able to see a setting called `LoggingLevel`. the default is 2 but it is recommeded to set it to 1:
-``` 
+By default, `LogDebug` and `LogFine` will not be seen in the modlog and/or ingame console, To change the level of logs you can see, locate the `ModdingApi.GlobalSettings.json` in the saves folder. There you will be able to see a setting called `LoggingLevel`.  The default is 2 but it is recommended to set it to 1, so that you can `LogDebug` while you develop, and share the same dll file as release ( where it won't spam the player's modlog due to settings ) :
+
+```  json
 "LoggingLevel": 1,
 ```
 
-The acceptable levels for this range from 0-5 where 5 is the least and 0 is the most:  
+The acceptable values for this range from 0-5 where 5 is the least amount of logging  and 0 is the most:  
   
 | Level | Amount of Logging                                |
 |-------|--------------------------------------------------|
@@ -86,9 +129,6 @@ The acceptable levels for this range from 0-5 where 5 is the least and 0 is the 
 | 1     | Error, Warn, Info, Debug.                        |   
 | 0     | Error, Warn, Info, Debug, Fine.                  |   
    
-## Player.log:  
-Some unity errors are not logged to `modlog.txt` but rather to `player.log`. This can be found in the folder as `modlog.txt`. It is very useful especially because it provides the stack traces of the errors.
-If you want this can also be logged to by using `UnityEngine.Debug.Log();`
 
 ## Finding your modlog:  
 `ModLog.txt` can be found in the same folder as your save files:
@@ -101,4 +141,4 @@ To easily get ModLog on Windows:
 - Copy and paste this into it `%appdata%\..\LocalLow\Team Cherry\Hollow Knight` and hit "OK"
 - ModLog.txt is in this folder.
 
-Additionally a [shortcut to the folder](https://www.howtogeek.com/436615/how-to-create-desktop-shortcuts-on-windows-10-the-easy-way/) can be created to make it easier to access.
+Additionally you can make a [shortcut to the folder](https://www.howtogeek.com/436615/how-to-create-desktop-shortcuts-on-windows-10-the-easy-way/) to find it easier the next time around.
