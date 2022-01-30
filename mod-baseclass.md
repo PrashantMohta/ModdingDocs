@@ -48,7 +48,7 @@ The Mod base class allows your mod to request the Modding Api to preload game ob
 for more information see  [Preloading game objects](https://prashantmohta.github.io/ModdingDocs/preloads.html) .
 
  ### Initialize your mod
-The Mod base class allows your mod to [receive the Preloaded objects](https://prashantmohta.github.io/ModdingDocs/preloads.html), and work with setting up your mod code in Initialize. This method is called after your mod class is constructed, but beware that it is called more than once, especially if your mod is toggled on and off.
+The Mod base class allows your mod to [receive the Preloaded objects](https://prashantmohta.github.io/ModdingDocs/preloads.html), and work with setting up your mod code in Initialize. This method is called after your mod class is constructed, but beware that it is called more than once, especially if your mod is toggled on and off. refer to [Mod Lifecycle](mod-lifecycle.md) for more details on the order of execution.
 
 ## Optional Interfaces
 
