@@ -20,9 +20,9 @@ The next few sections will give you a better idea of what modding hollow knight 
  - Concepts
 	 - [The Mod Class](mod-baseclass.md)
 	 - [The Mod Lifecycle](mod-lifecycle.md) 
+	 - [Preloading game objects](preloads.md)
 	 - [Logging](logging.md)
 	 - [Hooks](hooks.md)
-	 - [Preloading game objects](preloads.md)
 	 - [Saving Mod Data](saving-mod-data.md)
 	 - [Mod Menu](modmenu.md)
 	 - [Hollow Knight Classes](hkclasses.md)
