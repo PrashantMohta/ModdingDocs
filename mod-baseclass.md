@@ -1,3 +1,5 @@
 #Todo explain the mod base class
 
-#Todo explain the mod lifecycle
+[Slightly out dated document](https://radiance.host/apidocs/ModdingAPI.html)
+
+
