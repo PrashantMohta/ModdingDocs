@@ -1,4 +1,4 @@
-# Preloads
+# Preloading game objects
 ## Introduction
 To modify in game behaviors you typically need access to the GameObject that controls that behavior. To get access to said GameObject, you need to be in the same "scene" or level as it. This creates a problem such that, if you want to spawn a copy of an enemy, you need access to that enemy without needing the player to be in that scene before you can spawn it.
 
