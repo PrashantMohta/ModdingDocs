@@ -43,7 +43,7 @@ To Enable the In-game console :
 
 ## Creating a Log:
 
-To write to the log in your mod's main class, the one that inherits from the [Mod baseclass](https://prashantmohta.github.io/ModdingDocs/mod-baseclass.html), you can simply call the log functions, for example :  
+To write to the log in your mod's main class, the one that inherits from the [Mod baseclass](mod-baseclass.md), you can simply call the log functions, for example :  
 
 ```cs 
 public class MyFirstMod : Mod

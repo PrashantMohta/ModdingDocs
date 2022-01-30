@@ -52,10 +52,10 @@ public MyFirstMod() : base("My 1st Mod") { }
  ### Request for preloads
  
 The Mod base class allows your mod to request the Modding Api to preload game objects from a particular scene.
-for more information see  [Preloading game objects](https://prashantmohta.github.io/ModdingDocs/preloads.html) .
+for more information see  [Preloading game objects](preloads.md) .
 
  ### Initialize your mod
-The Mod base class allows your mod to [receive the Preloaded objects](https://prashantmohta.github.io/ModdingDocs/preloads.html), and work with setting up your mod code in Initialize. This method is called after your mod class is constructed, but beware that it is called more than once, especially if your mod is toggled on and off. refer to [Mod Lifecycle](mod-lifecycle.md) for more details on the order of execution.
+The Mod base class allows your mod to [receive the Preloaded objects](preloads.md), and work with setting up your mod code in Initialize. This method is called after your mod class is constructed, but beware that it is called more than once, especially if your mod is toggled on and off. refer to [Mod Lifecycle](mod-lifecycle.md) for more details on the order of execution.
 
 ## Optional Interfaces
 
@@ -79,4 +79,4 @@ refer to [creating local settings](saving-mod-data.md#creating-local-settings)
 
 Mod menu is the way for mods to give the player an interactive UI to change their settings as opposed to editing settings files manually. Instead of using custom UI to handle this, it is recommended to use the Mod menu so that players can have a consistent experience and the pause menu is not cluttered, wherever possible.
 
-for more about creating menus, head over to the dedicated page that covers the different types of [Mod menus](https://prashantmohta.github.io/ModdingDocs/modmenu.html)
+for more about creating menus, head over to the dedicated page that covers the different types of [Mod menus](modmenu.md)

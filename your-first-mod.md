@@ -77,7 +77,7 @@ To install the template :
 
 The Mod Template automatically copies the compiled `dll` of your mod into the right folder when a successful build is created (and the game is not running), so all you have to do next is start the game and you should see your mod in the top - left.
 
-if you start a save and press `O` your `modlog.txt` will now contain the text `Key Pressed`. you can find your modlog by following the steps outlined [here](https://prashantmohta.github.io/ModdingDocs/logging.html#finding-your-modlog)
+if you start a save and press `O` your `modlog.txt` will now contain the text `Key Pressed`. you can find your modlog by following the steps outlined [here](logging.md#finding-your-modlog)
 
 >TODO add instructions to enable modlog console
 
