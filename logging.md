@@ -80,11 +80,11 @@ Output:
 [MyFirstMod] - Start called from OtherClass.
 ```
 
-> Note: You can use the use `Modding.Logger` from the Modding API but it is not recommended to do in release builds because it doesn't display the name of your mod in the log, making it difficult for anyone looking at the log to resolve issues.
+> Note: You can use the `Modding.Logger` class from the Modding API directly but it is not recommended to do in release builds because it doesn't display the name of your mod in the log, making it difficult for anyone looking at the log to identify and resolve issues.
 
 
 ## Player.log:  
-Some unity errors & crashes are not logged to `modlog.txt` but rather to `player.log`. This can be found in the folder as `modlog.txt`. It is very useful especially because it provides the stack traces of the errors.
+Some unity errors & crashes are not logged to `modlog.txt` but rather to `player.log`. This can be found in the same folder as `modlog.txt`. It can be very useful especially because it provides the stack traces of the errors, and some errors that do not show up in the modlog can show up here.
 
 you can log to this file by using standard unity logging, for example `UnityEngine.Debug.Log();`
 
