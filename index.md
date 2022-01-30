@@ -23,10 +23,11 @@ The next few sections will give you a better idea of what modding hollow knight 
 	 - [Logging](logging.md)
 	 - [Hooks](hooks.md)
 	 - [Preloads](preloads.md)
-	 - [PlaymakerFSMs](understanding-fsms.md)
-	 - [Hollow Knight Classes](hkclasses.md)
-	 - [Dependency Mods](dependencymods.md)
+	 - [Saving Mod Data](saving-mod-data.md)
 	 - [Mod Menu](modmenu.md)
+	 - [Hollow Knight Classes](hkclasses.md)
+	 - [PlaymakerFSMs](understanding-fsms.md)
+	 - [Dependency Mods](dependencymods.md)
 	 - [Scripting](#todo-section)
 
  - Investigative tools
