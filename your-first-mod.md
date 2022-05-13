@@ -28,7 +28,7 @@ To install the template :
  - Enter project name and change the location to your working directory
  - [optional] Select place solution and project in the same directory 
  - Fix the assembly references in your mod project
-    > Note : this can be done easily by opening the csproj file in your project directoy
+    > Note : this can be done easily by opening the csproj file in your project directory
  - Add the Code from the mod in [Basic structure of a mod](#basic-structure-of-a-mod) section in a new file named `MyFirstMod.cs`
  - Create a build to compile your first mod
 
