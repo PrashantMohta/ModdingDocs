@@ -56,7 +56,15 @@ Relevant Links:
 
 ## [MagicUI](https://github.com/BadMagic100/HollowKnight.MagicUI)
 
-A core mod made by BadMagic.
+A core mod made by BadMagic that simplifies creating non-menu, in-game UI elements. Unity's UI elements are low-level components, meaning you need to be
+very familiar with their implementation details to piece them together into something useful and usually requiring a significant amount of boilerplate code.
+In contrast, MagicUI provides:
+* A hierarchical layout tree composed only of various "arrangable elements," which encapsulate boilerplate code and repeated arrangement behaviors.
+* Implicit re-measure/re-arrange support - simply change a property and the minimum necessary subset of the UI will be reflowed to accomodate the new value.
+* Several useful built-in element types, including buttons, text entry, text display, and images.
+* Simple API to implement custom element types for specific use cases
+* TextureLoader API to easily load images from embedded resources.
+
 Relevant Links:
 - [Documentation](https://badmagic100.github.io/HollowKnight.MagicUI/)
 - [Example](https://github.com/BadMagic100/HollowKnight.MagicUI/blob/master/MagicUIExamples)
