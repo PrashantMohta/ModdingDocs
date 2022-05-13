@@ -30,7 +30,7 @@ private Menu MenuRef;
 
 public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? modtoggledelegates) 
 {
-    MenuRef = new Menu("My Mod Name", new Element[]
+    MenuRef ??= new Menu("My Mod Name", new Element[]
         {
             //add elements here  
         }
