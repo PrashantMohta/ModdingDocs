@@ -88,4 +88,4 @@ if you start a save and press `O` your `modlog.txt` will now contain the text `K
 
 ## Video tutorial
 you can follow along with this video tutorial to create your first mod.
-[![Windows guide video](https://prashantmohta.github.io/ModdingDocs/Images/firstmod.jpg)](https://youtu.be/LMayapYyEr8)
+[![creating your first mod](https://prashantmohta.github.io/ModdingDocs/Images/firstmod.jpg)](https://youtu.be/LMayapYyEr8)
