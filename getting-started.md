@@ -17,12 +17,14 @@ To Setup your system for modding, you need to do the following steps. if you pre
 
 1. Download and Install [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/)
 1. Download and Install [.NET Framework 4.7.2](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472).
-1. Create a folder named `Hollow Knight Mods` as your working directory.
-1. Skip the following 2 steps if you installed the api with a modinstaller.
-1. Create a copy of your `Managed` Folder from the game files in your `Hollow Knight Mods` directory and rename it to `Vanilla` this should be unmodified copy of your original game files.
-1. Create a folder named `Api` in your `Hollow Knight Mods` directory, copy the contents of the latest release of the [Hollow Knight Modding Api](https://github.com/hk-modding/api/releases) based on your operating system, this will be your copy of the modding api.
+    - For linux see [Install a .NET SDK using Microsoft's packages.](https://docs.microsoft.com/en-us/dotnet/core/install/linux) 
+  > Do note that using the .NET 6 SDK or later is preferred.
+3. Create a folder named `Hollow Knight Mods` as your working directory (you will create your mods here).
+4. Install the Modding Api (skip if already using a modded install of the game.)
+    - Either by using a modinstaller (auto installs on load)
+    - Or manually by replacing the files in your `Managed` Folder in the game files with the contents of [Hollow Knight Modding Api](https://github.com/hk-modding/api/releases)'s latest release for your operating system, this will be your copy of the modding api.
 
-You're now done setting up your system for creating your first Hollow Knight mod.
+You're now done setting up your system for creating [your first Hollow Knight mod](/your-first-mod.md).
 
 ### Windows
 
@@ -34,5 +36,5 @@ You're now done setting up your system for creating your first Hollow Knight mod
 
 ### Linux
 
-[Install a .NET SDK using Microsoft's packages.](https://docs.microsoft.com/en-us/dotnet/core/install/linux)
-Do note that using the .NET 6 SDK or later is preferred.
+
+> **TODO:** Add a video here that goes over setting up and installing all of this
