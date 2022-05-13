@@ -8,7 +8,7 @@ There are many dependency mods that were created to make modding easier. Below y
 A core mod made by Dandy and Mulhima.  
 Some of the core features are:
 
-- BetterMenus: An easier way to implement ICustomMenuMod.
+- [BetterMenus](BetterMenus/better-menus.md): An easier way to implement ICustomMenuMod.
   - Only asks the user to return a list of all the menu elements they want while the menu builder and such are abstracted away.
   - Provides events and methods that allows you to edit/hide elements at runtime.
   - See [example](https://github.com/PrashantMohta/Satchel/tree/master/BetterMenus/Example)
