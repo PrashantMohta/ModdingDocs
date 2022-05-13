@@ -1,3 +1,7 @@
+---
+nav_order: 1
+---
+
 # Getting started with Modding Hollow Knight  
 
 ## What you will need
