@@ -1,5 +1,7 @@
 # Creating your first Mod
 
+> Note : if you prefer to follow along with a video see [the modding tutorial](#video-tutorial)
+
 ## Basics of C#
 
 Before we take a deep dive into writing your first mod, we need to take a look at C#, the programming language that we would be using to create our mods, it would certainly be helpful if you know a little bit about programming already, but if not then you can use the resources in this section to get a basic understanding of programming and C#.
@@ -8,6 +10,27 @@ Before we take a deep dive into writing your first mod, we need to take a look a
  - [A tour of the C# language Article Series](https://docs.microsoft.com/en-us/dotnet/csharp/tour-of-csharp)
 
 The video series is especially beginner friendly, so you may want to try that !
+
+## Installing the Mod Template
+
+Strictly speaking, there is no need to use a template to create your mod. it will however take some common things that you will have to do every time you start a project and do them for you, which is nice.
+
+To install the template : 
+ - Download the [Template Zip](https://cdn.discordapp.com/attachments/879130756146954240/931586813729075270/Hollow_Knight_1.5_Mod.zip) 
+ - Move this zip to `{documents folder}\Visual Studio 2022\Templates\ProjectTemplates`
+ - Restart visual studio 
+
+## Create your Mod using the Mod Template
+
+ - Open visual studio community 2022
+ - Click "Create a new project" on the right
+ - Select the Hollow Knight 1.5 Mod template
+ - Enter project name and change the location to your working directory
+ - [optional] Select place solution and project in the same directory 
+ - Fix the assembly references in your mod project
+    > Note : this can be done easily by opening the csproj file in your project directoy
+ - Add the Code from the mod in [Basic structure of a mod](#basic-structure-of-a-mod) section in a new file named `MyFirstMod.cs`
+ - Create a build to compile your first mod
 
 ## Basic structure of a mod
 
@@ -34,7 +57,7 @@ namespace MyFirstMod
         {
            if(Input.GetKeyDown(KeyCode.O))
            {
-               Log("Key Pressed")
+               Log("Key Pressed");
            }
         }
     }
@@ -56,28 +79,13 @@ For further reference into what the mod base class is and the lifecycle of a mod
  - [The Mod Class](mod-baseclass.md)
  - [The Mod Lifecycle](mod-lifecycle.md) 
 
-## Installing the Mod Template
-
-Strictly speaking, there is no need to use a template to create your mod. it will however take some common things that you will have to do every time you start a project and do them for you, which is nice.
-
-To install the template : 
- - Download the [Template Zip](https://cdn.discordapp.com/attachments/879130756146954240/931586813729075270/Hollow_Knight_1.5_Mod.zip) 
- - Move this zip to `{documents folder}\Visual Studio 2022\Templates\ProjectTemplates`
- - Restart visual studio 
-
-## Create your Mod using the Mod Template
-
-> TODO add steps here 
-
- - Fix the assembly references in your mod project
- - Add the Code from the mod in [Basic structure of a mod](#basic-structure-of-a-mod) section in a new file named `MyFirstMod.cs`
- - Create a build to compile your first mod
-
 ## Time to load your mod into game
 
 The Mod Template automatically copies the compiled `dll` of your mod into the right folder when a successful build is created (and the game is not running), so all you have to do next is start the game and you should see your mod in the top - left.
 
 if you start a save and press `O` your `modlog.txt` will now contain the text `Key Pressed`. you can find your modlog by following the steps outlined [here](logging.md#finding-your-modlog)
 
->TODO add instructions to enable modlog console
 
+## Video tutorial
+you can follow along with this video tutorial to create your first mod.
+[![Windows guide video](https://prashantmohta.github.io/ModdingDocs/Images/firstmod.jpg)](https://youtu.be/LMayapYyEr8)
