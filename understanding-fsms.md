@@ -1,3 +1,6 @@
+---
+nav_order: 12
+---
 # PlaymakerFSMs
 ## Introduction:  
 Playmaker is a visual state machine editor that Team Cherry use quite extensively across the game to control how things behave. Unfortunately this means that much of the game's behavior is not written in easy to work with code form, but is represented as a flow chart of states.

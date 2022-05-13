@@ -1,4 +1,7 @@
-﻿# Hollow Knight Classes
+﻿---
+nav_order: 11
+---
+# Hollow Knight Classes
 
 ### TODO
 - Explain common classes

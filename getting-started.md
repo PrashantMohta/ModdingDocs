@@ -1,8 +1,7 @@
 ---
-nav_order: 1
+nav_order: 2
 ---
-
-# Getting started with Modding Hollow Knight  
+# Environment setup  
 
 ## What you will need
 

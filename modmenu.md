@@ -1,4 +1,7 @@
-﻿# ModMenu
+﻿---
+nav_order: 10
+---
+# ModMenu
 
 ### TODO
 - What is modmenu

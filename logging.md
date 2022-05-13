@@ -1,3 +1,6 @@
+---
+nav_order: 7
+---
 # Logging
 
 ## Introduction 

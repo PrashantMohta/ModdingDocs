@@ -1,3 +1,6 @@
+---
+nav_order: 4
+---
 # The Mod base class
 
 ## Introduction

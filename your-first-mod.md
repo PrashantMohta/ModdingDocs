@@ -1,3 +1,6 @@
+---
+nav_order: 3
+---
 # Creating your first Mod
 
 > Note : if you prefer to follow along with a video see [the modding tutorial](#video-tutorial)

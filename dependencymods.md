@@ -1,4 +1,7 @@
-﻿# Dependency Mods
+﻿---
+nav_order: 13
+---
+# Dependency Mods
 
 There are many dependency mods that were created to make modding easier. Below you can find a list of them.
 > Note: All descriptions are added by the mod author unless specified.

@@ -1,4 +1,7 @@
-# Getting started guide
+---
+nav_order: 1
+---
+# Hollow Knight Modding Docs
 
 > Please note that this documentation is being written with the latest patch of the game in mind, for older patches you can refer to the documentation at [radiance.host](https://radiance.host/apidocs/Getting-Started.html)
 

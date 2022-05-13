@@ -1,3 +1,6 @@
+---
+nav_order: 8
+---
 # Hooks
 Hooks (more formally known as events) are the main way to interact with Hollow Knight's code. We can use them to wait for an event to happen in game, then intercept data related to that event and trigger some code and potentially return different data to what we received.   
 <br>There are 3 major type of hooks in the Modding API each of which will be explained below.
