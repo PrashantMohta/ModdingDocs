@@ -48,6 +48,13 @@ public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? modt
 ```
 
 where you see `//add elements here` you can add elements based on what you need. the 7 elements will be detailed on [Better Menu Elements Page](elements.md)
+1. [Horizontal Option](elements.md#1-horizontal-option)
+2. [Menu Button](elements.md#2-menu-button)
+3. [Text Panel](elements.md#3-text-panel)
+4. [Key Bind](elements.md#4-key-bind)
+5. [Button Bind](elements.md#5-button-bind)
+6. [Custom Slider](elements.md#6-custom-slider)
+7. [Static Panel](elements.md#7-static-panel)
 
 To add lets say a MenuButton that logs when  that button was pressed you would do
 ```cs
@@ -169,6 +176,16 @@ MenuRef = new Menu("Example Mod Menu", new Element[]
 We need to notice a couple of things:
 1. If we use `Show()`/`Hide()`, we don't need to call the MenuRef Update function. Additionally, the `OnVisibilityChange` event will be called.
 2. When we directly edit the `isVisible` property, it is easier to deal with especially if there are a large number of elements. However, we need to manually call Update function for changes to take effect and `OnVisibilityChange` event will not be called.
-3. When we created the 2 MenuButtons, on instantiation we initialized the `isVisible` property manually. This is because we want only the relevant options to show, even on first menu creation
+3. When we created the 2 Elements, on instantiation we initialized the `isVisible` property manually. This is because we want only the relevant options to show, even on first menu creation
 ### 5. Blueprints
+Blueprints is a class that has been created to help provide and ease the creation of commonly used functionality in modmenus.
+All the available blueprints will be detailed in [Better Menus BluePrints Page](blueprints.md)
+1. [Key And Button Bind](blueprints.md#key-and-button-bind)
+2. [Mod Toggle](blueprints.md#mod-toggle)
+3. [Navigate To Menu](blueprints.md#navigate-to-menu)
+4. [Update Visibility](blueprints.md#update-visibility)
 ### 6. Events
+
+Notes on building pages
+What to do if not happy with current element options
+creating elements in forloop
