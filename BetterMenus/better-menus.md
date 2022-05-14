@@ -11,7 +11,7 @@ It essentially can do what ICustomMenuMod does and more but with much more easie
 1. Easily create menus with 7 different menu elements - Horizontal Option, Static Panel, Text Panel, Menu Button, KeyBind, ButtonBind, Slider
 2. Update properties of elements at will by just editing a property and calling the update function.
 3. Hide/show menu elements at will. This allows "filtering" elements based on the current options selected by user. For example, if you have 3 gameplay modes in your mod, you can use this to only show the options relevant to that mode.
-4. A `MenuRow` elements that allows you to place multiple menu elements side by side on a single horizontal line.
+4. A `MenuRow` element that allows you to place multiple menu elements side by side on a single horizontal line.
 5. Blueprints for more easily creating commonly used configurations
 
 Each of the features will be detailed below 
@@ -78,8 +78,8 @@ BetterMenus.MenuButton buttonElem = elem as BetterMenus.MenuButton;
 //change a property of the element
 buttonElem.Description = "My New MenuButton";
 
-//update menu to reflect changes
-MenuRef.Update();
+//update element to reflect changes in game
+buttonElem.Update();
 ```
 
 This can be done anywhere and it will reflect in the modmenu. If you want to do it on MenuButton press, do this code in the `submitAction` Action parameter. Similarly, if you want to do it when the selected option in HorizontalOption is changed, do the code in `ApplySetting` Action<int> parameter.

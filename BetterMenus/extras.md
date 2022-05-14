@@ -39,7 +39,8 @@ Are you unhappy with the current options satchel provides in better menus? If so
 
 4) if your element is nothing like anything in satchel, Create a new class and inherit from the abstract Element class to create a new element and add that custom element to the menu like you'd do normally.  
    [Element base class](https://github.com/PrashantMohta/Satchel/blob/542960d0af1361565abfd54ec50f8ffc42167b53/BetterMenus/Base/Element.cs#L69-L84)  
-   [Example 1](https://github.com/PrashantMohta/Satchel/blob/542960d0af1361565abfd54ec50f8ffc42167b53/BetterMenus/Elements/CustomSlider.cs#L6-L165)
+   [Example 1](https://github.com/PrashantMohta/Satchel/blob/542960d0af1361565abfd54ec50f8ffc42167b53/BetterMenus/Elements/CustomSlider.cs#L6-L165)  
+   If you do make a custom element, a PR to [Satchel](https://github.com/PrashantMohta/Satchel) would be appreciated as it would benefit everyone who uses Satchel
 
 ## Adding Elements in ForLoops
 If you have many very similar elements to build or an abstraction that only returns Elements, you can still very easily create the Menu. The basic code would look like this
