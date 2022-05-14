@@ -49,17 +49,58 @@ public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? modt
 
 where you see `//add elements here` you can add elements based on what you need. the 7 elements will be detailed on [Better Menu Elements Page](elements.md)
 
-To add lets say a MenuButton you would do
+To add lets say a MenuButton thats logs when  that button was pressed you would do
 ```cs
 new Element[]
 {
-    new MenuButton("Button", "A menu button", (_) => Log("A button was pressed")),
+    new MenuButton("My Logging Button", "A menu button", (_) => Log("A button was pressed")),
 }
 ```
 
 Below that you can add how many elements you want using `new {Element Name}(),`. If the element count exceeds 5, satchel will create scrollbar for you.
-
+> Notice how I didn't manually specify an Id. If it is not specified, the Id will be the name of the element
 ### 2. Updating properties of elements
+Lets say you wanted to add another option in HorizontalOption or wanted to change what the menu button description says after you press it.
+All you'd have to do is 
+```cs
+//find the element by ID. 
+Element elem = MenuRef.Find("My Logging Button");
+
+//cast the element as a menubutton
+BetterMenus.MenuButton buttonElem = elem as BetterMenus.MenuButton;
+
+//change a property of the element
+buttonElem.Description = "My New MenuButton";
+
+//update menu to reflect changes
+MenuRef.Update();
+```
+
+This can be done anywhere and it will reflect in the modmenu. If you want to do it on MenuButton press, do this code in the `submitAction` Action parameter. Similarly, if you want to do it when the selected option in HorizontalOption is changed, do the code in `ApplySetting` Action<int> parameter.
+
+Example:
+```cs
+MenuRef ??= new Menu("Example Mod Menu",
+        new Element[]
+        {
+            new MenuButton("My Logging Button", "A menu button", (_) => Log("A button was pressed"), Id:"Button1"), // create a button very similar to above button
+            new MenuButton("Change Text", "Click me to change text of above button", (_) =>
+                {
+                    //find element by Id
+                    Element elem = MenuRef.Find("Button1");
+                    MenuButton buttonElem = elem as MenuButton;
+                    buttonElem.Name = "My New MenuButton"; //change name
+                    buttonElem.Description = "An old button with new properties"; //change description
+                    MenuRef.Update();
+                    
+                    Log("Name of above button changed"); //add a log to know my code worked
+                }),
+        });
+```
+This code produces the following modmenu
+[![BetterMenus Property Update Example](Images/BetterMenusPropertyUpdateExample.png](https://youtu.be/IlXgQSa3zTs)
+> Notice: Since I'm changing the name, I manually specified Id so there is no confusion
+> Note: The compiler might get an ambiguous reference between UnityEngine.UI.MenuButton and Satchel.BetterMenus.MenuButton. Best to do `using Satchel.BetterMenus` on the top to avoid this error
 ### 3. The MenuRow Element
 ### 4. Hide/Showing Elements
 ### 5. Blueprints
