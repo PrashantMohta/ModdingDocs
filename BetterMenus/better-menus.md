@@ -78,7 +78,7 @@ BetterMenus.MenuButton buttonElem = elem as BetterMenus.MenuButton;
 //change a property of the element
 buttonElem.Description = "My New MenuButton";
 
-//update element to reflect changes in game
+//update the element to reflect changes in menu
 buttonElem.Update();
 ```
 
@@ -97,7 +97,7 @@ MenuRef ??= new Menu("Example Mod Menu",
                     MenuButton buttonElem = elem as MenuButton;
                     buttonElem.Name = "My New MenuButton"; //change name
                     buttonElem.Description = "An old button with new properties"; //change description
-                    MenuRef.Update();
+                    buttonElem.Update();
                     
                     Log("Name of above button changed"); //add a log to know my code worked
                 }),
@@ -147,14 +147,14 @@ MenuRef = new Menu("Example Mod Menu", new Element[]
             switch (chosenMode)
             {
                 case Modes.Mode1:
-                    MenuRef.Find("Mode1Key").Show(); //show the element
-                    MenuRef.Find("Mode2Button").Hide(); //hide the element
+                    MenuRef.Find("Mode1Key").Show(); //show the keybind related to mode 1
+                    MenuRef.Find("Mode2Button").Hide(); //hide the button related to mode 2
                     break;
                 case Modes.Mode2:
                     //Another option is to find the buttons and update its visibility property and call Update function.
                     MenuRef.Find("Mode1Key").isVisible = chosenMode == Modes.Mode1; 
                     MenuRef.Find("Mode2Button").isVisible = chosenMode == Modes.Mode2; 
-                    MenuRef.Update(); //after updating the property, update the menu to changes can be visible
+                    MenuRef.Update(); //after updating the visibility property, update the menu so changes can be visible
                     break;
             }
         },
