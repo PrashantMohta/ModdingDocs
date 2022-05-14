@@ -13,7 +13,6 @@ It essentially can do what ICustomMenuMod does and more but with much more easie
 3. Hide/show menu elements at will. This allows "filtering" elements based on the current options selected by user. For example, if you have 3 gameplay modes in your mod, you can use this to only show the options relevant to that mode.
 4. A `MenuRow` elements that allows you to place multiple menu elements side by side on a single horizontal line.
 5. Blueprints for more easily creating commonly used configurations
-6. Provides events like OnBuilt and On Update Menu.
 
 Each of the features will be detailed below 
 
@@ -184,8 +183,10 @@ All the available blueprints will be detailed in [Better Menus BluePrints Page](
 2. [Mod Toggle](blueprints.md#mod-toggle)
 3. [Navigate To Menu](blueprints.md#navigate-to-menu)
 4. [Update Visibility](blueprints.md#update-visibility)
-### 6. Events
 
-Notes on building pages
-What to do if not happy with current element options
-creating elements in forloop
+## Extras
+These are BetterMenus information that didnt fit in the above tutorial but are still worth mentioning
+- [Notes on building pages](extras.md#notes-on-building-pages)
+- [Options To Add In The Menu Other Than The 8 Elements](extras.md#options-to-add-in-the-menu-other-than-the-8-elements)
+- [Adding elements in forloop](extras.md#adding-elements-in-forloops)
+- [Events](extras.md#events)

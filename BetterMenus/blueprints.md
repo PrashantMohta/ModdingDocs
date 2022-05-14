@@ -47,5 +47,4 @@ new HorizontalOption("Option Enabled", "Click here to enable/disable option",
             new []{ "MenuButton1", "KeyBind1", "MenuRow1" }); //these are a string array of element ids whose visibility needs to be updated
     },
     () => GlobalSettings.OptionIsEnabled ? 0 : 1, //if OptionIsEnabled is true, return 0 (yes) else return 1 (no)
-    
 ```
