@@ -24,7 +24,7 @@ To create satchel menus, there are 3 objects we need to define first.
 3. `Menu Element` It is the parts that make up the menu (buttons, keybinds etc.)
 
 To Create Menus:
-Make the class that inherits from `Mod` also inhert from `ICusomMenuMod`. You'll be asked to create a function `GetMenuScreen`. In that function do:
+Make the class that inherits from `Mod` also inherit from `ICusomMenuMod`. You'll be asked to create a function `GetMenuScreen`. In that function do:
 ```cs
 // a variable that holds our Satchel.BetterMenu.Menu for us to use in the code.
 private Menu MenuRef;
@@ -49,7 +49,7 @@ public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? modt
 
 where you see `//add elements here` you can add elements based on what you need. the 7 elements will be detailed on [Better Menu Elements Page](elements.md)
 
-To add lets say a MenuButton thats logs when  that button was pressed you would do
+To add lets say a MenuButton that logs when  that button was pressed you would do
 ```cs
 new Element[]
 {
@@ -98,8 +98,9 @@ MenuRef ??= new Menu("Example Mod Menu",
         });
 ```
 This code produces the following modmenu
-[![BetterMenus Property Update Example](Images/BetterMenusPropertyUpdateExample.jpg)](https://youtu.be/IlXgQSa3zTs)
-> Notice: Since I'm changing the name, I manually specified Id so there is no confusion
+[![BetterMenus Property Update Example](../Images/BetterMenusPropertyUpdateExample.jpg)](https://youtu.be/IlXgQSa3zTs)
+> Notice: Since I'm changing the name, I manually specified Id so there is no confusion.  
+
 > Note: The compiler might get an ambiguous reference between UnityEngine.UI.MenuButton and Satchel.BetterMenus.MenuButton. Best to do `using Satchel.BetterMenus` on the top to avoid this error
 ### 3. The MenuRow Element
 ### 4. Hide/Showing Elements
