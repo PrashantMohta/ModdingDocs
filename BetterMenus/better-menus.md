@@ -98,7 +98,7 @@ MenuRef ??= new Menu("Example Mod Menu",
         });
 ```
 This code produces the following modmenu
-[![BetterMenus Property Update Example](Images/BetterMenusPropertyUpdateExample.png](https://youtu.be/IlXgQSa3zTs)
+[![BetterMenus Property Update Example](Images/BetterMenusPropertyUpdateExample.jpg)](https://youtu.be/IlXgQSa3zTs)
 > Notice: Since I'm changing the name, I manually specified Id so there is no confusion
 > Note: The compiler might get an ambiguous reference between UnityEngine.UI.MenuButton and Satchel.BetterMenus.MenuButton. Best to do `using Satchel.BetterMenus` on the top to avoid this error
 ### 3. The MenuRow Element
