@@ -98,11 +98,77 @@ MenuRef ??= new Menu("Example Mod Menu",
         });
 ```
 This code produces the following modmenu
-[![BetterMenus Property Update Example](../Images/BetterMenusPropertyUpdateExample.jpg)](https://youtu.be/IlXgQSa3zTs)
+[![Property Update Example](../Images/BetterMenusPropertyUpdateExample.jpg)](https://youtu.be/IlXgQSa3zTs)
 > Notice: Since I'm changing the name, I manually specified Id so there is no confusion.  
 
 > Note: The compiler might get an ambiguous reference between UnityEngine.UI.MenuButton and Satchel.BetterMenus.MenuButton. Best to do `using Satchel.BetterMenus` on the top to avoid this error
 ### 3. The MenuRow Element
+The Menu Row element allows the modmenu to have multiple elements in a single horizontal line. Mostly used if you have multiple buttons and you dont want to waste vertical space on all of them
+Example
+```cs
+MenuRef = new Menu("Example Mod Menu", new Element[]
+        {
+            //create a menu row with 2 menu buttons. 
+            new MenuRow(new List<Element>() //first parameter is a list of elements you want to add to the row
+                {
+                    new MenuButton("ButtonL", "Left Button", (_) => Log("Left Button Pressed")),
+                    new MenuButton("ButtonR", "Right Button", (_) => Log("Right Button Pressed")),
+                }, "MyMenuButtonRow"), //second parameter is the id
+        });
+```
+![MenuRow Example](../Images/BetterMenusMenuRowExample.jpg)
 ### 4. Hide/Showing Elements
+This feature is very useful for showing only relevant elements to the user based on the current selected options. Using this system is very similar to [updating properties](#2-updating-properties-of-elements).
+Every Element has a property `isVisible` that controls whether not not its placed on next Menu Update. An Example will make this more clear.
+
+Example:
+```cs
+ enum Modes
+{
+    Mode1,
+    Mode2,
+}
+
+Modes chosenMode = Modes.Mode1;
+MenuRef = new Menu("Example Mod Menu", new Element[]
+{
+    new HorizontalOption("Choose Mode", 
+        "Choose from the following modes",
+        Enum.GetNames(typeof(Modes)), //get an string array of all values in Modes enum
+        (index) => //the function that will be run when a new option is set
+        { 
+            chosenMode = (Modes)index;
+            switch (chosenMode)
+            {
+                case Modes.Mode1:
+                    MenuRef.Find("Mode1Key").Show(); //show the element
+                    MenuRef.Find("Mode2Button").Hide(); //hide the element
+                    break;
+                case Modes.Mode2:
+                    //Another option is to find the buttons and update its visibility property and call Update function.
+                    MenuRef.Find("Mode1Key").isVisible = chosenMode == Modes.Mode1; 
+                    MenuRef.Find("Mode2Button").isVisible = chosenMode == Modes.Mode2; 
+                    MenuRef.Update(); //after updating the property, update the menu to changes can be visible
+                    break;
+            }
+        },
+        () => (int)chosenMode),
+    
+    new KeyBind("Mode 1 Key", keyBinds.Mode1Key, Id:"Mode1Key")
+    {
+        //isVisible is a property of all Elements. However it is not available to be set in the constructor so we need to set it on instantiation
+        isVisible = chosenMode == Modes.Mode1, 
+    },
+    new MenuButton("Mode 2 Button", "Does Something for Mode 2", (_) => Log("In Mode 2"), Id: "Mode2Button")
+    {
+        isVisible = chosenMode == Modes.Mode2,
+    },
+});
+```
+[![Element Update Example](../Images/BetterMenusUpdateElemExample.jpg)](https://youtu.be/9dOAWYQZ3C8)
+We need to notice a couple of things:
+1. If we use `Show()`/`Hide()`, we don't need to call the MenuRef Update function. Additionally, the `OnVisibilityChange` event will be called.
+2. When we directly edit the `isVisible` property, it is easier to deal with especially if there are a large number of elements. However, we need to manually call Update function for changes to take effect and `OnVisibilityChange` event will not be called.
+3. When we created the 2 MenuButtons, on instantiation we initialized the `isVisible` property manually. This is because we want only the relevant options to show, even on first menu creation
 ### 5. Blueprints
 ### 6. Events
