@@ -1,6 +1,7 @@
 ﻿---
 parent: BetterMenus
 nav_order: 3
+title: BetterMenus Extras
 ---
 # BetterMenus Extras
 
