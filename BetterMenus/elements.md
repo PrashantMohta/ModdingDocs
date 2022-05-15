@@ -1,4 +1,8 @@
-﻿# Better Menu Elements
+﻿---
+parent: BetterMenus
+nav_order: 1
+---
+# BetterMenus Elements
 
 ## 1. Horizontal Option
 The basic menu option that allows you to let the user select 1 option from a list of options

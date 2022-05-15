@@ -1,4 +1,8 @@
-﻿# BluePrints
+﻿---
+parent: BetterMenus
+nav_order: 2
+---
+# BluePrints
 Blueprints is a class that has been created to help provide and ease the creation of commonly used functionality in modmenus.
 
 ## Key And Button Bind

@@ -1,5 +1,7 @@
 ﻿---
+title: Dependency Mods
 nav_order: 13
+has_children: true
 ---
 # Dependency Mods
 

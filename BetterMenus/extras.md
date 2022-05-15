@@ -1,4 +1,8 @@
-﻿# Extras
+﻿---
+parent: BetterMenus
+nav_order: 3
+---
+# BetterMenus Extras
 
 ## Notes on building pages
 - You should create a new MenuRef for each menuscreen you want.

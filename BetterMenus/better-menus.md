@@ -1,6 +1,12 @@
-﻿# Better Menus
+﻿---
+title: BetterMenus
+nav_order: 1
+parent: Dependency Mods
+has_children: true
+---
+# BetterMenus
 
-## What is Satchel Better Menus
+## What is Satchel BetterMenus
 In 1.5, the MAPI added the ability for mods to add a menu to the "Mods" menu in game. The MAPI has 2 ways to create a modmenu, `IMenuMod` and `ICustomMenuMod`.  
 `IMenuMod` is really simple to create but it is limited as it only allows a list of horizontal selections (basic dropdown like selections without a drop down that allow you to choose 1 option from a list) as it is mainly used across HK menus.  
 `ICustomMenuMod` allows the mod to use a full range of menu elements at the cost of being hard to understand.
