@@ -2,6 +2,7 @@
 title: BetterMenus
 nav_order: 1
 parent: Satchel
+grand_parent: Dependency Mods   
 has_children: true
 ---
 # BetterMenus
