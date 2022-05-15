@@ -35,9 +35,9 @@ A Library mod that aims to make modding more accessible by providing simpler way
 	
 - FUtils - FSM related utilities
 	- FSMUtility
-	-Interceptor
-	-Serialiser
-	-Extractor
+	- Interceptor
+	- Serialiser
+	- Extractor
 	
 - Other General utilities and helpers
 	- AnimationUtils
@@ -51,7 +51,7 @@ A Library mod that aims to make modding more accessible by providing simpler way
 	- SpriteUtils
 	- TextureUtils
 	- WavUtils
-	- 
+	
 - Easy Reflection
 	- GameManager
 	- HeroController
