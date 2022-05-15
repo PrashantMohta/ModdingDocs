@@ -1,2 +1,5 @@
 markdown: GFM
 remote_theme: just-the-docs/just-the-docs
+aux_links:
+  "Just the Docs on GitHub":
+    - "https://discord.gg/RppAb2vNqz"
