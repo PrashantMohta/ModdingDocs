@@ -144,16 +144,21 @@ MenuRef = new Menu("Example Mod Menu", new Element[]
         (index) => //the function that will be run when a new option is set
         { 
             chosenMode = (Modes)index;
+
+            // Get the menu elements
+            Element mode1key = MenuRef.Find("Mode1Key");
+            Element mode2button = MenuRef.Find("Mode2Button");
+
             switch (chosenMode)
             {
                 case Modes.Mode1:
-                    MenuRef.Find("Mode1Key").Show(); //show the keybind related to mode 1
-                    MenuRef.Find("Mode2Button").Hide(); //hide the button related to mode 2
+                    mode1key.Show(); //show the keybind related to mode 1
+                    mode2button.Hide(); //hide the button related to mode 2
                     break;
                 case Modes.Mode2:
                     //Another option is to find the buttons and update its visibility property and call Update function.
-                    MenuRef.Find("Mode1Key").isVisible = chosenMode == Modes.Mode1; 
-                    MenuRef.Find("Mode2Button").isVisible = chosenMode == Modes.Mode2; 
+                    mode1key.isVisible = chosenMode == Modes.Mode1; 
+                    mode2button.isVisible = chosenMode == Modes.Mode2; 
                     MenuRef.Update(); //after updating the visibility property, update the menu so changes can be visible
                     break;
             }
