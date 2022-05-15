@@ -73,6 +73,14 @@ Relevant Links:
 
 A core mod made meant to replace all different PlayMakerExtensions, FsmExtensions, FsmUtil and FSMHelper in the long run.
 
+## [HKTool](https://github.com/HKLab/HollowKnightMod.Tool)
+
+A core mode made by HKLab
+
+## [Osmi](https://github.com/Clazex/HollowKnight.Osmi)
+
+A core mode made by Clazex
+
 ## TODO
 
 - Add other core mods that are missing
