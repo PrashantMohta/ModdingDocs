@@ -111,7 +111,7 @@ MenuRef ??= new Menu("Example Mod Menu",
         });
 ```
 This code produces the following modmenu
-[![Property Update Example](../Images/BetterMenusPropertyUpdateExample.jpg)](https://youtu.be/IlXgQSa3zTs)
+[![Property Update Example](/ModdingDocs/Images/BetterMenusPropertyUpdateExample.jpg)](https://youtu.be/IlXgQSa3zTs)
 > Notice: Since I'm changing the name, I manually specified Id so there is no confusion.  
 
 > Note: The compiler might get an ambiguous reference between UnityEngine.UI.MenuButton and Satchel.BetterMenus.MenuButton. Best to do `using Satchel.BetterMenus` on the top to avoid this error
@@ -129,7 +129,7 @@ MenuRef = new Menu("Example Mod Menu", new Element[]
                 }, "MyMenuButtonRow"), //second parameter is the id
         });
 ```
-![MenuRow Example](../Images/BetterMenusMenuRowExample.jpg)
+![MenuRow Example](/ModdingDocs/Images/BetterMenusMenuRowExample.jpg)
 ### 4. Hide/Showing Elements
 This feature is very useful for showing only relevant elements to the user based on the current selected options. Using this system is very similar to [updating properties](#2-updating-properties-of-elements).
 Every Element has a property `isVisible` that controls whether not not its placed on next Menu Update. An Example will make this more clear.
@@ -183,7 +183,7 @@ MenuRef = new Menu("Example Mod Menu", new Element[]
     },
 });
 ```
-[![Element Update Example](../Images/BetterMenusUpdateElemExample.jpg)](https://youtu.be/9dOAWYQZ3C8)
+[![Element Update Example](/ModdingDocs/Images/BetterMenusUpdateElemExample.jpg)](https://youtu.be/9dOAWYQZ3C8)
 We need to notice a couple of things:
 1. If we use `Show()`/`Hide()`, we don't need to call the MenuRef Update function. Additionally, the `OnVisibilityChange` event will be called.
 2. When we directly edit the `isVisible` property, it is easier to deal with especially if there are a large number of elements. However, we need to manually call Update function for changes to take effect and `OnVisibilityChange` event will not be called.

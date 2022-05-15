@@ -14,7 +14,7 @@ MenuRef = new Menu("Example Mod Menu", new Element[]
             Blueprints.KeyAndButtonBind("Action 1", keyBinds.Key1, keyBinds.Button1),
         });
 ```
-![Key and Button Bind Example](../Images/BetterMenusKeyAndButtonBind.jpg)
+![Key and Button Bind Example](/ModdingDocs/Images/BetterMenusKeyAndButtonBind.jpg)
 ## Mod Toggle
 A blueprint that makes it easier to add a mod Toggle Option that takes in the ModToggleDelegates to Initialize/Unload an IToggleable Mods
 ```cs
@@ -25,7 +25,7 @@ MenuRef = new Menu("Example Mod Menu", new Element[]
             "Should mod be enabled?"), //description
         });
 ```
-![Mod Toggle Example](../Images/BetterMenusModToggle.jpg)
+![Mod Toggle Example](/ModdingDocs/Images/BetterMenusModToggle.jpg)
 ## Navigate To Menu
 A blueprint to make a button to take you to a new menuscreen. Helps create more pages in the mod menu
 ```cs
@@ -36,7 +36,7 @@ MenuRef = new Menu("Example Mod Menu", new Element[]
                 () => ExtraMenuRef.GetMenuScreen(MenuRef.menuScreen)) //this is a Func<MenuScreen> you have to return the "Next Page" MenuScreen here
         });
 ```
-![Navigate To Menu Example](../Images/BetterMenusNavigateToMenu.jpg)
+![Navigate To Menu Example](/ModdingDocs/Images/BetterMenusNavigateToMenu.jpg)
 > Notice How in GetMenuScreen, MenuRef.menuScreen was passed and not modlistmenu. This is so the back button in extra menu leads to previous menu and not the `Mods` menu  
 ## Update Visibility
 A blueprint that allows you to set visibility of multiple elements together

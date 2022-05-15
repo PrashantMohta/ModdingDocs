@@ -98,7 +98,7 @@ fsm.ChangeTransition("fromStateName","onEventName","toStateName")
 ### Creating Custom FSM Actions
 If you want to do something specific to an FSM but there isn't an action that already does that, you can create your own pretty trivially.
 For this example I would like to conditionally flip the isTrue and isFalse events in this fsm.  
-![An action from the "Direction Wall" state in Knight-Superdash](Images/customfsmstateexample.jpg).     
+![An action from the "Direction Wall" state in Knight-Superdash](/ModdingDocs/Images/customfsmstateexample.jpg).     
 The easiest way to do this would be to create a "ConditionallyFlip_BoolTest" Action.  
 To get started, open [ILspy](Tools/decompilers.md) and search for the original Action (BoolTest in this case). Other than the attributes above the
 fields, the code is copy paste friendly which can be used as a reference when creating the custom FSM action.  

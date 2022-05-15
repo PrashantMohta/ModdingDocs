@@ -31,7 +31,7 @@ You're now done setting up your system for creating [your first Hollow Knight mo
 
 ### Windows
 
-[![Windows guide video](Images/step1guidewin.jpg)](https://www.youtube.com/watch?v=qT9a0k0fqqM)
+[![Windows guide video](/ModdingDocs/Images/step1guidewin.jpg)](https://www.youtube.com/watch?v=qT9a0k0fqqM)
 
 ### Mac
 
