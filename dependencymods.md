@@ -10,14 +10,8 @@ There are many dependency mods that were created to make modding easier. Below y
 
 ## [Satchel](https://github.com/PrashantMohta/Satchel)
 
-A core mod made by Dandy and Mulhima.  
-Some of the core features are:
-
-- [BetterMenus](BetterMenus/better-menus.md): An easier way to implement ICustomMenuMod.
-  - Only asks the user to return a list of all the menu elements they want while the menu builder and such are abstracted away.
-  - Provides events and methods that allows you to edit/hide elements at runtime.
-  - See [example](https://github.com/PrashantMohta/Satchel/tree/master/BetterMenus/Example)
-- Others (todo).
+A Library mod by Dandy and Mulhima that aims to make modding more accessible by providing simpler ways of achieving complex functionality, also has some Utilities for general things.
+[Features and documentation](Satchel/Satchel.md)
 
 ## [SFCore](https://github.com/SFGrenade/SFCore)
 

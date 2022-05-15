@@ -1,7 +1,7 @@
 ﻿---
 title: BetterMenus
 nav_order: 1
-parent: Dependency Mods
+parent: Satchel
 has_children: true
 ---
 # BetterMenus
