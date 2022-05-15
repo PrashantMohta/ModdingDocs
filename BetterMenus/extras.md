@@ -1,7 +1,6 @@
 ﻿---
-parent: BetterMenus
-nav_order: 3
 title: BetterMenus Extras
+parent: BetterMenus
 ---
 # BetterMenus Extras
 
