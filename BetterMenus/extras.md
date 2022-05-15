@@ -1,6 +1,7 @@
 ﻿---
 title: BetterMenus Extras
 parent: BetterMenus
+grand_parent: Dependency Mods
 ---
 # BetterMenus Extras
 
