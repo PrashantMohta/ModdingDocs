@@ -11,7 +11,7 @@ There are many dependency mods that were created to make modding easier. Below y
 ## [Satchel](https://github.com/PrashantMohta/Satchel)
 
 A Library mod by Dandy and Mulhima that aims to make modding more accessible by providing simpler ways of achieving complex functionality, also has some Utilities for general things.
-[Features and documentation](Satchel/Satchel.md)
+[Features and documentation](Satchel/Satchel.md){: .btn }
 
 ## [SFCore](https://github.com/SFGrenade/SFCore)
 
