@@ -78,12 +78,14 @@ A core mod made by HKLab
 A core mod made by Clazex that aims to provide convenient utilities and allow the user to get rid of writing commonly used code snippets repeatedly.
 
 Features include but not limited to:
+
 - `CharmUtil` and `Charm` enum: provide a easy-to-maintain way to manage checking and (un)equipping for charms without magic numbers
 - `Dict` and `LangUtil`: automatic localization loading, switching and getting
 - `RandomSelector`: simulation of `SendRandomEventV3`, but way more flexible
 - `Refs`: short-hand for singleton instances
 - `SimpleFSM`: a straightforward approach to define a finite state machine from scratch with `IEnumerator`s, attributes and full access to `MonoBehaviour` functionalities, also interops with vanilla `PlayMakerFSM`
 - `Osmi.FsmActions` namespace: convenient `PlayMakerFSM` actions
+
 ... and a large number of extension method utilities
 
 ## TODO
