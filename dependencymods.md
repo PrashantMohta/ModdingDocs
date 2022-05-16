@@ -71,16 +71,17 @@ A core mod made meant to replace all different PlayMakerExtensions, FsmExtension
 
 ## [HKTool](https://github.com/HKLab/HollowKnightMod.Tool)
 
-A core mode made by HKLab
+A core mod made by HKLab
 
 ## [Osmi](https://github.com/Clazex/HollowKnight.Osmi)
 
-A core mode made by Clazex
+A core mod made by Clazex
 
 ## TODO
 
 - Add other core mods that are missing
 - Add small explanation of each core mod and what it can do
 - Add other intermod things like:
-  - DebugMod (Adding to keybinds and such)
-  - Rando adding to pools?
+  - DebugMod
+  - HKMP
+  - Rando adding to pools
