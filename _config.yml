@@ -1,5 +1,7 @@
 markdown: GFM
 remote_theme: just-the-docs/just-the-docs
 aux_links:
-  "Join Discord":
+  "Contribute":
+    - "https://github.com/PrashantMohta/ModdingDocs"
+  "Join Modding Discord":
     - "https://discord.gg/RppAb2vNqz"
