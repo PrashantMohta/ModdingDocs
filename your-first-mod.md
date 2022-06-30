@@ -16,6 +16,9 @@ The video series is especially beginner friendly, so you may want to try that !
 
 ## Installing the Mod Template
 
+> Tip: if your IDE supports it, using an [extension](ide-extensions.md) can simplify or eliminate many of the
+steps below!
+
 Strictly speaking, there is no need to use a template to create your mod. it will however take some common things that you will have to do every time you start a project and do them for you, which is nice.
 
 To install the template : 
