@@ -8,5 +8,3 @@ IDE extensions are addons to your existing development tools that can help to st
 certain modding tasks. The most commonly used IDEs in the modding community are Visual Studio 2022 and
 JetBrains Rider. There is currently extension support for Visual Studio 2022. Click one of the links
 below for more information on the extension available for your IDE.
-
-* [Visual Studio Desktop](IdeExtensions/vs-2022.md)
