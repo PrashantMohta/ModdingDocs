@@ -18,10 +18,11 @@ nav_order: 2
 
 To Setup your system for modding, you need to do the following steps. if you prefer, you can refer to the video guides below and follow along as well.
 
-1. Download and Install [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/)
-1. Download and Install [.NET Framework 4.7.2](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472).
+1. Download and Install [Visual Studio Community](https://visualstudio.microsoft.com/vs/community/).
+    - Make sure to also install the "C# for desktop development" workflow.
+2. Download and Install [.NET Framework 4.7.2](https://dotnet.microsoft.com/en-us/download/dotnet-framework/net472).
     - For linux see [Install a .NET SDK using Microsoft's packages.](https://docs.microsoft.com/en-us/dotnet/core/install/linux) 
-  > Do note that using the .NET 6 SDK or later is preferred.
+      Do note that using the .NET 6 SDK or later is preferred.
 3. Create a folder named `Hollow Knight Mods` as your working directory (you will create your mods here).
 4. Install the Modding Api (skip if already using a modded install of the game.)
     - Either by using a modinstaller (auto installs on load)
