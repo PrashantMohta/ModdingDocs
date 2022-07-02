@@ -54,6 +54,18 @@ To be able to do this, [Reflection](reflection.md) is the best way to do it.
 
 > Note: To be able to write OnHooks, you will need to import `MMHOOK_Assembly-CSharp.dll` and `MMHOOK_PlayMaker.dll` from your managed folder.
 
+## Order of Execution
+If multiple mods On Hook the same method, it might be important to understand the order of importance. Lets say 3 mods exist, Mod A, B and C and they subscribe in that order, then the for the execution of the hooks are:
+
+- C does stuff before orig(self)
+- B does stuff before orig(self)
+- A does stuff before orig(self)
+- The original function runs
+- A does stuff after orig(self)
+- B does stuff after orig(self)
+- C does stuff after orig(self)
+
+This order becomes especially imporant when one of the mods doesn't call orig(self). For example if B chooses not to call orig(self), then everything between "B does stuff before orig(self)" and "B does stuff after orig(self)" gets skipped (so C is fine but A is ignored).
 
 
 ###  TODO
