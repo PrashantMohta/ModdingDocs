@@ -1,5 +1,33 @@
-# ModHooks Reference
-Here you can find a list of all hooks and an explanation of what they do and how to use it.  
+---
+title: ModHooks
+nav-order: 1
+parent: Hooks
+---
+
+# ModHooks
+ModHooks are hooks that are built into the Modding API that allow us to interact will Hollow Knight code.
+To use a Modhook, you need to subscribe to the hook. For example:
+```cs
+public class MyFirstMod:Mod
+{
+    // The method that will be called by Modding API when the game first opens
+    public override void Initialize()
+    {
+        // We subscribe to HeroUpdateHook which is an hook that is triggered when the 'Update' Function is called for the player (once every frame)
+        ModHooks.HeroUpdateHook += OnHeroUpdate;
+    }
+    
+    //This event's method doesn't take any Parameters. normally the IDE can generate this function for you with the correct parameters
+    public void OnHeroUpdate()
+    {
+       //code to run
+    }
+}
+```
+> Note: Your IDE (Visual Studio Community/Jetbrains Rider) can generate this function for you with the correct parameters. To do this, [see example video](https://youtu.be/oH-lbfZORw0) or type in `ModHooks.HeroUpdateHook += OnHeroUpdate;`, Then right click on the now red highlighted `OnHeroUpdate` and click on the light bulb icon (called 'Quick actions and Refactoring') and choose 'Generate Method'.
+
+There are many modhooks available to be used.  
+Here you can find a list of some hooks and an explanation of what they do and how to use it.  
 However, not all hooks are listed here. Please refer to the 
 [API Documentation](https://hk-modding.github.io/api/api/Modding.ModHooks.html#events) for a list of all hooks.
 
