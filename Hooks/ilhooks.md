@@ -67,12 +67,12 @@ To IL hook a method, first you'll need to find the IL code you'll be editing. Na
 interest in ILSpy or dnspy. Then, in the top bar, change from "C#" to "IL with C#." This will show you
 the IL code, annotated with the equivalent C# code.
 
-![Decompiling with IL](/ModdingDocs/Images/ILHooks/DecompileToIL.png)
+![Decompiling with IL](/ModdingDocs/Images/ILHooks/DecompileToIL.jpg)
 
 Once you do, you'll see something like the following (this example is part of the Update method of the stag
 cutscene's Monobehaviour).
 
-![Stag example](/ModdingDocs/Images/ILHooks/DecompiledILExample.png)
+![Stag example](/ModdingDocs/Images/ILHooks/DecompiledILExample.jpg)
 
 ## Fundamentals of IL Hooking
 
