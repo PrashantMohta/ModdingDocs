@@ -47,16 +47,18 @@ them with Mono). Java is another example of a bytecode language. You can see a f
 covered here later.
 
 As a simple example of IL, consider adding 2 numbers. In C#, that would look like this:
+
 ```csharp
 int x = 2 + 3;
 ```
 
 In IL, it would look like this:
-```msil
+
+```
 ldc.i4 2 // push the constant value 2 onto the stack
 ldc.i4 3 // push the constant value 3 onto the stack
 add      // pop 2 values from the stack, add them, and push the result
-stloc.0  // pop the value from the stack and store it in the 0th local variable
+stloc.0  // pop the value from the stack and store it in the 1st local variable (index 0)
 ```
 
 ## Reading IL Code in ILSpy/dnspy
@@ -65,31 +67,126 @@ To IL hook a method, first you'll need to find the IL code you'll be editing. Na
 interest in ILSpy or dnspy. Then, in the top bar, change from "C#" to "IL with C#." This will show you
 the IL code, annotated with the equivalent C# code.
 
-![Decompiling with IL](/Images/ILHooks/DecompileToIL.png)
+![Decompiling with IL](/ModdingDocs/Images/ILHooks/DecompileToIL.png)
 
 Once you do, you'll see something like the following (this example is part of the Update method of the stag
 cutscene's Monobehaviour).
 
-![Stag example](/Images/ILHooks/DecompiledILExample.png)
+![Stag example](/ModdingDocs/Images/ILHooks/DecompiledILExample.png)
 
-### TODO
-- reading IL code from ILspy
-- explanation of matching, how to match
-- list common OpCodes and what they do
-- Explain GotoNext(); GotoNext(params bool predicate); TryGoToNext(params bool predicate);
-- Explain Emit, EmitDelegate
-- Explain Remove();
-- Explain common patterns for replacing
-  - cursor.EmitDelegate<Func<float,float>>
-  - cursor.Remove(); cursor.Emit(OpCodes, val)/ cursor.EmitDelegate(() => val)
-  - cursor.Next.Operand = newval
-- understand common errors such as
-    - invalid stack
-        - when stack has a value thats not used
-        - when stack has a value thats not expected (int instead of string)
-        - when stack has missing value
-    - invalid label
-        - when remove is used to remove an instruction that is used to transfer control (in if statement)
-- While vs If in matching
-- Ienumarator IL hooking and how to do it
-- - how to run your code mid function (will probably not be able to change value of parameters of functions tho)
+## Fundamentals of IL Hooking
+
+Creating an IL hook follows the same relatively simple formula regardless of what you're hooking.
+
+1. **Attach** your hook to the method of interest.
+1. **Match** instructions at or near where you want to modify the original code.
+1. **Manipulate** the code by emitting and removing instructions.
+
+Let's take a detailed look at the various ways to do each of these steps.
+
+### Attach Hooks
+
+Similar to `On` hooks, most methods in Hollow Knight can be hooked using a pattern like `IL.Class.Method += YourHook;`.
+For example, if you wanted to change the way a given enemy gets counted in the Hunter's Journal, you would hook
+`IL.PlayerData.CountJournalEntries`. IL hooks always have the signature `void(IlContext)`; your IDE can generate this
+for you when you type `+=`, just like `On` hooks.
+
+There are a few cases when it isn't this simple. To start with a simple real-world example, let's suppose you want
+to make it so that the Hunter icon never shows up in the bottom corner of the screen. To do this, we would need
+to hook into `EnemyDeathEffects.RecordKillForJournal`. When we take a look at the code in ILSpy, however, we see
+something problematic:
+
+```csharp
+private void RecordKillForJournal()
+{
+    string killedBoolPlayerDataLookupKey = "killed" + playerDataName;
+    string killCountIntPlayerDataLookupKey = "kills" + playerDataName;
+    string newDataBoolPlayerDataLookupKey = "newData" + playerDataName;
+    ModHooks.OnRecordKillForJournal(this, playerDataName, killedBoolPlayerDataLookupKey, killCountIntPlayerDataLookupKey, newDataBoolPlayerDataLookupKey);
+    orig_RecordKillForJournal();
+}
+```
+
+This isn't the original code! In fact, we can see that this is the caller for `ModHooks.OnRecordKillForJournal`. This
+method has been patched by the modding API. The original code is actually in `orig_RecordKillForJournal`. We'll have to
+make our changes there instead, but to do that, we'll need to make a custom IL hook first.
+
+```csharp
+// within your mod class, for this example
+
+// find the method - in this case we know it's a private, non-static method on EnemyDeathEffects
+private static MethodInfo origRecordKillForJournal = typeof(EnemyDeathEffects).GetMethod("orig_RecordKillForJournal",
+    BindingFlags.NonPublic | BindingFlags.Instance);
+// hold the actual hook
+private ILHook ilRecordKillForJournal;
+
+public override void Initialize() 
+{
+    ilRecordKillForJournal = new ILHook(ilRecordKillForJournal, HideHunterIcon);
+}
+
+private void HideHunterIcon(ILContext il) { ... }
+```
+
+If you need to unhook the method (for instance, if your mod is toggleable), you can use `ILHook.Dispose()` to do so.
+
+```csharp
+public override void Unload()
+{
+    ilRecordKillForJournal.Dispose();
+    ilRecordKillForJournal = null;
+}
+```
+
+The other case where hooking is not straightforward is when hooking coroutines. Coroutines are IEnumerator "generator
+methods" used by Unity to execute workloads over multiple frames. Typically these use `yield return` statements
+to generate new values in the enumerator. To support this, the compiler actually generates a hidden, behind-the-scenes
+class that implements your enumeration. Let's take for example the platforms in Queen's Gardens that drop out from
+beneath you. The dropping is controlled by the `Flip` coroutine in the `DropPlatform` MonoBehaviour. Let's suppose we
+want to change the time before the platform drops. We can't just hook `IL.DropPlatform.Flip`, even though that hook
+exists, because the underlying IL code is just creating an instance of the generated class:
+
+```
+IL_0000: ldc.i4.0
+IL_0001: newobj instance void DropPlatform/'<Flip>d__16'::.ctor(int32)
+IL_0006: dup
+IL_0007: ldarg.0
+IL_0008: stfld class DropPlatform DropPlatform/'<Flip>d__16'::'<>4__this'
+IL_000d: ret
+```
+
+Hopefully, this should make it clear that we actually need to modify code in the generated class (in this case,
+`<Flip>d__16`). For coroutines, we need to modify the generated `MoveNext` method on the generated class. Similar to
+above, we'd need to create a custom IL hook. To do this, we'd usually need to use reflection to get the generated type
+and then get the method off the type. Fortunately, MonoMod provides a convenient extension method to do this work for 
+us using compiler-generated attributes. To complete our example, here's the code needed to hook the `Flip` coroutine,
+where SetDropTime is your defined IL manipulator.
+
+```csharp
+_hook = new ILHook
+    (
+        typeof(DropPlatform).GetMethod("Flip", BindingFlags.NonPublic | BindingFlags.Instance)
+            .GetStateMachineTarget(),
+        SetDropTime
+    );
+```
+
+### Match Instructions
+
+explain gotonext, trygotonext
+
+explain Match predicates
+
+### Manipulate Code
+
+explain remove
+explain emit
+explain emitdelegate
+
+## Debugging Broken IL
+
+explain why IL hooks are difficult to debug and why they produce InvalidProgramException
+explain common causes of errors and how to identify them
+ - stack is unbalanced
+ - wrong type of data
+ - invalid label
