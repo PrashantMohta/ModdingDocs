@@ -173,9 +173,62 @@ _hook = new ILHook
 
 ### Match Instructions
 
-explain gotonext, trygotonext
+To work with IL, you need to create a cursor. In your IL manipulator:
 
-explain Match predicates
+```csharp
+private void Manipulate(ILContext il)
+{
+    ILCursor cursor = new ILCursor(il).Goto(0);
+    // ...
+}
+```
+
+The `Goto(0)` is not strictly necessary in most cases, but is a good safety practice because you do always need to
+call `Goto` or some variant of `GotoNext` before you can make any modifications.
+
+Once you've made a cursor, the next step is to move the cursor to where you want to make your changes. Let's continue
+the example of the drop platforms in QG (we'll keep using this example for the rest of the documentation). The IL code
+that sets the delay looks like the following:
+
+```text
+// <>2__current = new WaitForSeconds(0.7f);
+IL_0056: ldarg.0
+IL_0057: ldc.r4 0.7
+IL_005c: newobj instance void [UnityEngine.CoreModule]UnityEngine.WaitForSeconds::.ctor(float32)
+IL_0061: stfld object DropPlatform/'<Flip>d__16'::'<>2__current'
+```
+
+We want to change the 0.7 to a different amount of delay. In order to do this, we'll have to move the cursor prior
+to the ldc.r4 instruction.
+
+```csharp
+if (cursor.TryGotoNext
+(
+    i => i.MatchLdcR4(0.7f),
+    i => i.MatchNewobj<WaitForSeconds>()
+))
+{
+    ...
+}
+```
+
+In `GotoNext` and `TryGotoNext`, we define a sequence of instruction predicates (i.e. functions that take in
+`Instruction`s and return `bool`s). All the predicates must match sequential instructions in order. Most instructions
+have a match predicate defined for you to use. In the example above, we can see we are trying to find an `ldc.r4`
+with an operand of 0.7, and a `newobj` creating a `WaitForSeconds` (in this example, there's only one place where
+`ldc.r4 0.7` happens, so you technically don't need the `newobj` check but it helps with readability).
+
+The `Match*` predicates have several variants, depending on how much you care about the operand:
+* If you want to match any `ldc.r4` and need to know the value, you can use `MatchLdcR4(out float value)`
+* If you want to match any `ldc.r4` and don't care about what value, you can use `Match(OpCodes.Ldc_R4)`
+
+These variants apply to other instructions as well.
+
+Depending on your preferred mode of failure, you can use `GotoNext` instead of `TryGotoNext`. In this case, you avoid
+an if statement, but if you fail to match IL (i.e. your predicates are incorrect), you'll get an exception. In most
+cases, you're doing a single modification in a known place matching a known pattern, so this may be preferred over
+failing silently. If you need to match several similar chunks of code, you can also use `TryGotoNext` in a while loop
+to make repeated modifications.
 
 ### Manipulate Code
 
