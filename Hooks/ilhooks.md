@@ -222,7 +222,17 @@ The `Match*` predicates have several variants, depending on how much you care ab
 * If you want to match any `ldc.r4` and need to know the value, you can use `MatchLdcR4(out float value)`
 * If you want to match any `ldc.r4` and don't care about what value, you can use `Match(OpCodes.Ldc_R4)`
 
-These variants apply to other instructions as well.
+These variants apply to other instructions as well. By default, `TryGotoNext` and `GotoNext` place the cursor before
+the matched instructions, so the cursor would be at IL_0057 as shown below. You can change this by setting the first
+argument to `MoveType.After` if needed, but usually it will be possible and more convenient to 
+
+```text
+// <>2__current = new WaitForSeconds(0.7f);
+IL_0056: ldarg.0
+>>>cursor is here<<< IL_0057: ldc.r4 0.7
+IL_005c: newobj instance void [UnityEngine.CoreModule]UnityEngine.WaitForSeconds::.ctor(float32)
+IL_0061: stfld object DropPlatform/'<Flip>d__16'::'<>2__current'
+```
 
 Depending on your preferred mode of failure, you can use `GotoNext` instead of `TryGotoNext`. In this case, you avoid
 an if statement, but if you fail to match IL (i.e. your predicates are incorrect), you'll get an exception. In most
@@ -232,9 +242,94 @@ to make repeated modifications.
 
 ### Manipulate Code
 
-explain remove
-explain emit
-explain emitdelegate
+Once your cursor is positioned in the right place, you can begin to make modifications to the IL code. This is a good
+time for a reminder that the stack starts empty and needs to end empty - in other words, you need to keep the stack
+balanced. Any time you add a value, you should remove a value, any time you remove a value you should add a value.
+With that in mind, let's look at some common ways to manipulate IL.
+
+`cursor.Next` refers to the instruction the cursor is pointing to. In some cases, it's possible to do simple
+manipulations just by replacing the operand. In the drop platform example, we could simply do 
+`cursor.Next.Operand = NewValue;` inside the if block.
+
+The next most common method of manipulation is to add and remove instructions. We can achieve this by using `Remove`
+and `Emit`. `Remove` removes the instruction at the cursor; continuing from the previous example, removing a statement
+would leave the IL in this state (note that this is bad; we've removed a value without adding a value so the stack is
+unbalanced):
+
+```text
+// <>2__current = new WaitForSeconds(0.7f);
+IL_0056: ldarg.0
+>>>cursor is here<<< IL_005c: newobj instance void [UnityEngine.CoreModule]UnityEngine.WaitForSeconds::.ctor(float32)
+IL_0061: stfld object DropPlatform/'<Flip>d__16'::'<>2__current'
+```
+
+We can then add back a new value using `Emit`, restoring the stack to a valid state.
+
+```text
+// <>2__current = new WaitForSeconds(0.7f);
+IL_0056: ldarg.0
+>>>cursor is here<<< ldc.r4 SomeValue // this would be the actual constant value
+IL_005c: newobj instance void [UnityEngine.CoreModule]UnityEngine.WaitForSeconds::.ctor(float32)
+IL_0061: stfld object DropPlatform/'<Flip>d__16'::'<>2__current'
+```
+
+Here's the full code to do the above manipulations:
+
+```csharp
+if (cursor.TryGotoNext
+(
+    i => i.MatchLdcR4(0.7f),
+    i => i.MatchNewobj<WaitForSeconds>()
+))
+{
+    cursor.Remove();
+    cursor.Emit(OpCodes.Ldc_I4, SomeValue);
+}
+```
+
+You can emit any kind of opcode, with or without an operand. As a reminder, there is a full list of opcodes
+[here](https://en.wikipedia.org/wiki/List_of_CIL_instructions). You'll see most of the ones you'll usually use in
+the process of investigating the IL code you're hooking. Covering the functionality is out of scope for this
+documentation, but a few commonly used ones include:
+* ldc.i4
+* ldstr
+* ldarg
+* ldfld
+* callvirt
+
+You'll notice that most of these are ways to add values to the stack. In fact, if you want to do meaningful processing
+on the data, there is a much easier way to do that: by using `EmitDelegate`. This will allow you to emit an instruction
+that will call your C# code. This is a common place for the stack to get imbalanced, because arguments to your methods
+are removed from the stack. In general, this means you should do one of the following:
+* Use `EmitDelegate<Action>` to add additional code that needs no inputs and has no outputs.
+* Use `EmitDelegate<Func<T, T>>` to add additional code that takes an input and replaces it with an output of the
+  same type.
+* Add additional items to the stack, then use `EmitDelegate<Action<...>>` to add additional code that takes inputs
+  and has no outputs.
+* Remove items from the stack, then use `EmitDelegate<Func<T>>` to add code that does complex processing and then
+  adds a value to the stack.
+
+Of course, this is not a comprehensive list of all the possible ways you can handle inputs and outputs of delegates;
+they are just a few rules of thumb. Just make sure to keep the stack balanced.
+
+Let's see how to use `EmitDelegate` in action. Suppose we want to modify the drop platform time based on the player's
+current health. Here is one way to accomplish that using `EmitDelegate`.
+
+```csharp
+if (cursor.TryGotoNext
+(
+    i => i.MatchLdcR4(0.7f),
+    i => i.MatchNewobj<WaitForSeconds>()
+))
+{
+    // move between the ldc.r4 and the newobj; we want to have the original time on the stack as an input
+    cursor.GotoNext();
+    cursor.EmitDelegate<Func<float, float>>(f => {
+        return f + (0.5f * PlayerData.instance.GetInt(nameof(PlayerData.health)));
+    });
+}
+```
+
 
 ## Debugging Broken IL
 
