@@ -224,7 +224,8 @@ The `Match*` predicates have several variants, depending on how much you care ab
 
 These variants apply to other instructions as well. By default, `TryGotoNext` and `GotoNext` place the cursor before
 the matched instructions, so the cursor would be at IL_0057 as shown below. You can change this by setting the first
-argument to `MoveType.After` if needed, but usually it will be possible and more convenient to 
+argument to `MoveType.After` if needed, but in many cases it will be possible and more convenient to simply match a 
+different set of instructions.
 
 ```text
 // <>2__current = new WaitForSeconds(0.7f);
@@ -333,8 +334,29 @@ if (cursor.TryGotoNext
 
 ## Debugging Broken IL
 
-explain why IL hooks are difficult to debug and why they produce InvalidProgramException
-explain common causes of errors and how to identify them
- - stack is unbalanced
- - wrong type of data
- - invalid label
+IL hooks can be incredibly difficult to debug. This is because in an IL hook, if you make an error, you'll usually
+end up with invalid code, and the compiler has no way to warn you since you've made all the modifications at runtime.
+This manifests itself as an `InvalidProgramException`, which often provides very little context on what the error is.
+In many cases, the best chance you have to fix broken IL is to get out a pen and paper and work your way through the
+state of the stack as instructions run, until you get to the code you've modified. However, there are a few common
+errors that are typically caused when IL hooking, and being able to identify them can speed up your debugging
+significantly.
+
+The most common error to see, as we've discussed several times in this documentation already, is an unbalanced stack.
+This can be caused in several ways, most commonly pushing additional data onto the stack without consuming it
+appropriately or adding a delegate with arguments that doesn't push back onto the stack. If there are too many values 
+on the stack, you'll usually see an error message like "Invalid IL code in (the method you hooked): (some IL address): 
+ret" or "Invalid IL code in (the method you hooked): (some IL address): (some instruction close after where you 
+modified code)," depending on if you added or removed values from the stack respectively.
+
+Another common cause of errors is putting invalid data type on the stack (for instance, loaded a float when you should
+have loaded an int). This will look quite similar to the error above, where some code near where you made your 
+modification will show as invalid. This is because that code is expecting a certain type of input still; in the case 
+above you are providing no input, in this case you are providing the incorrect input.
+
+A final, less common cause of errors is creating invalid branch instructions. This can happen when modifying code
+after the end of an if block, or when trying to emit if/branch instructions in IL. Typically, the error is caused
+when you branch into the middle of a series of operations, so the stack is not in an expected state. This will look
+similar to the previous 2 errors, since the stack would be missing expected values. In rare cases, it may be possible
+for you to completely remove a branch target, though generally it seems that `ILCursor` is pretty resilient to this
+in the author's testing.
