@@ -9,12 +9,12 @@ are not a swiss army knife, and are not appropriate to use in every situation. U
 reasonable replacement for any of the following:
 
 * Replacing the functionality of a method by using an On hook without calling orig
-  * It's really just more effort to use IL hooks
+  * It's really just more effort to use IL hooks.
 * Editing an FSM in hopes to avoid compatibility issues
-  * IL hooks are just as brittle
+  * IL hooks are just as brittle as FSM edits, if not more.
   * If you're trying to modify the FSM in a major way, you can expect other mods to break regardless of what
-    you do
-  * It's really just more effort to use IL hooks
+    you do.
+  * It's really just more effort to use IL hooks.
 
 IL hooks are best used for small changes - changing magic numbers, altering the condition of an if statement,
 or other tweaks where you would otherwise think to just copy-paste the original method and change a few 
@@ -32,12 +32,12 @@ Object-oriented means that objects are first-class citizens. You may be familiar
 C# is also an object-oriented language. You can create classes with properties, fields, and methods, and then
 create many instances of those classes.
 
-Stack-based language means that the language operates on a stack. Stacks are quite intuitive to think about.
-Consider a deck of playing cards on a table. You can put cards on top of the deck ("pushing" them onto the
-stack) or remove cards from the top of the stack ("popping" them from the stack). You can't easily remove 
-cards from the bottom of the deck though. A stack-based language functions exactly the same way: 
-instructions manipulate the stack by adding and removing values. You start with an empty stack and end 
-with an empty stack.
+Stack-based language means that the language operates on a stack. A stack is a programming concept that is useful
+in many scenarios and, while initially confusing, can actually be quite easy to reason about. Consider a deck of 
+playing cards on a table. You can put cards on top of the deck ("pushing" them onto the stack) or remove cards from 
+the top of the stack ("popping" them from the stack). You can't easily remove cards from the bottom of the deck 
+though. A stack-based language functions exactly the same way: instructions manipulate the stack by adding and
+removing values. You start with an empty stack and end with an empty stack.
 
 A bytecode language has a fixed set of instructions, and is not processor-dependent. This means, in theory,
 that the program can run cross-platform, because they are not directly runnable and instead are executed by
@@ -360,3 +360,10 @@ when you branch into the middle of a series of operations, so the stack is not i
 similar to the previous 2 errors, since the stack would be missing expected values. In rare cases, it may be possible
 for you to completely remove a branch target, though generally it seems that `ILCursor` is pretty resilient to this
 in the author's testing.
+
+## Additional Reading
+
+In this documentation, you've been presented several partial examples. Many of these examples are adapted from a 
+heavily annotated example by [Flib](https://github.com/flibber-hk). Here is the original/complete example for updating
+the wait times for the QG drop platforms: https://gist.github.com/flibber-hk/47bd1e713405fa5936255dd2265c3bb3.
+This is a good read as well, as it presents a more complete view of the code and is more example-oriented.
