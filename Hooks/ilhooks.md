@@ -238,8 +238,36 @@ IL_0061: stfld object DropPlatform/'<Flip>d__16'::'<>2__current'
 Depending on your preferred mode of failure, you can use `GotoNext` instead of `TryGotoNext`. In this case, you avoid
 an if statement, but if you fail to match IL (i.e. your predicates are incorrect), you'll get an exception. In most
 cases, you're doing a single modification in a known place matching a known pattern, so this may be preferred over
-failing silently. If you need to match several similar chunks of code, you can also use `TryGotoNext` in a while loop
-to make repeated modifications.
+failing silently.
+
+If you need to match several similar chunks of code, you can also use `TryGotoNext` in a while loop to make repeated 
+modifications. For example, if you need to modify every change in velocity in `HeroController.FixedUpdate`, you can 
+see there are several more than you'd want to hook individually. You can, however, see a pattern: every time the
+velocity is changed, the exact same IL code is run. We can make the same modification to each appearance of this code
+by doing the following (adapted from RandomGravityChange):
+
+```csharp
+public void ChangeVelocity(ILContext il)
+{
+    ILCursor cursor = new ILCursor(il).Goto(0);
+        
+    //Match all the times game goes to set velocity
+    while (cursor.TryGotoNext
+        (
+            MoveType.Before,
+            //happens when the vector is created. not matching this causes a while(true) to happen sometimes
+            i => i.Match(OpCodes.Newobj),
+            // the actual thing we want to adjust
+            i => i.MatchCallvirt<Rigidbody2D>("set_velocity")
+        ))
+    {
+        //because the newObj isnt the target of my IL hook, the set velocity is
+        cursor.GotoNext();
+        //want to take in current Vector2 on stack and replace it with my own
+        cursor.EmitDelegate<Func<Vector2, Vector2>>(GetNewVelocity);
+    }
+}
+```
 
 ### Manipulate Code
 
