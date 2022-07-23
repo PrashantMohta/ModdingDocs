@@ -128,6 +128,11 @@ public override void Initialize()
 private void HideHunterIcon(ILContext il) { ... }
 ```
 
+> Note: If you prefer not to write out the appropriate binding flags yourself (which is slightly more efficient at
+runtime), you can also use `ReflectionHelper.GetMethodInfo(typeof(EnemyDeathEffects), "orig_RecordKillForJournal",
+true);` to get the `MethodInfo` above. Throughout this documentation, the more complete, "vanilla" reflection approach
+will be used, but you can usually take a similar approach with `ReflectionHelper`.
+
 If you need to unhook the method (for instance, if your mod is toggleable), you can use `ILHook.Dispose()` to do so.
 
 ```csharp
