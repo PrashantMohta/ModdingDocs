@@ -250,7 +250,9 @@ With that in mind, let's look at some common ways to manipulate IL.
 
 `cursor.Next` refers to the instruction the cursor is pointing to. In some cases, it's possible to do simple
 manipulations just by replacing the operand. In the drop platform example, we could simply do 
-`cursor.Next.Operand = NewValue;` inside the if block.
+`cursor.Next.Operand = NewValue;` inside the if block. Note that when using this approach, the type of the operand
+must be appropriate for the corresponding opcode - in this case, we're modifying an `ldc.r4` instruction, so the
+operand must be a float.
 
 The next most common method of manipulation is to add and remove instructions. We can achieve this by using `Remove`
 and `Emit`. `Remove` removes the instruction at the cursor; continuing from the previous example, removing a statement
@@ -292,23 +294,30 @@ You can emit any kind of opcode, with or without an operand. As a reminder, ther
 [here](https://en.wikipedia.org/wiki/List_of_CIL_instructions). You'll see most of the ones you'll usually use in
 the process of investigating the IL code you're hooking. Covering the functionality is out of scope for this
 documentation, but a few commonly used ones include:
-* ldc.i4
-* ldstr
-* ldarg
-* ldfld
-* callvirt
+* ldc.i4 (load constant 4-byte integer)
+* ldc.r4 (load constant 4-byte float)
+* ldstr (load a string constant)
+* ldloc (load a local variable)
+* ldarg (load a method argument)
+* ldfld (load a field of a class)
+* callvirt (call an instance method of an object)
+
+> Note: many of these instructions have several shorthand variants, such as `ldc.i4.0`. These are functionally
+identical to the normal opcode (such as `ldc.i4 0`), but use a different opcode and no operand. When matching,
+the opcodes are not interchangable. The shorthand opcodes are more efficient and should be preferred when possible.
 
 You'll notice that most of these are ways to add values to the stack. In fact, if you want to do meaningful processing
 on the data, there is a much easier way to do that: by using `EmitDelegate`. This will allow you to emit an instruction
 that will call your C# code. This is a common place for the stack to get imbalanced, because arguments to your methods
 are removed from the stack. In general, this means you should do one of the following:
-* Use `EmitDelegate<Action>` to add additional code that needs no inputs and has no outputs.
+* Use `EmitDelegate<Action>` to add additional code that needs no inputs and has no outputs; for example, to add 
+  logging or side effects.
 * Use `EmitDelegate<Func<T, T>>` to add additional code that takes an input and replaces it with an output of the
-  same type.
+  same type; for example, to apply some modifications to the original value.
 * Add additional items to the stack, then use `EmitDelegate<Action<...>>` to add additional code that takes inputs
-  and has no outputs.
+  and has no outputs; for example, to get values of local variables or arguments.
 * Remove items from the stack, then use `EmitDelegate<Func<T>>` to add code that does complex processing and then
-  adds a value to the stack.
+  adds a value to the stack; for example, to compute a value based on some condition rather than using a constant.
 
 Of course, this is not a comprehensive list of all the possible ways you can handle inputs and outputs of delegates;
 they are just a few rules of thumb. Just make sure to keep the stack balanced.
@@ -330,6 +339,9 @@ if (cursor.TryGotoNext
     });
 }
 ```
+
+> Note: In most cases, you should use a named function rather than a lambda when emitting a delegate. A lambda is used
+here for brevity.
 
 
 ## Debugging Broken IL
