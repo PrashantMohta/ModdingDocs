@@ -402,9 +402,10 @@ above you are providing no input, in this case you are providing the incorrect i
 A final, less common cause of errors is creating invalid branch instructions. This can happen when modifying code
 after the end of an if block, or when trying to emit if/branch instructions in IL. Typically, the error is caused
 when you branch into the middle of a series of operations, so the stack is not in an expected state. This will look
-similar to the previous 2 errors, since the stack would be missing expected values. In rare cases, it may be possible
-for you to completely remove a branch target, though generally it seems that `ILCursor` is pretty resilient to this
-in the author's testing.
+similar to the previous 2 errors, since the stack would be missing expected values. In some cases, this error can also
+be caused by removing a label that is the target of a branch instruction (for example, if there is a `brtrue IL_066C`
+somewhere and you delete the line at `IL_066C`). In this case, the error message will say something like "Label #X is
+not marked in method."
 
 ## Additional Reading
 
