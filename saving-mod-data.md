@@ -26,7 +26,7 @@ public class GlobalSettingsClass
 }
 ```
 
-These are just some examples but you can use any field type that is serializeable (bool, int, float, double, string, List, Dictionary, etc.). However not all fields are serializeable and the ways around it are listed in the the [Notes on Non Serializeable Fields Section](#Notes-on-Non-Serializeable-Fields)
+These are just some examples but you can use any field type that is serializeable (bool, int, float, double, string, List, Dictionary, etc.). However not all fields are serializeable and the ways around it are listed in the the [Notes on Non Serializeable Fields Section](#notes-on-non-serializeable-fields)
 
 The next step is to tell MAPI that you want a global setting. You do this by making the class that inherits from `Mod` to also inherit from the interaface `IGlobalSettings<T>` where T is the settings class name.  
 This interface requires you to implement 2 methods `OnLoadGlobal`(what happens when global settings is read from file) and `OnSaveGlobal` (what happens when global settings is saved to file). In most cases you want to use OnLoadLocal to save the data read in a local variable and OnSaveLocal to return that local variable
@@ -139,7 +139,7 @@ public class GlobalSettingsClass
 
 ### Creating your own custom JSONConvertors
 If you don't want to do a workaround, you can create your own JSON Convertor. Examples are linked below:
-1. [Vector2](https://github.com/hk-modding/api/blob/master/Assembly-CSharp/Converters/Vector2Converter.cs)
-2. [Vector3](https://github.com/hk-modding/api/blob/master/Assembly-CSharp/Converters/Vector3Converter.cs)
-3. [PlayerActionSet](https://github.com/hk-modding/api/blob/master/Assembly-CSharp/Converters/PlayerActionSetConverter.cs)
-4. [System.Random](https://github.com/TheMulhima/HollowKnight.RandomTeleport/blob/master/RandomTeleport/JsonConvertors/RandomJsonConvertor.cs)
+1. [System.Random](https://github.com/TheMulhima/HollowKnight.RandomTeleport/blob/master/RandomTeleport/JsonConvertors/RandomJsonConvertor.cs)
+2. [Vector2](https://github.com/hk-modding/api/blob/master/Assembly-CSharp/Converters/Vector2Converter.cs)
+3. [Vector3](https://github.com/hk-modding/api/blob/master/Assembly-CSharp/Converters/Vector3Converter.cs)
+4. [PlayerActionSet](https://github.com/hk-modding/api/blob/master/Assembly-CSharp/Converters/PlayerActionSetConverter.cs)
