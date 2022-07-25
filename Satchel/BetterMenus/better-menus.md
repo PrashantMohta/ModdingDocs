@@ -29,24 +29,31 @@ To create satchel menus, there are 3 objects we need to define first.
 To Create Menus:
 Make the class that inherits from `Mod` also inherit from `ICusomMenuMod`. You'll be asked to create a function `GetMenuScreen`. In that function do:
 ```cs
-// a variable that holds our Satchel.BetterMenu.Menu for us to use in the code.
-private Menu MenuRef;
-
-//function required to be created when inheriting from ICustomMenuMod.
-public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? modtoggledelegates) 
+public class MyFirstMod: Mod, ICustomMenuMod //make the mod class also inherit from ICusomMenuMod
 {
-    //Create a new MenuRef if it's not null
-    MenuRef ??= new Menu(
-                "My Mod Name", //the title of the menu screen, it will appear on the top center of the screen 
-                new Element[]
-                {
-                    //add elements here  
-                }
-    );
-    
-    //uses the GetMenuScreen function to return a menuscreen that MAPI can use. 
-    //The "modlistmenu" that is passed into the parameter can be any menuScreen that you want to return to when "Back" button or "esc" key is pressed 
-    return MenuRef.GetMenuScreen(modListMenu);
+    // a variable that holds our Satchel.BetterMenu.Menu for us to use in the code.
+    private Menu MenuRef;
+
+    //function required to be created when inheriting from ICustomMenuMod.
+    public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? modtoggledelegates) 
+    {
+        //Create a new MenuRef if it's not null
+        MenuRef ??= new Menu(
+                    "My Mod Name", //the title of the menu screen, it will appear on the top center of the screen 
+                    new Element[]
+                    {
+                        //add elements here  
+                    }
+        );
+        
+        //uses the GetMenuScreen function to return a menuscreen that MAPI can use. 
+        //The "modlistmenu" that is passed into the parameter can be any menuScreen that you want to return to when "Back" button or "esc" key is pressed 
+        return MenuRef.GetMenuScreen(modListMenu);
+    }
+
+    //a property requuired by the ICustomMenuMod interface to be implemented
+    //since our mod is not IToggleable, we can leave it as is (leave it as null)
+     public bool ToggleButtonInsideMenu { get; }
 }
 ```
 
