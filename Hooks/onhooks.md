@@ -55,7 +55,7 @@ To be able to do this, [Reflection](reflection.md) is the best way to do it.
 > Note: To be able to write OnHooks, you will need to import `MMHOOK_Assembly-CSharp.dll` and `MMHOOK_PlayMaker.dll` from your managed folder.
 
 ## Order of Execution
-If multiple mods On Hook the same method, it might be important to understand the order of importance. Lets say 3 mods exist, Mod A, B and C and they subscribe in that order, then the for the execution of the hooks are:
+If multiple mods On Hook the same method, it might be important to understand the order of importance. Lets say 3 mods exist, Mod A, B and C and they subscribe to the hook in that order, then the for the execution of the hooks are:
 
 - C does stuff before orig(self)
 - B does stuff before orig(self)
@@ -67,9 +67,88 @@ If multiple mods On Hook the same method, it might be important to understand th
 
 This order becomes especially imporant when one of the mods doesn't call orig(self). For example if B chooses not to call orig(self), then everything between "B does stuff before orig(self)" and "B does stuff after orig(self)" gets skipped (so C is fine but A is ignored).
 
+Also, if the funtion has other parameters:
+* C's parameters when calling orig(self, ...) are seen by B
+* B's parameters when calling orig(self, ...) are seen by A
+* A's parameters when calling orig(self, ...) are seen by the original function
+i.e. A has final say in terms of what parameter to take effect
 
-###  TODO
+## Creating custom On Hooks
+MonoMod allows you to create OnHooks that are not present in the `On` namespace. There are 2 main purposes of doing this:
+1. Modifying methods of other mods
+2. To on hook a method that is patched by MAPI
+
+### 1. Modifying methods of other mods
+Before you start, you need to reference to MonoMod.RuntimeDetour and have a `using MonoMod.RuntimeDetour;`
+
+Suppose the other mod defines the following class:
+
+```cs
+public class ModClass
+{
+    public void DoSomething() { /*...*/ }
+    public int DoSomethingElse(string input) { /*...*/ }
+    public static void AStaticMethod() { /*...*/ }
+}
+```
+
+To hook DoSomething you do something like this:
+```cs
+// Defined as fields in your mod class
+class YourClass
+{
+    private Hook _hook;
+    private static MethodInfo _methodToHook = typeof(ModClass).GetMethod(nameof(ModClass.DoSomething));
+
+    // In initialize
+    _hook = new Hook(_methodToHook, MyOwnMethod);
+
+    // In unload, if you want to unhook
+    _hook?.Dispose();
+    
+    // The actual method
+    private void MyOwnMethod(Action<ModClass> orig, ModClass self) { ... }
+}
+```
+
+* The delegate type of `orig` has to be something that the method you're hooking can be assigned to (so for DoSomethingElse it could be `Func<ModClass, string, int>` and for AStaticMethod it could be `Action`), though you can define your own delegate type if you want.
+
+* If the methods you're hooking are not public then it should be the same, except you need to add binding flags to `GetMethod` and you can't use `nameof`.
+
+* If the class you're hooking is a struct, then you'll need a ref parameter on the struct everywhere (so you'll need to define your own delegate type for `orig`).
+
+* If the class you're hooking is not accessible (particularly if it's a struct), then it might be more hassle than it's worth to use this style of hook. I recommend using an [IL hook](Hooks/ilhooks.md) in this case.
+
+### 2. To on hook a method that is patched by MAPI
+
+If in dnspy while seeing the game's code you come across a method that you want to OnHook but you see in that method there is a call to a method with the same name but prefixed with `orig_`. For example in the `PlayerData` class the function `AddHealth` looks like this":
+```csharp
+public void AddHealth(int amount)
+{
+    amount = ModHooks.BeforeAddHealth(amount);
+    this.orig_AddHealth(amount);
+}
+```
+
+If you see someything like this, it means the method has been patched by the modding API. This means that the original code (which we want to hook) is actually in `orig_AddHealth`. To do that, we need to make a custom On Hook which is very similar to the example above
+
+```csharp
+// find the method - in this case we know it's a public, non-static method on PlayerData
+private static MethodInfo origAddHealth = typeof(PlayerData).GetMethod("orig_AddHealth",
+    BindingFlags.Public | BindingFlags.Instance);
+// hold the actual hook
+private Hook OnAddHealth;
+
+
+//to hook
+OnAddHealth = new Hook(origAddHealth, CustomAddHealth);
+
+//to unhook
+OnAddHealth?.Dispose();
+
+//the actual method
+private void CustomAddHealth(Action<PlayerData, int> orig, PlayerData self, int amount) { ... }
+```
+
+###  Possible TODOs
 - Show common hooks
-- Explanation of order of execution of multiple mod using on hooks (this is here because im not knowledgeable about it)
-- Show how to hook using reflection (for mapi created orig_Methods) 
-  - because it allows you to edit methods that are assembly edited by mapi
