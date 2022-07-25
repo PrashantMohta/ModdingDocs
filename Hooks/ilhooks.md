@@ -1,3 +1,8 @@
+---
+title: ModHooks
+nav-order: 3
+parent: Hooks
+---
 # IL Hooks
 
 IL Hooks are a way to directly modify the code of a method. 
