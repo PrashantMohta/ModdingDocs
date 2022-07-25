@@ -1,5 +1,5 @@
 ---
-title: ModHooks
+title: IL Hooks
 nav-order: 3
 parent: Hooks
 ---
@@ -127,7 +127,7 @@ private ILHook ilRecordKillForJournal;
 
 public override void Initialize() 
 {
-    ilRecordKillForJournal = new ILHook(ilRecordKillForJournal, HideHunterIcon);
+    ilRecordKillForJournal = new ILHook(origRecordKillForJournal, HideHunterIcon);
 }
 
 private void HideHunterIcon(ILContext il) { ... }
