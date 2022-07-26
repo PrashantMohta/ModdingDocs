@@ -65,7 +65,7 @@ public class MyFirstMod: Mod, ILocallSettings<LocalSettingsClass>
 
 
 ## Notes on Non Serializeable Fields
-An indicator for a type not being seralizable is that it doesnt show up in the JSON file.
+An indicator for a type not being seralizable is that it doesnt show up in the JSON file. Normally any public field or property with no non-public accessors is serialized, by default.
 
 ### Enums
 To make sure the enums are stored as strings and not ints in the settings file, you can add the attribute `[JsonConverter(typeof(StringEnumConvertor))]` to the field. Even if you dont add the attribute it will still seralize but with the attribute, it will make it easier for people to edit.
@@ -138,7 +138,8 @@ public class GlobalSettingsClass
 	public int IconColorG = 0;
 	public int IconColorB = 0;
 
-	//adding this property in the settings class wont affect the JSON because a property is just a pair of get and set methods and it only seralizes fields
+	//adding a JsonIgnore attribute to the property will make the seralizer ignore the property
+    [JsonIgnore]
     public Color IconColor
     {
         get => new Color(IconColorR, IconColorG, IconColorB);
