@@ -35,7 +35,7 @@ Example:
 ```cs
 public class MyFirstMod: Mod, IGlobalSettings<GlobalSettingsClass>
 {
-    //Create local variable to be able to access data and initalize it
+    //Create and initalize a local variable to be able to access the settings
     public static GlobalSettingsClass GS {get; set;} = new GlobalSettingsClass();
 
     // First method to implement. The parameter is the read settings from the file
@@ -65,7 +65,7 @@ public class MyFirstMod: Mod, ILocallSettings<LocalSettingsClass>
 
 
 ## Notes on Non Serializeable Fields
-An indicator for a type not being seralizable is that it doesnt show up in the JSON file. Normally any public field or property with no non-public accessors is serialized, by default.
+An indicator for a type not being seralizable is that it doesnt show up in the JSON file. Normally any public field or property with no non-public accessors is serialized, by default. For more information you can check the [Newtonsoft documentation](https://www.newtonsoft.com/json/help/html/Introduction.htm)
 
 ### Enums
 To make sure the enums are stored as strings and not ints in the settings file, you can add the attribute `[JsonConverter(typeof(StringEnumConvertor))]` to the field. Even if you dont add the attribute it will still seralize but with the attribute, it will make it easier for people to edit.
