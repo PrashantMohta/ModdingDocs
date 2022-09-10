@@ -58,9 +58,10 @@ Example of implementing Local Settings:
 ```cs
 public class MyFirstMod: Mod, ILocallSettings<LocalSettingsClass>
 {
-	public static LocalSettingsClass saveSettings { get; set; } = new LocalSettingsClass();
-	public void OnLoadLocal(LocalSettingsClass s) => saveSettings = s;
+    public static LocalSettingsClass saveSettings { get; set; } = new LocalSettingsClass();
+    public void OnLoadLocal(LocalSettingsClass s) => saveSettings = s;
     public LocalSettingsClass OnSaveLocal() => saveSettings;
+}
 ```
 
 
@@ -114,20 +115,6 @@ public class GlobalSettingsClass
 ```
 
 Now you can access the keybinds by doing `GS.keybinds.Key1`
-
-### Vector2 and Vector3
-The MAPI provides a way to seralize those. to do this add the `JsonConverter` attribute to the vector2/vector3 field
-```cs
-public class GlobalSettingsClass
-{
-     [JsonConverter(typeof(Vector2Converter))]
-     public Vector2 myVector2 = new Vector2(0,0);
-
-
-     [JsonConverter(typeof(Vector3Converter))]
-     public Vector3 myVector3 = new Vector3(0,0,0);
-}
-```
 
 ### Using workarounds
 If the type you are trying to save is not seralizable, you can use work arounds to save it in global settings. For example: if you wanted to save a `UnityEngine.Color`, you can do
