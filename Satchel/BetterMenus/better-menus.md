@@ -39,8 +39,8 @@ public class MyFirstMod: Mod, ICustomMenuMod //make the mod class also inherit f
     {
         //Create a new MenuRef if it's not null
         MenuRef ??= new Menu(
-                    "My Mod Name", //the title of the menu screen, it will appear on the top center of the screen 
-                    new Element[]
+                    name: "My Mod Name", //the title of the menu screen, it will appear on the top center of the screen 
+                    elements: new Element[]
                     {
                         //add elements here  
                     }
@@ -70,7 +70,10 @@ To add lets say a MenuButton that logs when  that button was pressed you would d
 ```cs
 new Element[]
 {
-    new MenuButton("My Logging Button", "A menu button", (_) => Log("A button was pressed")),
+    new MenuButton(
+            name: "My Logging Button", 
+            description: "A menu button", 
+            submitAction: (_) => Log("A button was pressed")),
 }
 ```
 
@@ -100,8 +103,16 @@ Example:
 MenuRef ??= new Menu("Example Mod Menu",
         new Element[]
         {
-            new MenuButton("My Logging Button", "A menu button", (_) => Log("A button was pressed"), Id:"Button1"), // create a button very similar to above button
-            new MenuButton("Change Text", "Click me to change text of above button", (_) =>
+            new MenuButton(// create a button very similar to above button
+                name: "My Logging Button", 
+                description: "A menu button", 
+                submitAction: (_) => Log("A button was pressed"),
+                Id:"Button1"), 
+
+            new MenuButton(
+                name: "Change Text",
+                description: "Click me to change text of above button", 
+                submitAction: (_) =>
                 {
                     //find element by Id
                     Element elem = MenuRef.Find("Button1");
@@ -125,12 +136,21 @@ Example
 ```cs
 MenuRef = new Menu("Example Mod Menu", new Element[]
         {
-            //create a menu row with 2 menu buttons. 
-            new MenuRow(new List<Element>() //first parameter is a list of elements you want to add to the row
+            //create a menu row with some menu buttons. 
+            new MenuRow(
+                Row: new List<Element>() //the list of elements you want to add to the row
                 {
-                    new MenuButton("ButtonL", "Left Button", (_) => Log("Left Button Pressed")),
-                    new MenuButton("ButtonR", "Right Button", (_) => Log("Right Button Pressed")),
-                }, "MyMenuButtonRow"), //second parameter is the id
+                    new MenuButton(
+                            name: "ButtonL",
+                            description: "Left Button", 
+                            submitAction: (_) => Log("Left Button Pressed")),
+
+                    new MenuButton(
+                            name: "ButtonR", 
+                            description: "Right Button", 
+                            submitAction: (_) => Log("Right Button Pressed")),
+
+                }, Id: "MyMenuButtonRow"), //second parameter is the id
         });
 ```
 ![MenuRow Example](/ModdingDocs/Images/BetterMenusMenuRowExample.jpg)
@@ -149,10 +169,11 @@ Example:
 Modes chosenMode = Modes.Mode1;
 MenuRef = new Menu("Example Mod Menu", new Element[]
 {
-    new HorizontalOption("Choose Mode", 
-        "Choose from the following modes",
-        Enum.GetNames(typeof(Modes)), //get an string array of all values in Modes enum
-        (index) => //the function that will be run when a new option is set
+    new HorizontalOption(
+        name: "Choose Mode", 
+        description: "Choose from the following modes",
+        values: Enum.GetNames(typeof(Modes)), //get an string array of all values in Modes enum
+        ApplySetting: (index) => //the function that will be run when a new option is set
         { 
             chosenMode = (Modes)index;
 
@@ -174,17 +195,24 @@ MenuRef = new Menu("Example Mod Menu", new Element[]
                     break;
             }
         },
-        () => (int)chosenMode),
+        loadSetting: () => (int)chosenMode),
     
-    new KeyBind("Mode 1 Key", keyBinds.Mode1Key, Id:"Mode1Key")
-    {
+    new KeyBind(
+        name: "Mode 1 Key", 
+        playerAction: keyBinds.Mode1Key,
+        Id: "Mode1Key")
+        {
         //isVisible is a property of all Elements. However it is not available to be set in the constructor so we need to set it on instantiation
         isVisible = chosenMode == Modes.Mode1, 
-    },
-    new MenuButton("Mode 2 Button", "Does Something for Mode 2", (_) => Log("In Mode 2"), Id: "Mode2Button")
-    {
+        },
+    new MenuButton(
+        name: "Mode 2 Button",
+        description: "Does Something for Mode 2",
+        submitAction: (_) => Log("In Mode 2"),
+        Id: "Mode2Button")
+        {
         isVisible = chosenMode == Modes.Mode2,
-    },
+        },
 });
 ```
 [![Element Update Example](/ModdingDocs/Images/BetterMenusUpdateElemExample.jpg)](https://youtu.be/9dOAWYQZ3C8)
