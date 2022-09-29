@@ -1,4 +1,4 @@
-﻿---
+---
 title: Blueprints
 nav_order: 2
 parent: BetterMenus
@@ -8,13 +8,14 @@ grand_parent: Satchel
 Blueprints is a class that has been created to help provide and ease the creation of commonly used functionality in modmenus.
 
 ## Confirm Dialogue
-Add a new screen that shows up when back button or escape is pressed that acts as a confirm dialogue
+Add a new screen that shows up when back button or escape is pressed that acts as a confirm dialogue.
+![Confirm Dialogue Example](/ModdingDocs/Images/BetterMenusConfirmDialogue.jpg)
 Example:
 ```cs
 public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? toggleDelegates)
 {
     //create your menu screen
-    MenuRef ??= new Menu("Breakable Charms", new Element[]
+    MenuRef ??= new Menu("My MenuScreen", new Element[]
     {
         //add elements here
     });
@@ -44,7 +45,6 @@ public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? togg
     return menuScreen; //return our menuscreen to mapi
 }
 ```
-![Confirm Dialogue Example](/ModdingDocs/Images/BetterMenusConfirmDialogue.jpg)
 
 Notes:
 - Unfortunately the order given must be followed (MenuRef creation -> calling MenuRef.GetMenuScreen -> creating confirm dialogue -> returning menu screen)
