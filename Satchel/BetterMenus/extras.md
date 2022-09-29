@@ -1,7 +1,8 @@
 ﻿---
-title: BetterMenus Extras
+title: BetterMenus-Extras
+nav_order: 3
 parent: BetterMenus
-grand_parent: Dependency Mods
+grand_parent: Satchel
 ---
 # BetterMenus Extras
 

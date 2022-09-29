@@ -1,5 +1,6 @@
 ﻿---
 title: BluePrints
+nav_order: 2
 parent: BetterMenus
 grand_parent: Satchel
 ---
