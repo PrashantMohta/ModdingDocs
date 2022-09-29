@@ -1,5 +1,5 @@
 ﻿---
-title: BetterMenus-Elements
+title: BetterMenus Elements
 nav_order: 1
 parent: BetterMenus
 grand_parent: Satchel
