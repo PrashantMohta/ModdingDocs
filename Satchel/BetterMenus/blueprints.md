@@ -8,7 +8,7 @@ grand_parent: Satchel
 Blueprints is a class that has been created to help provide and ease the creation of commonly used functionality in modmenus.
 
 ## Confirm Dialogue
-Add a dialogue that shows up when back is pressed (cancelAction is invoked)
+Add a new screen that shows up when back button or escape is pressed that acts as a confirm dialogue
 Example:
 ```cs
 public MenuScreen GetMenuScreen(MenuScreen modListMenu, ModToggleDelegates? toggleDelegates)
