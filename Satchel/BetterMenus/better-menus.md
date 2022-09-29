@@ -160,7 +160,7 @@ Every Element has a property `isVisible` that controls whether not not its place
 
 Example:
 ```cs
- enum Modes
+enum Modes
 {
     Mode1,
     Mode2,
@@ -223,10 +223,12 @@ We need to notice a couple of things:
 ### 5. Blueprints
 Blueprints is a class that has been created to help provide and ease the creation of commonly used functionality in modmenus.
 All the available blueprints will be detailed in [Better Menus BluePrints Page](blueprints.md)
-1. [Key And Button Bind](blueprints.md#key-and-button-bind)
-2. [Mod Toggle](blueprints.md#mod-toggle)
-3. [Navigate To Menu](blueprints.md#navigate-to-menu)
-4. [Update Visibility](blueprints.md#update-visibility)
+1. [Confirm Dialogue](blueprints.md#confirm-dialogue) 
+2. [Key And Button Bind](blueprints.md#key-and-button-bind)
+3. [Mod Toggle](blueprints.md#mod-toggle)
+4. [Navigate To Menu](blueprints.md#navigate-to-menu)
+5. [Update Visibility](blueprints.md#update-visibility)
+6. [Get Cached MenuScreen](blueprints.md#get-cached-menuscreen)
 
 ## Extras
 These are BetterMenus information that didnt fit in the above tutorial but are still worth mentioning
