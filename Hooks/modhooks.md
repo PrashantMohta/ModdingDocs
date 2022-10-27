@@ -151,7 +151,7 @@ public int AfterTakeDamage(int hazardType, int damageAmount)
 ```
 | Parameter type | Parameter name | Explanation                                                                                                                                                                      |
 |----------------|----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| int            | hazardType     | Even though it is an integer it represents a value from 0-4 of the enum `HazardType`. the possible values are => (0) `NON_HAZARD`,(1) `SPIKES`,(2) `ACID`,(3) `LAVA`, (4) `PIT`, |
+| int            | hazardType     | Even though it is an integer it represents a value from 0-4 of the enum `HazardType`. the possible values are => (1) `NON_HAZARD`,(2) `SPIKES`,(3) `ACID`,(4) `LAVA`, (5) `PIT`, |
 | int            | damageAmount   | The amount of damage that was going to be applied to player. return back this value to not change damage taken                                                                   |
 
 | Return type | Explanation                                         |
