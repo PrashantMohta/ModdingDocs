@@ -6,7 +6,7 @@ nav_order: 12
 Playmaker is a visual state machine editor that Team Cherry use quite extensively across the game to control how things behave. Unfortunately this means that much of the game's behavior is not written in easy to work with code form, but is represented as a flow chart of states.
 
 Playmaker documentation is available on [hutonggames' website](https://hutonggames.fogbugz.com/default.asp?W133).
-An explantions of Playmaker FSMs and how to view them is also available on the [radiance.host](https://radiance.host/apidocs/PlayMakerFSM.html) website
+An explantions of Playmaker FSMs and how to view them is also available on the [radiance.host](https://radiance.synthagen.net/apidocs/_images/PlayMakerFSM.html) website
 
 ## Viewing FSMs:  
 FSMs from the game can be viewed using a tool developed by nesrak1 known as [FSMViewAvalonia](Tools/fsmviewer.md) 
