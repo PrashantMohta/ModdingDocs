@@ -20,10 +20,10 @@ Like this
 ```
 
 **Warning:**
-- `File Name` uses a file name relative to `$(TargetDir)`, which means that for files to be added, you need to set `<CopyToOutputDirectory>Always</CopyToOutputDirectory>` or `<Private>true</Private>`
+- `File Name` uses a file name relative to `$(TargetDir)`, which means that for files to be added, you need to set `<CopyToOutputDirectory>Always</CopyToOutputDirectory>` or `<Private>true</Private>`.
 
 ### Process packed files
-Like this
+You use it like this:
 ```xml
 <Target Name="[Target Name]" AfterTargets="PackOutputMod">
     <WriteLinesToFile File="$(ReleaseInfoPath)"
@@ -35,11 +35,11 @@ Like this
 ```
 
 Available properties:
-- `$(OutputZipSHA256)`: SHA256 of the output publish zip
+- `$(OutputZipSHA256)`: SHA256 of the output publish zip.
 
 ## Configuration
 
-- `$(ExportDir)`: Specifies the directory for the packaged output. Defaults to "$(ProjectDir)\bin\Publish\"
-- `$(PublishZipPath)`: Specify the save path of the ZIP output after packaging. Defaults to "$(ExportDir)\Publish.zip"
-- `$(ReleaseInfoPath)`: Specifies the output location of the ReleaseInfo information constructed after packaging. Currently, only SHA256 is included. Default is "\$([System.IO.Path]::GetDirectoryName('$(PublishZipPath)'))\ReleaseInfo.txt"
+- `$(ExportDir)`: Specifies the directory for the packaged output. Defaults to "$(ProjectDir)\bin\Publish\".
+- `$(PublishZipPath)`: Specify the save path of the ZIP output after packaging. Defaults to "$(ExportDir)\Publish.zip".
+- `$(ReleaseInfoPath)`: Specifies the output location of the ReleaseInfo information constructed after packaging. Currently, only SHA256 is included. Default is "$(PublishZipPath)\ReleaseInfo.txt".
 

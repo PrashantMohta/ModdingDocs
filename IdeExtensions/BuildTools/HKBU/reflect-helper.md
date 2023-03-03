@@ -4,16 +4,16 @@ nav_order: 1
 parent: Hollow Knight Build Utils
 ---
 
-Allows developers to directly access private fields and private types
+The reflect helper allows developers to directly access private fields and private types.
 
-**If you need to use this feature, please add a reference to the Fody package**
+**If you need to use this feature, please add a reference to the Fody package.**
 
 
 ## How to use
 
-Use `<ReflectHelper Include="<AssemblyName>" />` to indicate which assemblies need to construct Reflect Helper
+Use `<ReflectHelper Include="<AssemblyName>" />` to indicate which assemblies need to construct Reflect Helper.
 
-> `<AssemblyName>` can use assemblies explicitly referenced in project files using `<Reference>` and MAPI assemblies and other Mods assemblies inserted by HKBuildUtils
+> `<AssemblyName>` can use assemblies explicitly referenced in project files using `<Reference>` and MAPI assemblies and other Mods assemblies inserted by HKBuildUtils.
 
 For example:
 
@@ -24,7 +24,7 @@ For example:
 
 They indicate the Reflect Helper that generates `UnityEngine.CoreModule` and `Assembly-CSharp`
 
-They can be used like
+They can be used like this:
 
 ```cs
 HeroControllerR reflect = HeroController.instance.Reflect();
@@ -48,19 +48,17 @@ ModLoaderR.TryAddModInstance(typeof(TestModMod), new ModInstanceR()
 
 #### Compare with HKMirror
 
-Advantage:
+Advantages:  
+- No need to add additional references.
+- Can be used with almost any assembly.
+- Has most of the private types.
+- Custom operator operations with primitive types.
+- Primitive object instances can be created directly using `new`. For example, `new ModInstanceR()` will create an instance of `ModLoader.ModInstance`.
+- Supports generics.
 
-- No need to add additional references
-- Can be used with almost any assembly
-- Has most of the private types
-- Custom operator operations with primitive types
-- Primitive object instances can be created directly using `new`. For example, `new ModInstanceR()` will create an instance of `ModLoader.ModInstance`
-- Supports generics
-
-Defect:
-
+Defects:  
 - No quick access to singleton objects
 - Does not carry HookHelper
 
-#### Compare with [HKReflect](https://github.com/Clazex/HKReflect)
+#### Comparison to [HKReflect](https://github.com/Clazex/HKReflect)
 - TODO (not released yet)
