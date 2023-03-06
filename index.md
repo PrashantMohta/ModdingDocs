@@ -4,7 +4,7 @@ nav_order: 1
 ---
 # Hollow Knight Modding Docs
 
-> Please note that this documentation is being written with the latest patch of the game in mind, for older patches you can refer to the documentation at [radiance.host](https://radiance.host/apidocs/Getting-Started.html)
+> Please note that this documentation is being written with the latest patch of the game in mind, for older patches you can refer to the documentation at [radiance.host](https://radiance.synthagen.net/apidocs/_images/Getting-Started.html)
 
 ## Introduction:  
 Hollow Knight (patch 1.5.x.x onwards) is a game built with Unity 2020.2.2 and C# (.NET Framework 4.7.2), this means that a mod in the context of hollow knight is a `dll` or a Dynamic-Link Library that allows players to modify the behavior of the game, fix issues or add new features. This is achieved with the help of a Modding Api that handles the loading of mods and giving us ways of injecting our own code in the middle of normal logic.
