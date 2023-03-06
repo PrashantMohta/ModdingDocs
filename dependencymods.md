@@ -1,4 +1,4 @@
-﻿---
+---
 title: Dependency Mods
 nav_order: 13
 has_children: true
@@ -138,6 +138,14 @@ To use, add a `using HKMirror.Hooks.ILHooks` and find the class you want, in thi
   * HKMirror.Hooks
     * HKMirror.Hooks.OnHooks - Contains the on hook events to hook onto
     * HKMirror.Hooks.ILHooks - Contains the il hook events to hook onto
+
+## [HKReflect](https://github.com/Clazex/HKReflect)
+
+A compile-time utility that allows easy access to non-public members in Assembly-CSharp with zero runtime overhead, technically not a mod. 
+
+It serves as an alternative to HKMirror, and if you're only using HKMirror's reflection, it'll be easy to migrate.
+
+See [readme](https://github.com/Clazex/HKReflect#readme) for detailed usage.
 
 
 
