@@ -45,8 +45,15 @@ ModLoaderR.TryAddModInstance(typeof(TestModMod), new ModInstanceR()
    Name = "Hello, World!This is Test Mod"
 }); 
 ```
+```cs
+List<ModInstanceR> allMods = ModLoaderR.ModInstances.ToList();
+foreach(var mod in allMods)
+{
+   Log($"Mod Name: {mod.Name}");
+}
+```
 
-#### Compare with HKMirror
+#### Compare with [HKMirror](https://github.com/TheMulhima/HKMirror)
 
 Advantages:  
 - No need to add additional references.
@@ -57,8 +64,15 @@ Advantages:
 - Supports generics.
 
 Defects:  
-- No quick access to singleton objects
-- Does not carry HookHelper
+- No quick access to singleton objects.
+- Does not carry HookHelper.
 
 #### Comparison to [HKReflect](https://github.com/Clazex/HKReflect)
-- TODO (not released yet)
+
+Advantages:  
+- Can be used with almost any assembly.
+- Has most of the private types.
+- Can use reflect type to completely replace original type
+
+Defects:  
+- No quick access to singleton objects.
