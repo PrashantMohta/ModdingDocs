@@ -2,6 +2,7 @@
 title: Hollow Knight Build Utils
 nav_order: 2
 parent: IDE Extensions
+has_children: true
 ---
 
 # Hollow Knight Build Utils
