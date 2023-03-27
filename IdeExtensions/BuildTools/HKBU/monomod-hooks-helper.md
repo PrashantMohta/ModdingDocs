@@ -16,7 +16,7 @@ Use `<MonoModHook Include="<AssemblyName>" />` to indicate which assemblies need
 
 > `<AssemblyName>` can use assemblies explicitly referenced in project files using `<Reference>` and MAPI assemblies and other Mods assemblies inserted by HKBuildUtils.
 
-Then you can use them like [OnHook](/ModdingDocs/Hooks/onhooks.md) and [ILHook](/ModdingDocs/Hooks/ilhooks.md).
+Then you can use them like [OnHook](../../../Hooks/onhooks.md) and [ILHook](../../../Hooks/ilhooks.md).
 
 For example:
 
