@@ -14,6 +14,10 @@ Before we take a deep dive into writing your first mod, we need to take a look a
 
 The video series is especially beginner friendly, so you may want to try that !
 
+## Unity Fundamentals
+
+While not entirely mandatory, knowing about unity concepts is immensely helpful in creating the mental model required for making your own mods. [This video by Game Maker's Toolkit](https://www.youtube.com/watch?v=XtQMytORBmM) is a good introduction to unity. I highly recommend watching it. 
+
 ## Installing the Mod Template
 
 > Tip: if your IDE supports it, using an [extension](ide-extensions.md) can simplify or eliminate many of the
