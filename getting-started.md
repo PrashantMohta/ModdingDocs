@@ -7,7 +7,7 @@ nav_order: 2
 
 - A Windows / Linux / Mac device that you can code on
 - A Legitimate copy of Hollow Knight on PC (Steam / GoG / HumbleBundle)
-  - Console / Xbox gamepass versions do not work for our purposes.
+  - XBox / PS4 / Nintendo Switch versions do not work for our purposes.
 - A copy of the [Hollow Knight Modding Api](https://github.com/hk-modding/api) binary (dll) files
   - Installing them through any modinstaller (e.g. Scarab or Butterfly) also works.
 - Visual Studio Community and .NET Framework 4.7.2
