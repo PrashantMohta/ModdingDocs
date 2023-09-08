@@ -59,17 +59,15 @@ To add your mod to the mod installer:
 - Instead of creating a fork, click the pencil at the top right corner.
 - Make your changes to the file.
 Example mod manifest:
+
 ```
 <Manifest>
+    <!-- Not Optional -->
     <Name>Test Name</Name>
     <Description>Test description</Description>
     <Version>0.0.0.0</Version>
-    <Links>
-        <Linux SHA256="0000000000000000000000000000000000000000000000000000000000000000"><![CDATA[https://linux.link]]></Linux>
-        <Mac SHA256="0000000000000000000000000000000000000000000000000000000000000000"><![CDATA[https://mac.link]]></Mac>
-        <Windows SHA256="0000000000000000000000000000000000000000000000000000000000000000"><![CDATA[https://windows.link]]></Windows>
-    </Links>
     <Link SHA256="0000000000000000000000000000000000000000000000000000000000000000"><![CDATA[https://multiplatform.link]]></Link>
+    <!-- Optional -->
     <Dependencies>
         <Dependency>Another mod's name that this mod depends on</Dependency>
     </Dependencies>
@@ -90,10 +88,46 @@ Example mod manifest:
     </Authors>
 </Manifest>
 ```
+
+Example:
+
+```
+<Manifest>
+    <Name>Hallownest-Vocalized</Name>
+    <Description>Adds English voice acting to all Hollow Knight's in-game dialogue.</Description>
+    <Version>1.0.1.2</Version>
+    <Link SHA256="F9529A1D664C1020DD4AFE6A7E06BF77EEA614F5E5079E726CF5F7704CD01EFC">
+    <![CDATA[https://github.com/Hallownest-Vocalized/Hallownest-Vocalized/releases/download/0.0.1.2/HKVocal.zip]]>
+    </Link>
+    <Dependencies>
+      <Dependency>Satchel</Dependency>
+      <Dependency>Core.FsmUtil</Dependency>
+      <Dependency>HKMirror</Dependency>
+      <Dependency>Osmi</Dependency>
+      <Dependency>SFCore</Dependency>
+      <Dependency>FrogCore</Dependency>
+      <Dependency>Hallownest-Vocalized-AudioLoader</Dependency>
+    </Dependencies>
+    <Repository>
+      <![CDATA[https://github.com/Hallownest-Vocalized/Hallownest-Vocalized]]>
+    </Repository>
+    <Tags>
+      <Tag>Gameplay</Tag>
+    </Tags>
+    <Authors>
+      <Author>RedFrog</Author>
+      <Author>Mulhima</Author>
+      <Author>Link459</Author>
+      <Author>Clove</Author>
+      <Author>Zickles</Author>
+    </Authors>
+</Manifest>
+```
+
 - Make sure the mod name is unique, as this could cause issues.
 - Make sure your version is numbers, without any letters. (not like `v0.0.0.0`)
 - The SHA256 is a unique identifier, and there are multiple ways to get it.
-- Look at [getting a SHA256](#todo-section) or go to the hollow knight modding discord.
+- Look at [this website](https://emn178.github.io/online-tools/sha256_checksum.html) or go to the hollow knight modding discord.
 - Click `Commit Changes...` at the top right of the page.
 - In the commit message, write something like `Added {Mod Name}`.
 - In the extended description, you can put in the mod's description (optional).
