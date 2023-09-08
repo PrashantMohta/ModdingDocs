@@ -54,7 +54,7 @@ Once you have created a mod that you want to share with the world, you should lo
 
 ## Adding your mod to modlinks
 
-To add your mod to scarab:
+To add your mod to the mod installer:
 - [Visit the modlinks page](https://github.com/hk-modding/modlinks/blob/main/ModLinks.xml)
 - Instead of creating a fork, click the pencil at the top right corner.
 - Make your changes to the file.
@@ -102,7 +102,7 @@ Example mod manifest:
 - At the top of the page, there should be a button to "Create pull request." Click on it.
 - Once the pull request is created, it will be reviewed by project maintainers or contributors.
 - If the changes are approved, a maintainer will merge the pull request into the modlinks repository.
-- After the pull request is merged, your mod should hopefully appear on scarab!
+- After the pull request is merged, your mod should hopefully appear on the installer!
 
 ## Todo-section
 
