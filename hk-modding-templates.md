@@ -1,6 +1,8 @@
 # Hollow Knight Mod Templates (NuGet)
 
 This is a NuGet package for making new hollow knight mods. [See it on the NuGet Gallery](https://www.nuget.org/packages/HKModding.HKMod.Templates/1.0.14)
+
+**Keep in mind using the NuGet package instead of the IDE Template can often be more difficult.**
 If you are looking for the IDE Template, [this](https://prashantmohta.github.io/ModdingDocs/your-first-mod.html#installing-the-mod-template) might be it.
 
 ## Installation
@@ -23,7 +25,8 @@ There are several parameters you may pass into the `dotnet` command:
 - *--description*: A description of the mod. Default is "A Hollow Knight mod."
 - *--refsPath*: The location of your project references. This is the folder that contains the `Assembly-CSharp.dll` file. Default is `$(MSBuildProgramFiles32)/Steam/steamapps/common/Hollow Knight/hollow_knight_Data/Managed/`.
 
-### HKMP Add-on template only
+### Copying output to multiple locations
+If you want to install your build in multiple file locations, you can use this:
 - *--refsPath1*: The location of your project references for one installation of Hollow Knight. This is the folder that contains the `Assembly-CSharp.dll` file. Default is `$(MSBuildProgramFiles32)/Steam/steamapps/common/Hollow Knight/hollow_knight_Data/Managed/`.
 - *--refsPath2*: The location of your project references for another installation of Hollow Knight. This is the folder that contains the `Assembly-CSharp.dll` file. Default is `$(MSBuildProgramFiles32)/Steam/steamapps/common/Hollow Knight/hollow_knight_Data/Managed/`.
 
