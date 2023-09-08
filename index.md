@@ -50,7 +50,59 @@ The next few sections will give you a better idea of what modding hollow knight 
 
 ## Publishing and distributing your mod
 
-Once you have created a mod that you want to share with the world, you should look into [publishing your mod on github](#todo-section). This will allow others to look at the source code and get inspired from your creation. They might even contribute to it, making your mod all the better! Once that is done you can share the link of your published github release with all your friends. If you want to add your mod to the mod installer (scarab) then you can [add your mod to the modlinks](#todo-section).  
+Once you have created a mod that you want to share with the world, you should look into [publishing your mod on github](#todo-section). This will allow others to look at the source code and get inspired from your creation. They might even contribute to it, making your mod all the better! Once that is done you can share the link of your published github release with all your friends. If you want to add your mod to the mod installer (scarab) then you can [add your mod to the modlinks](#adding-your-mod-to-modlinks).  
+
+## Adding your mod to modlinks
+
+To add your mod to scarab:
+- [Visit the modlinks page](https://github.com/hk-modding/modlinks/blob/main/ModLinks.xml)
+- Instead of creating a fork, click the pencil at the top right corner.
+- Make your changes to the file.
+Example mod manifest:
+```
+<Manifest>
+    <Name>Test Name</Name>
+    <Description>Test description</Description>
+    <Version>0.0.0.0</Version>
+    <Links>
+        <Linux SHA256="0000000000000000000000000000000000000000000000000000000000000000"><![CDATA[https://linux.link]]></Linux>
+        <Mac SHA256="0000000000000000000000000000000000000000000000000000000000000000"><![CDATA[https://mac.link]]></Mac>
+        <Windows SHA256="0000000000000000000000000000000000000000000000000000000000000000"><![CDATA[https://windows.link]]></Windows>
+    </Links>
+    <Link SHA256="0000000000000000000000000000000000000000000000000000000000000000"><![CDATA[https://multiplatform.link]]></Link>
+    <Dependencies>
+        <Dependency>Another mod's name that this mod depends on</Dependency>
+    </Dependencies>
+    <Repository>
+        <![CDATA[https://github.com/user/repo]]>
+    </Repository>
+    <Issues>
+        <![CDATA[https://website/for/bug_reports]]>
+    </Issues>
+    <Integrations>
+        <Integration>Another mod's name, like the dependency list, but not a hard dependency, but extra stuff when it is installed alongside</Integration>
+    </Integrations>
+    <Tags>
+        <Tag>Either of: 'Boss', 'Cosmetic', 'Expansion', 'Gameplay', 'Library', 'Utility'</Tag>
+    </Tags>
+    <Authors>
+        <Author>An author's name. Has no specific format.</Author>
+    </Authors>
+</Manifest>
+```
+- Make sure the mod name is unique, as this could cause issues.
+- Make sure your version is numbers, without any letters. (not like `v0.0.0.0`)
+- The SHA256 is a unique identifier, and there are multiple ways to get it.
+- Look at [getting a SHA256](#todo-section) or go to the hollow knight modding discord.
+- Click `Commit Changes...` at the top right of the page.
+- In the commit message, write something like `Added {Mod Name}`.
+- In the extended description, you can put in the mod's description (optional).
+- Then click propose changes.
+- After clicking "Propose changes," you'll be taken to a new page where you can review your proposed changes.
+- At the top of the page, there should be a button to "Create pull request." Click on it.
+- Once the pull request is created, it will be reviewed by project maintainers or contributors.
+- If the changes are approved, a maintainer will merge the pull request into the modlinks repository.
+- After the pull request is merged, your mod should hopefully appear on scarab!
 
 ## Todo-section
 
