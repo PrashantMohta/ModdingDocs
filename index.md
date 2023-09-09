@@ -55,25 +55,26 @@ Once you have created a mod that you want to share with the world, you should lo
 ## Adding your mod to modlinks
 
 To add your mod to the mod installer:
+
 - [Visit the modlinks page](https://github.com/hk-modding/modlinks/blob/main/ModLinks.xml)
-- Instead of creating a fork, click the pencil at the top right corner.
+- Instead of forking the entire repository, click the pencil at the top right corner to edit the `Modlinks.xml` file.
 - Make your changes to the file.
 Example mod manifest:
 
-```
+```xml
 <Manifest>
     <!-- Not Optional -->
     <Name>Test Name</Name>
     <Description>Test description</Description>
     <Version>0.0.0.0</Version>
-    <Link SHA256="0000000000000000000000000000000000000000000000000000000000000000"><![CDATA[https://multiplatform.link]]></Link>
-    <!-- Optional -->
+    <Link SHA256="0000000000000000000000000000000000000000000000000000000000000000"><![CDATA[https://download.link]]></Link>
     <Dependencies>
         <Dependency>Another mod's name that this mod depends on</Dependency>
     </Dependencies>
     <Repository>
         <![CDATA[https://github.com/user/repo]]>
     </Repository>
+    <!-- Optional -->
     <Issues>
         <![CDATA[https://website/for/bug_reports]]>
     </Issues>
@@ -91,7 +92,7 @@ Example mod manifest:
 
 Example:
 
-```
+```xml
 <Manifest>
     <Name>Hallownest-Vocalized</Name>
     <Description>Adds English voice acting to all Hollow Knight's in-game dialogue.</Description>
@@ -124,19 +125,19 @@ Example:
 </Manifest>
 ```
 
-- Make sure the mod name is unique, as this could cause issues.
-- Make sure your version is numbers, without any letters. (not like `v0.0.0.0`)
-- The SHA256 is a unique identifier, and there are multiple ways to get it.
-- Look at [this website](https://emn178.github.io/online-tools/sha256_checksum.html) or go to the hollow knight modding discord.
-- Click `Commit Changes...` at the top right of the page.
-- In the commit message, write something like `Added {Mod Name}`.
-- In the extended description, you can put in the mod's description (optional).
-- Then click propose changes.
-- After clicking "Propose changes," you'll be taken to a new page where you can review your proposed changes.
-- At the top of the page, there should be a button to "Create pull request." Click on it.
-- Once the pull request is created, it will be reviewed by project maintainers or contributors.
-- If the changes are approved, a maintainer will merge the pull request into the modlinks repository.
-- After the pull request is merged, your mod should hopefully appear on the installer!
+- After editing ensure that
+  - The mod name is unique.
+  - The version is in the format `0.0.0.0` and without any letters. (not like `v0.0.0.0`)
+  - The SHA256 is of the file that is going downloaded by the installer. You can get it from a website like [this](https://emn178.github.io/online-tools/sha256_checksum.html).
+- After you are done editing the file
+  - Click `Commit Changes...` at the top right of the page.
+  - Write a meaningful commit message. For example: `Added {Mod Name}`.
+  - Then click propose changes.
+  - After clicking "Propose changes," you'll be taken to a new page where you can review your proposed changes.
+  - At the top of the page, there should be a button to "Create pull request." Click on it.
+  - Once the pull request is created, it will be reviewed by project maintainers or contributors.
+  - If the changes are approved, a maintainer will merge the pull request into the modlinks repository.
+  - After the pull request is merged, your mod should hopefully appear on the installer!
 
 ## Todo-section
 
