@@ -50,7 +50,94 @@ The next few sections will give you a better idea of what modding hollow knight 
 
 ## Publishing and distributing your mod
 
-Once you have created a mod that you want to share with the world, you should look into [publishing your mod on github](#todo-section). This will allow others to look at the source code and get inspired from your creation. They might even contribute to it, making your mod all the better! Once that is done you can share the link of your published github release with all your friends. If you want to add your mod to the mod installer (scarab) then you can [add your mod to the modlinks](#todo-section).  
+Once you have created a mod that you want to share with the world, you should look into [publishing your mod on github](#todo-section). This will allow others to look at the source code and get inspired from your creation. They might even contribute to it, making your mod all the better! Once that is done you can share the link of your published github release with all your friends. If you want to add your mod to the mod installer (scarab) then you can [add your mod to the modlinks](#adding-your-mod-to-modlinks).  
+
+## Adding your mod to modlinks
+
+To add your mod to the mod installer:
+
+- [Visit the modlinks page](https://github.com/hk-modding/modlinks/blob/main/ModLinks.xml)
+- Instead of forking the entire repository, click the pencil at the top right corner to edit the `Modlinks.xml` file.
+- Make your changes to the file.
+Example mod manifest:
+
+```xml
+<Manifest>
+    <!-- Not Optional -->
+    <Name>Test Name</Name>
+    <Description>Test description</Description>
+    <Version>0.0.0.0</Version>
+    <Link SHA256="0000000000000000000000000000000000000000000000000000000000000000"><![CDATA[https://download.link]]></Link>
+    <Dependencies>
+        <Dependency>Another mod's name that this mod depends on</Dependency>
+    </Dependencies>
+    <Repository>
+        <![CDATA[https://github.com/user/repo]]>
+    </Repository>
+    <!-- Optional -->
+    <Issues>
+        <![CDATA[https://website/for/bug_reports]]>
+    </Issues>
+    <Integrations>
+        <Integration>Another mod's name, like the dependency list, but not a hard dependency, but extra stuff when it is installed alongside</Integration>
+    </Integrations>
+    <Tags>
+        <Tag>Either of: 'Boss', 'Cosmetic', 'Expansion', 'Gameplay', 'Library', 'Utility'</Tag>
+    </Tags>
+    <Authors>
+        <Author>An author's name. Has no specific format.</Author>
+    </Authors>
+</Manifest>
+```
+
+Example:
+
+```xml
+<Manifest>
+    <Name>Hallownest-Vocalized</Name>
+    <Description>Adds English voice acting to all Hollow Knight's in-game dialogue.</Description>
+    <Version>1.0.1.2</Version>
+    <Link SHA256="F9529A1D664C1020DD4AFE6A7E06BF77EEA614F5E5079E726CF5F7704CD01EFC">
+    <![CDATA[https://github.com/Hallownest-Vocalized/Hallownest-Vocalized/releases/download/0.0.1.2/HKVocal.zip]]>
+    </Link>
+    <Dependencies>
+      <Dependency>Satchel</Dependency>
+      <Dependency>Core.FsmUtil</Dependency>
+      <Dependency>HKMirror</Dependency>
+      <Dependency>Osmi</Dependency>
+      <Dependency>SFCore</Dependency>
+      <Dependency>FrogCore</Dependency>
+      <Dependency>Hallownest-Vocalized-AudioLoader</Dependency>
+    </Dependencies>
+    <Repository>
+      <![CDATA[https://github.com/Hallownest-Vocalized/Hallownest-Vocalized]]>
+    </Repository>
+    <Tags>
+      <Tag>Gameplay</Tag>
+    </Tags>
+    <Authors>
+      <Author>RedFrog</Author>
+      <Author>Mulhima</Author>
+      <Author>Link459</Author>
+      <Author>Clove</Author>
+      <Author>Zickles</Author>
+    </Authors>
+</Manifest>
+```
+
+- After editing ensure that
+  - The mod name is unique.
+  - The version is in the format `0.0.0.0` and without any letters. (not like `v0.0.0.0`)
+  - The SHA256 is of the file that is going downloaded by the installer. You can get it from a website like [this](https://emn178.github.io/online-tools/sha256_checksum.html).
+- After you are done editing the file
+  - Click `Commit Changes...` at the top right of the page.
+  - Write a meaningful commit message. For example: `Added {Mod Name}`.
+  - Then click propose changes.
+  - After clicking "Propose changes," you'll be taken to a new page where you can review your proposed changes.
+  - At the top of the page, there should be a button to "Create pull request." Click on it.
+  - Once the pull request is created, it will be reviewed by project maintainers or contributors.
+  - If the changes are approved, a maintainer will merge the pull request into the modlinks repository.
+  - After the pull request is merged, your mod should hopefully appear on the installer!
 
 ## Todo-section
 
