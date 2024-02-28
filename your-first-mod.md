@@ -26,7 +26,7 @@ steps below!
 Strictly speaking, there is no need to use a template to create your mod. it will however take some common things that you will have to do every time you start a project and do them for you, which is nice.
 
 To install the template : 
- - Download the [Template Zip](https://cdn.discordapp.com/attachments/879130756146954240/931586813729075270/Hollow_Knight_1.5_Mod.zip) 
+ - Download the [Template Zip](https://github.com/PrashantMohta/ModdingDocs/releases/download/1.5-modding-template/Hollow_Knight_1.5_Mod.zip) 
  - Move this zip to `{documents folder}\Visual Studio 2022\Templates\ProjectTemplates`
  - Restart visual studio 
 
