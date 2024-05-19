@@ -1,4 +1,4 @@
-﻿---
+---
 title: On Hooks
 nav-order: 2
 parent: Hooks
