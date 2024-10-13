@@ -117,7 +117,7 @@ new MenuButton(
         	//execute code here when the user presses this button. 
         	//you can use the Mbutton parameter to edit the menu button if you wish
         	Log("My Button was pressed");
-        }
+        },
         Id: "mybutton")// the id of the button to search for it
 ```
 See also:
