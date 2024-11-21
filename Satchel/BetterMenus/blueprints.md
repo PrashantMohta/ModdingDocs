@@ -92,7 +92,7 @@ MenuRef = new Menu("Example Mod Menu", new Element[]
 > Notice How in GetMenuScreen, MenuRef.menuScreen was passed and not modlistmenu. This is so the back button in extra menu leads to previous menu and not the `Mods` menu  
 ## Update Visibility
 A blueprint that allows you to set visibility of multiple elements together
-Makes it easier because you dont have to manually find each element and also you dont need to call MenuRef.Update (the blueprint will do it for you)
+Makes it easier because you dont have to manually find each element and also you don't need to call MenuRef.Update (the blueprint will do it for you)
 Example:
 ```cs
 new HorizontalOption(
