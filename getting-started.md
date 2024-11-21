@@ -9,7 +9,7 @@ nav_order: 2
 - A Legitimate copy of Hollow Knight on PC (Steam / GoG / HumbleBundle)
   - XBox / PS4 / Nintendo Switch versions do not work for our purposes.
 - A copy of the [Hollow Knight Modding Api](https://github.com/hk-modding/api) binary (dll) files
-  - Installing them through any modinstaller (e.g. Scarab or Butterfly) also works.
+  - Installing them through any modinstaller (e.g. [Lumafly](https://themulhima.github.io/Lumafly) or [Scarab](https://github.com/fifty-six/Scarab)) also works.
 - Visual Studio Community and .NET Framework 4.7.2
   - Any version of Visual Studio or any other C# IDE works.
   - .NET Framework 4.7.2 is included in the .NET 4.8 Runtime.
