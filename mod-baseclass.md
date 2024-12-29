@@ -21,10 +21,10 @@ you can also use additional features of the base class, by implementing optional
 - [Add a Mod Menu](#add-a-mod-menu)
 
 ### Set your load priority
-By default Mods are loaded in an unspecified order, if for some reason you need to ensure that your mod loads earlier or later than some other mods, you can use the load priority to denote that. 
 
-To do this add the following method to your Mod class :
+By default Mods are loaded in an unspecified order, if for some reason you need to ensure that your mod loads earlier or later than some other mods, you can use the load priority to denote that.
 
+To do this add the following method to your Mod class:
 ```cs
 public override int LoadPriority() => PRIORITY;
 ```
@@ -35,16 +35,16 @@ Where `PRIORITY` is an int, higher values of priority will load your mod later a
 
 By "load" order we strictly mean the order in which the `Initialize` method is called, the Mod class constructors may be called out of this order, do not rely on constructor order.
 
-
 ### Set your Mods Name
-The Default name of your mod is the name of the Mod class, if you need to change that, you can do so by passing the name to the base class constructor, like so :
 
+The Default name of your mod is the name of the Mod class, if you need to change that, you can do so by passing the name to the base class constructor, like so:
 ```cs
 public MyFirstMod() : base("My 1st Mod") { }
 ```
 
 ### Set your Mods Version
-To allow user's to tell your mod versions apart and to allow you to debug issues, you can set the version
+
+To allow user's to tell your mod versions apart and to allow you to debug issues, you can set the version.
 
 ```cs
 public override string GetVersion() => "v0.1";
@@ -52,12 +52,38 @@ public override string GetVersion() => "v0.1";
 
 > Note: it is advisable to always change your version before publishing a new release to make sure that people are able to use the right version when installing / reporting bugs.
 
+#### Dynamic Version String
+
+One alternative of a hard-coded version string is to read the assemblies assembly-version.
+
+The assembly version can be set in the properties window of the IDE, or in the .csproj file by hand:
+```xml
+<Project Sdk="Microsoft.NET.Sdk">
+  ...
+  <PropertyGroup>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+  </PropertyGroup>
+  ...
+</Project>
+```
+
+Then in the mod that information can be used like this:
+```cs
+public override string GetVersion() => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+```
+
+Or using dependency mods (e.g. SFCore):
+```cs
+public override string GetVersion() => SFCore.Utils.Util.GetVersion(System.Reflection.Assembly.GetExecutingAssembly());
+```
+
 ### Request for preloads
 
 The Mod base class allows your mod to request the Modding Api to preload game objects from a particular scene.
 for more information see  [Preloading game objects](preloads.md) .
 
 ### Initialize your mod
+
 The Mod base class allows your mod to [receive the Preloaded objects](preloads.md), and work with setting up your mod code in Initialize. This method is called after your mod class is constructed, but beware that it is called more than once, especially if your mod is toggled on and off. refer to [Mod Lifecycle](mod-lifecycle.md) for more details on the order of execution.
 
 ## Optional Interfaces
