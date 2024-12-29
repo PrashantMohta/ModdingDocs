@@ -27,7 +27,7 @@ Some of the core features are:
   - This abstracts code used to have global and save settings.
 - ModInterOp
   - This allows mods to register methods with a name so other mods can call them without having a hard dependency.
-  - This is superseeded by MonoMod.ModInterop
+  - This is superseded by MonoMod.ModInterop
     - For an up-to-date example of this, refer to [DebugMod's Example](https://github.com/TheMulhima/HollowKnight.DebugMod/tree/master/Example%20of%20Adding%20into%20Debug)
 - MonoBehaviours
   - These are useful for making custom scenes.
