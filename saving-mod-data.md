@@ -3,18 +3,21 @@ nav_order: 9
 ---
 # Saving Mod Data
 
-## Introduction 
-There are many times where you want data created by your mod to persist after the game closes. The primary way to to this via the MAPI is thorough the LocalSettings and GlobalSettings interfaces. A LocalSetting is a setting that is specific to a save file while a GlobalSetting is a setting that is common between all saves. These interfaces allow you to store data as a JSON in the saves folder which can be read with old data when your mod is loaded and written to with new data when game is closed. Since it's stored as a JSON, a user can edit the values in the file which allows you to let the user configure some settings if they wish. 
+## Introduction
+
+There are many times where you want data created by your mod to persist after the game closes. The primary way to to this via the MAPI is thorough the LocalSettings and GlobalSettings interfaces. A LocalSetting is a setting that is specific to a save file while a GlobalSetting is a setting that is common between all saves. These interfaces allow you to store data as a JSON in the saves folder which can be read with old data when your mod is loaded and written to with new data when game is closed. Since it's stored as a JSON, a user can edit the values in the file which allows you to let the user configure some settings if they wish.
 
 > Note: The 1.5 MAPI provides a ModMenu interface which allows users to change settings in-game which is preferred, as compared to asking users to find a specific file in the save folder to change settings.
 
 A mod's global settings can be found in the saves folder with the name `ModName.GlobalSettings.json` while it's local settings are found in `userN.modded.json` where N is the save file number
 
 ## How to use
-It is really easy to create a settings interface. For this explanation global settings will be used and an example for local settings will be provided under that.  
-The first step is to create a class and in that class add fields that will store your persistent data/configurations
 
-Example
+It is really easy to create a settings interface. For this explanation global settings will be used and an example for local settings will be provided under that.
+
+The first step is to create a class and in that class add fields that will store your persistent data/configurations-
+
+Example:
 ```cs
 public class GlobalSettingsClass
 {
@@ -46,7 +49,7 @@ public class MyFirstMod: Mod, IGlobalSettings<GlobalSettingsClass>
 
     public GlobalSettingsClass OnSaveGlobal()
     {
-    	return GS;//return the local variable so it can be written in the json file
+        return GS;//return the local variable so it can be written in the json file
     }
 
 }
@@ -64,11 +67,31 @@ public class MyFirstMod: Mod, ILocallSettings<LocalSettingsClass>
 }
 ```
 
+### [SFCore Generics](dependencymods.md#SFCore)
+
+The above examples can be trivialized using the generic mod classes from SFCore:
+```cs
+
+public class MyFirstMod: SFCore.Generics.GlobalSettingsMod<GlobalSettingsClass>
+{
+    // this class now has global settings at `this.GlobalSettings` available
+}
+public class MyFirstMod: SFCore.Generics.SaveSettingsMod<LocalSettingsClass>
+{
+    // this class now has local settings at `this.SaveSettings` available
+}
+public class MyFirstMod: SFCore.Generics.FullSettingsMod<LocalSettingsClass, GlobalSettingsClass>
+{
+    // this class now has both local settings at `this.SaveSettings` and global settings at `this.GlobalSettings` available
+}
+```
 
 ## Notes on Non Serializeable Fields
+
 An indicator for a type not being seralizable is that it doesnt show up in the JSON file. Normally any public field or property with no non-public accessors is serialized, by default. For more information you can check the [Newtonsoft documentation](https://www.newtonsoft.com/json/help/html/Introduction.htm)
 
 ### Enums
+
 To make sure the enums are stored as strings and not ints in the settings file, you can add the attribute `[JsonConverter(typeof(StringEnumConvertor))]` to the field. Even if you dont add the attribute it will still seralize but with the attribute, it will make it easier for people to edit.
 
 ```cs
@@ -86,13 +109,14 @@ public class GlobalSettingsClass
 ```
 
 ### Keybinds
-When creating a mod menu, there is an option to have bindable keys. However, to save those keys in a settings file, we need to use this method.  
 
-The first step is to create a Keybinds Class that inherts from `PlayerActionSet`
+When creating a mod menu, there is an option to have bindable keys. However, to save those keys in a settings file, we need to use this method.
+
+The first step is to create a Keybinds Class that inherts from `PlayerActionSet`:
 ```cs
 public class KeyBinds : PlayerActionSet
 {
-	//the keybinds you want to save. it needs to be of type PlayerAction
+    //the keybinds you want to save. it needs to be of type PlayerAction
     public PlayerAction Key1;
 
     //a constructor to initalize the PlayerAction
@@ -103,45 +127,49 @@ public class KeyBinds : PlayerActionSet
        //optional: set a default bind
         Key1.AddDefaultBinding(Key.A);
     }
+}
 ```
 
-The next step is to add a field of type `KeyBinds` in the settings class and add the `[JsonConverter(typeof(PlayerActionSetConverter))]` attribute to that field
+The next step is to add a field of type `KeyBinds` in the settings class and add the `[JsonConverter(typeof(PlayerActionSetConverter))]` attribute to that field:
 ```cs
 public class GlobalSettingsClass
 {
-	[JsonConverter(typeof(PlayerActionSetConverter))]
-	public KeyBinds keybinds = new KeyBinds();
+    [JsonConverter(typeof(PlayerActionSetConverter))]
+    public KeyBinds keybinds = new KeyBinds();
 }
 ```
 
 Now you can access the keybinds by doing `GS.keybinds.Key1`
 
 ### Using workarounds
+
 If the type you are trying to save is not seralizable, you can use work arounds to save it in global settings. For example: if you wanted to save a `UnityEngine.Color`, you can do
 ```cs
 public class GlobalSettingsClass
 {
-	public int IconColorR = 0;
-	public int IconColorG = 0;
-	public int IconColorB = 0;
+    // `UnityEngine.Color` saves the rgb information as floats between 0.0 and 1.0, which is why one either uses floats to save these values or convert it to a `UnityEngine.Color32`, which does save the values as bytes from 0 to 255, luckily these two can be implicitly converted
+    public int IconColorR = 0;
+    public int IconColorG = 0;
+    public int IconColorB = 0;
 
-	//adding a JsonIgnore attribute to the property will make the seralizer ignore the property
+    //adding a JsonIgnore attribute to the property will make the seralizer ignore the property
     [JsonIgnore]
     public Color IconColor
     {
-        get => new Color(IconColorR, IconColorG, IconColorB);
+        get => new Color32(IconColorR, IconColorG, IconColorB);
         set
         {
-            IconColorR = Mathf.RoundToInt(value.r); 
-            IconColorG = Mathf.RoundToInt(value.g); 
-            IconColorB = Mathf.RoundToInt(value.b); 
-            
+            Color32 tmp = value;
+            IconColorR = tmp.r;
+            IconColorG = tmp.g;
+            IconColorB = tmp.b;
         }
     }
 }
 ```
 
 ### Creating your own custom JSONConvertors
+
 If you don't want to do a workaround, you can create your own JSON Convertor. Examples are linked below:
 1. [System.Random](https://github.com/TheMulhima/HollowKnight.RandomTeleport/blob/master/RandomTeleport/JsonConvertors/RandomJsonConvertor.cs)
 2. [Vector2](https://github.com/hk-modding/api/blob/master/Assembly-CSharp/Converters/Vector2Converter.cs)
