@@ -46,4 +46,4 @@ public override void Initialize(Dictionary<string, Dictionary<string, GameObject
 
 You can then access your GameObject by doing `preloadedObjects[SceneName][GameObjectPath]`.
 
-> Note: Preloading objects increases the overall loading time for the game to start. If possible, you should preload the minimum number of objects that you need.
+> Note: Preloading objects increases the overall loading time for the game to start. If possible, you should preload the minimum number of objects that you need. Or have as many objects as possible be from the same scene.
