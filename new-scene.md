@@ -326,32 +326,254 @@ And with that the MonoBehaviour Project is ready for Unity.
 
 ### Unity Project
 
-For the Unity scene, we will use the following `obj` data in a `TutorialScene.obj`:
-```obj
-o TutorialScene
-v -30.000000 0.000000 0.000000
-v 0.000000 0.000000 0.000000
-v -30.000000 17.000000 0.000000
-v 0.000000 2.000000 0.000000
-v -30.000000 2.000000 0.000000
-v -30.000000 6.000000 0.000000
-v 0.000000 17.000000 0.000000
-v 0.000000 6.000000 0.000000
-v -2.000000 6.000000 0.000000
-v -2.000000 15.000000 0.000000
-v -28.000000 15.000000 0.000000
-v -28.000000 6.000000 0.000000
-vn -0.0000 -0.0000 -1.0000
-vt 0.000000 0.000000
-s 0
-f 2/1/1 1/1/1 5/1/1 4/1/1
-f 3/1/1 7/1/1 8/1/1 9/1/1 10/1/1 11/1/1 12/1/1 6/1/1
-```
+The Unity Project should be created as a 2D Project, as that enables us to use 2D components, which will be necessary.
 
-Yes, this is the entire mesh we will use as Terrain for the custom Scene. And since `.obj` files are just plain text files they can be easily edited using notepad or any other text editor.
+In the Unity Project, we will need:
+- The `SFCoreUnity.dll` renamed to `SFCore.dll`
+- The `MyFirstCustomSceneMod.dll` from the MonoBehaviour Project
+- The following `TutorialScene.obj` file:
+  ```obj
+  o TutorialScene
+  v -30.000000 0.000000 0.000000
+  v 0.000000 0.000000 0.000000
+  v -30.000000 17.000000 0.000000
+  v 0.000000 2.000000 0.000000
+  v -30.000000 2.000000 0.000000
+  v -30.000000 6.000000 0.000000
+  v 0.000000 17.000000 0.000000
+  v 0.000000 6.000000 0.000000
+  v -2.000000 6.000000 0.000000
+  v -2.000000 15.000000 0.000000
+  v -28.000000 15.000000 0.000000
+  v -28.000000 6.000000 0.000000
+  vn -0.0000 -0.0000 -1.0000
+  vt 0.000000 0.000000
+  s 0
+  f 2/1/1 1/1/1 5/1/1 4/1/1
+  f 3/1/1 7/1/1 8/1/1 9/1/1 10/1/1 11/1/1 12/1/1 6/1/1
+  ```
+  > Yes, this is the entire mesh we will use as Terrain for the custom Scene. And since `.obj` files are just plain text files they can be easily edited using notepad or any other text editor.
 
+The folder-structure can look like the following, for easier management:
+- Assets
+  - _MonoScripts
+    - In here, there will be `.cs` source files that are mostly `MonoBehaviour`s copied from Hollow Knight and then adjusted to only contain the members.
+  - Assemblies
+    - In here, we will put both the (renamed from `SFCoreUnity.dll`) `SFCore.dll` and `MyFirstCustomSceneMod.dll`.
+  - Editor
+    - In here, there will be `.cs` source files that will add visualization or other functionality to the Unity Editor, potentially regarding some specific MonoBehaviours.
+  - Materials
+    - In here, every created Material can be stored, be it Texture Materials or Physics Materials.
+  - Meshes
+    - In here, we will put the `TutorialScene.obj` file.
+  - Scenes
+    - In here, we will create using Right Click => Create => Scene and call it "MyFirstCustomSceneMod"
 
+For _MonoScripts, we can create the following files:
+- `GlobalEnums/MapZone.cs`
+  ```cs
+  namespace GlobalEnums
+  {
+    public enum MapZone
+    {
+      NONE = 0,
+      TEST_AREA = 1,
+      KINGS_PASS = 2,
+      CLIFFS = 3,
+      TOWN = 4,
+      CROSSROADS = 5,
+      GREEN_PATH = 6,
+      ROYAL_GARDENS = 7,
+      FOG_CANYON = 8,
+      WASTES = 9,
+      DEEPNEST = 10,
+      HIVE = 11,
+      BONE_FOREST = 12,
+      PALACE_GROUNDS = 13,
+      MINES = 14,
+      RESTING_GROUNDS = 15,
+      CITY = 16,
+      DREAM_WORLD = 17,
+      COLOSSEUM = 18,
+      ABYSS = 19,
+      ROYAL_QUARTER = 20,
+      WHITE_PALACE = 21,
+      SHAMAN_TEMPLE = 22,
+      WATERWAYS = 23,
+      QUEENS_STATION = 24,
+      OUTSKIRTS = 25,
+      KINGS_STATION = 26,
+      MAGE_TOWER = 27,
+      TRAM_UPPER = 28,
+      TRAM_LOWER = 29,
+      FINAL_BOSS = 30,
+      SOUL_SOCIETY = 31,
+      ACID_LAKE = 32,
+      NOEYES_TEMPLE = 33,
+      MONOMON_ARCHIVE = 34,
+      MANTIS_VILLAGE = 35,
+      RUINED_TRAMWAY = 36,
+      DISTANT_VILLAGE = 37,
+      ABYSS_DEEP = 38,
+      ISMAS_GROVE = 39,
+      WYRMSKIN = 40,
+      LURIENS_TOWER = 41,
+      LOVE_TOWER = 42,
+      GLADE = 43,
+      BLUE_LAKE = 44,
+      PEAK = 45,
+      JONI_GRAVE = 46,
+      OVERGROWN_MOUND = 47,
+      CRYSTAL_MOUND = 48,
+      BEASTS_DEN = 49,
+      GODS_GLORY = 50,
+      GODSEEKER_WASTE = 51,
+    }
+  }
+  ```
+- `GlobalEnums/SceneType.cs`
+  ```cs
+  namespace GlobalEnums
+  {
+    public enum SceneType
+    {
+      GAMEPLAY = 0,
+      MENU = 1,
+      LOADING = 2,
+      CUTSCENE = 3,
+      TEST = 4,
+    }
+  }
+  ```
+- `ReplacementStuff/AudioMixerSnapshot.cs`
+  ```cs
+  public class AudioMixerSnapshot {}
+  ```
+- `ReplacementStuff/PlayMakerFSM.cs`
+  ```cs
+  public class PlayMakerFSM {}
+  ```
+- `CameraLockArea.cs`
+  ```cs
+  using UnityEngine;
 
+  public class CameraLockArea : MonoBehaviour
+  {
+    public float cameraXMin;
+    public float cameraYMin;
+    public float cameraXMax;
+    public float cameraYMax;
+    public bool preventLookUp;
+    public bool preventLookDown;
+    public bool maxPriority;
+  }
+  ```
+- `HazardRespawnMarker.cs`
+  ```cs
+  using UnityEngine;
+
+  public class HazardRespawnMarker : MonoBehaviour
+  {
+    public bool respawnFacingRight;
+    public bool drawDebugRays;
+  }
+  ```
+- `HazardRespawnTrigger.cs`
+  ```cs
+  using UnityEngine;
+
+  public class HazardRespawnTrigger : MonoBehaviour
+  {
+    public HazardRespawnMarker respawnMarker;
+    public bool fireOnce;
+  }
+  ```
+- `NonBouncer.cs`
+  ```cs
+  using UnityEngine;
+
+  public class NonBouncer : MonoBehaviour
+  {
+    public bool active;
+  }
+  ```
+- `RealHazardType.cs`
+  ```cs
+  public enum RealHazardType
+  {
+    NON_HAZARD = 0,
+    NORMAL,
+    SPIKES,
+    ACID,
+    LAVA,
+    PIT
+  }
+  ```
+- `RespawnMarker.cs`
+  ```cs
+  using UnityEngine;
+
+  public class RespawnMarker : MonoBehaviour
+  {
+    public bool respawnFacingRight;
+  }
+  ```
+- `SceneLoadVisualizations.cs`
+  ```cs
+  using UnityEngine;
+
+  public class GameManager : MonoBehaviour
+  {
+    public enum SceneLoadVisualizations
+    {
+      Default = 0,
+      Custom = -1,
+      Dream = 1,
+      Colosseum = 2,
+      GrimmDream = 3,
+      ContinueFromSave = 4,
+      GodsAndGlory = 5
+    }
+  }
+  ```
+- `TransitionPoint.cs`
+  ```cs
+  using UnityEngine;
+
+  public class TransitionPoint : MonoBehaviour
+  {
+    public bool isADoor = false;
+    [HideInInspector]
+    public bool dontWalkOutOfDoor = false;
+    [HideInInspector]
+    public float entryDelay = 0.0f;
+    public bool alwaysEnterRight = false;
+    public bool alwaysEnterLeft = false;
+    public bool hardLandOnExit = false;
+    public string targetScene;
+    public string entryPoint;
+    [HideInInspector]
+    public Vector2 entryOffset = new Vector2(0.0f, 0.0f);
+    [HideInInspector]
+    public PlayMakerFSM customFadeFSM = null;
+    [HideInInspector]
+    public bool nonHazardGate = false;
+    public HazardRespawnMarker respawnMarker;
+    [HideInInspector]
+    public AudioMixerSnapshot atmosSnapshot = null;
+    [HideInInspector]
+    public AudioMixerSnapshot enviroSnapshot = null;
+    [HideInInspector]
+    public AudioMixerSnapshot actorSnapshot = null;
+    [HideInInspector]
+    public AudioMixerSnapshot musicSnapshot = null;
+    public GameManager.SceneLoadVisualizations sceneLoadVisualization = GameManager.SceneLoadVisualizations.Default;
+    [HideInInspector]
+    public bool customFade = false;
+    [HideInInspector]
+    public bool forceWaitFetch = false;
+  }
+  ```
 
 
 
