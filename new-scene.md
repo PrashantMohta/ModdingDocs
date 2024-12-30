@@ -2,6 +2,8 @@
 
 ## Starting notes
 
+This guide will have you create a Mod that adds a custom Scene that will sit in between the transition from Dirtmouth to the Forgotten Crossroads.
+
 It will be assumed that you know how a Mod can be created, built and then played, as well as how to handle embedded resources.
 
 This guide will follow the mod *[Stories of a HK player - Chapter 2](https://github.com/SFGrenade/StoriesOfaHkPlayer-Ch2)*, as it is one of the smaller mods that use these steps.  
@@ -94,6 +96,7 @@ public class MyFirstCustomSceneMod : SaveSettingsMod<SettingsClass>
     ModHooks.GetPlayerBoolHook += OnGetPlayerBoolHook;
     ModHooks.SetPlayerBoolHook += OnSetPlayerBoolHook;
     ModHooks.LanguageGetHook += OnLanguageGetHook;
+    UnityEngine.SceneManagement.SceneManager.activeSceneChanged += OnSceneChanged;
   }
 }
 ```
@@ -136,18 +139,32 @@ private string OnLanguageGetHook(string key, string sheet, string orig)
   // this hook can be trivialized using `SFCore.Utils.LanguageStrings`
   if (sheet == "Titles" && key == "MyFirstCustomSceneMod_AreaTitle_SUPER")
   {
-    return "My first";
+    return "The";
   }
   if (sheet == "Titles" && key == "MyFirstCustomSceneMod_AreaTitle_MAIN")
   {
-    return "Custom Scene";
+    return "Lands";
   }
   if (sheet == "Titles" && key == "MyFirstCustomSceneMod_AreaTitle_SUB")
   {
-    return "Mod";
+    return "Between";
   }
 
   return orig;
+}
+
+private void OnSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.SceneManagement.Scene to)
+{
+  if (to.name == "Town")
+  {
+    // we arrived in Dirtmouth
+    // todo: add code that redirects the well transition to our custom scene
+  }
+  else if (to.name == "Crossroads_01")
+  {
+    // we arrived in the Forgotten Crossroads
+    // todo: add code that redirects the well transition to our custom scene
+  }
 }
 ```
 
@@ -205,10 +222,68 @@ class PrefabHolder
 }
 ```
 
+Now to use these 2 preloaded objects.
 
+For the `Area Title Controller` we will create the following `MonoBehaviour`:
+```cs
+class PatchAreaTitleController : MonoBehaviour
+{
+  [Range(0, 10)]
+  public float Pause = 3f;
+  public bool AlwaysVisited = false;
+  public bool DisplayRight = false;
+  public bool OnlyOnRevisit = false;
+  public bool SubArea = true;
+  public bool WaitForTrigger = false;
+  public string AreaEvent = "";
+  public string VisitedBool = "";
 
+  public void Awake()
+  {
+    GameObject atc = Instantiate(PrefabHolder.PopAreaTitleCtrlPrefab);
+    atc.SetActive(false);
+    atc.transform.localPosition = transform.position;
+    atc.transform.localEulerAngles = transform.eulerAngles;
+    atc.transform.localScale = transform.lossyScale;
 
+    PlayMakerFSM atcFsm = atc.LocateMyFSM("Area Title Controller");
+    atcFsm.GetFloatVariable("Unvisited Pause").Value = Pause;
+    atcFsm.GetFloatVariable("Visited Pause").Value = Pause;
 
+    atcFsm.GetBoolVariable("Always Visited").Value = AlwaysVisited;
+    atcFsm.GetBoolVariable("Display Right").Value = DisplayRight;
+    atcFsm.GetBoolVariable("Only On Revisit").Value = OnlyOnRevisit;
+    atcFsm.GetBoolVariable("Sub Area").Value = SubArea;
+    atcFsm.GetBoolVariable("Visited Area").Value = PlayerData.instance.GetBool(VisitedBool);
+    atcFsm.GetBoolVariable("Wait for Trigger").Value = WaitForTrigger;
+
+    atcFsm.GetStringVariable("Area Event").Value = AreaEvent;
+    atcFsm.GetStringVariable("Visited Bool").Value = VisitedBool;
+
+    atcFsm.GetGameObjectVariable("Area Title").Value = GameObject.Find("Area Title");
+
+    atc.AddComponent<NonBouncer>();
+    atc.SetActive(true);
+
+    Destroy(gameObject);
+  }
+}
+```
+
+And for the `_Managers/PlayMaker Unity 2D`, the following `MonoBehaviour` is created:
+```cs
+class PatchPlayMakerManager : MonoBehaviour
+{
+  public Transform ManagerTransform;
+
+  public void Awake()
+  {
+    GameObject tmpPmu2D = Instantiate(PrefabHolder.PopPmU2dPrefab, ManagerTransform);
+    tmpPmu2D.SetActive(true);
+    tmpPmu2D.name = "PlayMaker Unity 2D";
+  }
+}
+```
 
 
 
