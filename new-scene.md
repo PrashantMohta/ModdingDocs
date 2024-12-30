@@ -1094,6 +1094,18 @@ So we will need a few objects for a basic Hollow Knight Scene. Most of these are
     - `Manager Transform`: Drag and drop the `_Managers` GameObject here.
 - GameObject `_Areas`
 - GameObject `_Camera Lock Zones`
+  - GameObject `Main`, placed at (`15`, `8.5`, `0`), to which we will add 2 MonoBehaviours
+  - MonoBehaviour `BoxCollider2D`
+    - `Is Trigger`: Check it.
+    - `Size`: Set to `32`x`19`.
+  - MonoBehaviour `CameraLockArea`
+    - `Camera X Min`: Set to `15`.
+    - `Camera Y Min`: Set to `8.5`.
+    - `Camera X Max`: Set to `15`.
+    - `Camera Y Max`: Set to `8.5`.
+    - `Prevent Look Up`: Check it.
+    - `Prevent Look Down`: Check it.
+    - `Max Priority`: Leave it unchecked.
 - GameObject `_Effects`
 - GameObject `_Enemies`
 - GameObject `_Items`
@@ -1101,10 +1113,59 @@ So we will need a few objects for a basic Hollow Knight Scene. Most of these are
 - GameObject `_Markers`
 - GameObject `_NPCs`
 - GameObject `_Props`
-- GameObject `_Scenery`
-- GameObject `_Transition Gate`
-- GameObject `BlurPlane`
-- GameObject `TileMap`
+- GameObject `_Scenery`, to which we will add 1 MonoBehaviours
+  - MonoBehaviour `SpritePatcher`
+    - `Shader`: Set to `Sprites/Lit`.
+    - `Scale`: Set to `1`.
+    - This allows any sprite added as a child of `_Scenery` to be actually viewed in game as not pink boxes.
+    - Alternatively, put the MonoBehaviour on a child under which you then put the sprites.
+- GameObject `_Transition Gates`
+  - GameObject `left1`, to which we will add 2 MonoBehaviours
+    - MonoBehaviour `BoxCollider2D`
+      - `Is Trigger`: Check it.
+      - `Size`: Set to `1`x`5`.
+    - MonoBehaviour `TransitionPoint`
+      - `Always Enter Left`: Check it.
+      - `Target Scene`: Set to `Town`.
+      - `Entry Point`: Set to `bot1`.
+  - GameObject `right1`, to which we will add 2 MonoBehaviours
+    - MonoBehaviour `BoxCollider2D`
+      - `Is Trigger`: Check it.
+      - `Size`: Set to `1`x`5`.
+    - MonoBehaviour `TransitionPoint`
+      - `Always Enter Right`: Check it.
+      - `Target Scene`: Set to `Crossroads_01`.
+      - `Entry Point`: Set to `top1`.
+- GameObject `BlurPlane`, to which we will add 3 MonoBehaviours
+  - MonoBehaviour `MeshFilter`
+    - `Mesh`: Create a new Mesh in like Blender or something of a square, any flat plane is good and select it here.
+  - MonoBehaviour `MeshRenderer`
+    - `Materials`: You can add a custom material there.
+    - Lighting
+      - `Cast Shadows`: Off.
+      - `Receive Shadows`: Off.
+      - `Contribute Global Illumination`: Off.
+    - Probes
+      - `Light Probes`: Off.
+      - `Reflection Probes`: Blend Probes.
+      - `Anchor Override`: None.
+    - Probes
+      - `Motion Vectors`: Per Object Motion.
+      - `Dynamic Occlusion`: On.
+  - MonoBehaviour `BlurPlanePatcher`
+    - This will replace the Material you put on the `MeshRenderer`, but you can still put one there for visualization of where the BlurPlane would need to be.
+- GameObject `TileMap`, set the Tag to `TileMap`, to which we will add 1 MonoBehaviour
+  - MonoBehaviour `PatchTileMap`
+    - `Width`: Set to `30`.
+    - `Height`: Set to `17`.
+    - `Columns`: Set to `1`.
+    - `Rows`: Set to `1`.
+    - `Part Size X`: Set to `30`.
+    - `Part Size Y`: Set to `17`.
+    - `Physics Material 2D`: Select the `Physics Material 2D` you created here.
+    - `Render Data`: Drag and Drop the `TileMap Render Data` GameObject here.
 - GameObject `TileMap Render Data`
-  - GameObject `Scenemap`
+  - GameObject `Scenemap`, set the Layer to `Terrain` and to which we will add 1 MonoBehaviour
+    - MonoBehaviour `SceneMapPatcher`
+      - `Tex`: Set to any black square sprite.
     - GameObject `Chunk 0 0`
