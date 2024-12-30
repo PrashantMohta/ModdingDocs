@@ -296,6 +296,46 @@ class PatchPlayMakerManager : MonoBehaviour
 }
 ```
 
+And for now, temporarily, a 3rd MonoBehaviour is needed, it will be added to SFCore in the future though, so check first if it isn't already available:
+```cs
+public class PatchTileMap : MonoBehaviour
+{
+  public int width;
+  public int height;
+  public int columns;
+  public int rows;
+  public int partSizeX;
+  public int partSizeY;
+  public PhysicsMaterial2D physicsMaterial2D;
+  public GameObject renderData;
+
+  private void Awake()
+  {
+    var tileMap = gameObject.AddComponent<tk2dTileMap>();
+    tileMap.renderData = renderData;
+    tileMap.width = width;
+    tileMap.height = height;
+    tileMap.partitionSizeX = partSizeX;
+    tileMap.partitionSizeY = partSizeY;
+    tileMap.Layers = new Layer[]
+    {
+      new Layer(0, width, height, partSizeX, partSizeY)
+      {
+        gameObject = renderData.transform.GetChild(0).gameObject,
+        numColumns = columns,
+        numRows = rows
+      }
+    };
+    tileMap.ColorChannel = new ColorChannel(width, height, partSizeX, partSizeY)
+    {
+      clearColor = new Color(1, 1, 1, 1),
+      numColumns = columns,
+      numRows = rows
+    };
+  }
+}
+```
+
 With this the Final Mod Project is done for now!
 
 ### MonoBehaviour Project
@@ -328,6 +368,19 @@ class PatchPlayMakerManager : MonoBehaviour
   public void Awake()
   {
   }
+}
+```
+```cs
+public class PatchTileMap : MonoBehaviour
+{
+  public int width;
+  public int height;
+  public int columns;
+  public int rows;
+  public int partSizeX;
+  public int partSizeY;
+  public PhysicsMaterial2D physicsMaterial2D;
+  public GameObject renderData;
 }
 ```
 
@@ -381,7 +434,7 @@ The folder-structure can look like the following, for easier management:
     - In here, we will create using Right Click => Create => Scene and call it "MyFirstCustomSceneMod"
 
 For _MonoScripts, we can create the following files:
-- `GlobalEnums/MapZone.cs`
+- `GlobalEnums/MapZone.cs`  
   ```cs
   namespace GlobalEnums
   {
@@ -442,7 +495,7 @@ For _MonoScripts, we can create the following files:
     }
   }
   ```
-- `GlobalEnums/SceneType.cs`
+- `GlobalEnums/SceneType.cs`  
   ```cs
   namespace GlobalEnums
   {
@@ -456,15 +509,15 @@ For _MonoScripts, we can create the following files:
     }
   }
   ```
-- `ReplacementStuff/AudioMixerSnapshot.cs`
+- `ReplacementStuff/AudioMixerSnapshot.cs`  
   ```cs
   public class AudioMixerSnapshot {}
   ```
-- `ReplacementStuff/PlayMakerFSM.cs`
+- `ReplacementStuff/PlayMakerFSM.cs`  
   ```cs
   public class PlayMakerFSM {}
   ```
-- `CameraLockArea.cs`
+- `CameraLockArea.cs`  
   ```cs
   using UnityEngine;
 
@@ -479,7 +532,7 @@ For _MonoScripts, we can create the following files:
     public bool maxPriority;
   }
   ```
-- `HazardRespawnMarker.cs`
+- `HazardRespawnMarker.cs`  
   ```cs
   using UnityEngine;
 
@@ -489,7 +542,7 @@ For _MonoScripts, we can create the following files:
     public bool drawDebugRays;
   }
   ```
-- `HazardRespawnTrigger.cs`
+- `HazardRespawnTrigger.cs`  
   ```cs
   using UnityEngine;
 
@@ -499,7 +552,7 @@ For _MonoScripts, we can create the following files:
     public bool fireOnce;
   }
   ```
-- `NonBouncer.cs`
+- `NonBouncer.cs`  
   ```cs
   using UnityEngine;
 
@@ -508,7 +561,7 @@ For _MonoScripts, we can create the following files:
     public bool active;
   }
   ```
-- `RealHazardType.cs`
+- `RealHazardType.cs`  
   ```cs
   public enum RealHazardType
   {
@@ -520,7 +573,7 @@ For _MonoScripts, we can create the following files:
     PIT
   }
   ```
-- `RespawnMarker.cs`
+- `RespawnMarker.cs`  
   ```cs
   using UnityEngine;
 
@@ -529,7 +582,7 @@ For _MonoScripts, we can create the following files:
     public bool respawnFacingRight;
   }
   ```
-- `SceneLoadVisualizations.cs`
+- `SceneLoadVisualizations.cs`  
   ```cs
   using UnityEngine;
 
@@ -547,7 +600,7 @@ For _MonoScripts, we can create the following files:
     }
   }
   ```
-- `TransitionPoint.cs`
+- `TransitionPoint.cs`  
   ```cs
   using UnityEngine;
 
@@ -587,7 +640,7 @@ For _MonoScripts, we can create the following files:
   ```
 
 For Editor, we can create the following files:
-- `CameraLockAreaEditor.cs`
+- `CameraLockAreaEditor.cs`  
   This script displays which area the in-game camera will show when you enter a `CameraLockArea`
   ```cs
   using UnityEngine;
@@ -611,7 +664,7 @@ For Editor, we can create the following files:
     }
   }
   ```
-- `CameraModeSwitch.cs`
+- `CameraModeSwitch.cs`  
   This script allows you to easily switch all `Camera`s in a Scene to either Orthographic or Perspective transparency sort mode, which is usefull since Hollow Knight's camera is a 3d camera but in Orthographic transparency sort mode.
   ```cs
   using UnityEngine;
@@ -633,7 +686,7 @@ For Editor, we can create the following files:
     }
   }
   ```
-- `CreateAssetBundles.cs`
+- `CreateAssetBundles.cs`  
   This script allows you to easily build Asset Bundles for windows, which will work for all platforms right up until you use custom shaders.
   ```cs
   using UnityEditor;
@@ -669,184 +722,39 @@ For Editor, we can create the following files:
   }
   ```
 
+With that done, we can actually get to the scene content now, yay!
 
+#### Unity Project Scene Content
 
+So we will need a few objects for a basic Hollow Knight Scene. Most of these are just for organizing. Also, all have their Transform as:  
+| Part     | X | Y | Z |
+|----------|---|---|---|
+| Position | 0 | 0 | 0 |
+| Rotation | 0 | 0 | 0 |
+| Scale    | 1 | 1 | 1 |
 
-
-
-
-
-
----
----
----
----
----
-OLD STUFF HERE
----
----
----
----
----
-
-4. Add :code:`GetPlayerBoolHook`, :code:`LanguageGetHook` & :code:`UnityEngine.SceneManagement.SceneManager.activeSceneChanged`
-
-5. The :code:`GetPlayerBoolHook` will only listen to a bool that we will call :code:`CustomSceneTutorial_VisitedArea` and will always return false
-
-```c#
-private bool OnGetPlayerBoolHook(string target)
-{
-  if (target == "CustomSceneTutorial_VisitedArea") return false;
-  return PlayerData.instance.GetBoolInternal(target);
-}
-```
-
-6. The :code:`LanguageGetHook` will only listen to 3 strings that start with :code:`"CustomSceneTutorial_AreaTitle_"`
-
-```c#
-private string OnLanguageGetHook(string key, string sheet)
-{
-  if (sheet == "Titles" && key == "CustomSceneTutorial_AreaTitle_SUPER") return "Testing";
-  else if (sheet == "Titles" && key == "CustomSceneTutorial_AreaTitle_MAIN") return "area";
-  else if (sheet == "Titles" && key == "CustomSceneTutorial_AreaTitle_SUB") return "of doom";
-  return Language.Language.GetInternal(key, sheet);
-}
-```
-
-7. The :code:`UnityEngine.SceneManagement.SceneManager.activeSceneChanged` will do nothing for now
-
-```c#
-private void OnSceneChanged(Scene from, Scene to)
-{
-}
-```
-
-8. For the ease of simplicity add the preloads "Area Title Controller" & "_SceneManager" from "White_Palace_18"
-
-```c#
-public override List<ValueTuple<string, string>> GetPreloadNames()
-{
-  return new List<ValueTuple<string, string>>
-  {
-    new ValueTuple<string, string>("White_Palace_18", "Area Title Controller"),
-    new ValueTuple<string, string>("White_Palace_18", "_SceneManager"),
-    new ValueTuple<string, string>("White_Palace_18", "_Managers/PlayMaker Unity 2D")
-  };
-}
-```
-
-9. This also means storing these preloaded GOs in your mod class
-
-10. For later use in Unity, also add `a script for inserting an AreaTitleController <https://github.com/SFGrenade/TestOfTeamwork/blob/master/MonoBehaviours/Patcher/PatchAreaTitleController.cs>`_, `a script to insert a SceneManager<https://github.com/SFGrenade/TestOfTeamwork/blob/master/MonoBehaviours/Patcher/PatchSceneManager.cs>`_ and `a script to insert a PlayMaker Manager<https://github.com/SFGrenade/TestOfTeamwork/blob/master/MonoBehaviours/Patcher/PatchPlayMakerManager.cs>`_
-
-11. Also for later use in Unity, add a script for setting the correct width and height of the scene
-
-```c#
-class PatchTilemapSize : MonoBehaviour
-{
-  public int width = 30;
-  public int height = 17;
-
-  public void Awake()
-  {
-    On.GameManager.RefreshTilemapInfo += OnGameManagerRefreshTilemapInfo;
-  }
-
-  public void OnDestroy()
-  {
-    On.GameManager.RefreshTilemapInfo -= OnGameManagerRefreshTilemapInfo;
-  }
-
-  private void OnGameManagerRefreshTilemapInfo(On.GameManager.orig_RefreshTilemapInfo orig, GameManager self, string targetScene)
-  {
-    orig(self, targetScene);
-    if (targetScene == gameObject.scene.name)
-    {
-        self.tilemap.width = width;
-        self.tilemap.height = height;
-        self.sceneWidth = width;
-        self.sceneHeight = height;
-        FindObjectOfType<GameMap>().SetManualTilemap(0, 0, width, height);
-    }
-  }
-}
-```
-
-## Preparation for Unity
-^^^^^^^^^^^^^^^^^^^^^
-
-12. Create a new C# class library project using Unity. Use the one labelled "Class library (.NET Framework)".
-
-13. Give it a name (i suggest the same from before, but with :code:`"Scripts"` behind it) and select .NET Framework 3.5
-
-14. Add ONLY the required unity assemblies as references
-
-15. Copy only the MonoBehaviour classes from before into this new project
-
-16. You can remove all functions from these classes, only the member variables are important
-
-.. note::
-  For member variables that are of enum types, you can use other enums that have the same ranges covered as seen in the PatchSceneManager class.
-
-17. Build this MonoBehaviour-Only project and copy the DLL
-
-Unity project setup
-^^^^^^^^^^^^^^^^^^^
-18. Create a new project using Unity. As a template choose the 3D template. The name is irrelevant.
-
-19. Make a few folders for organizing assets.
-
-.. figure:: resources/newscene/unityfolders.png
-  :scale: 35 %
-
-  Figure 1: My personal assortment of folders to organize assets.
-
-20. Paste the copied DLL from before into the :code:`Assemblies` folder, also add the :code:`SFCoreUnity.dll` assembly
-
-.. note::
-  Don't forget to rename :code:`SFCoreUnity.dll` to :code:`SFCore.dll`
-
-21. Create a scene in unity
-
-22. Change the lighting of the scene
-
-.. figure:: resources/newscene/unitylighting.png
-  :scale: 35 %
-
-  Figure 2: Lighting settings that are good to use
-
-23. Add your terrain meshes, put colliders on them (either :code:`EdgeCollider2D`s or :code:`PolygonCollider2D`s) and put them on layer 8 (aka the terrain layer)
-
-.. note::
-  This can utilize custom made meshes in programs like Blender
-
-24. On these mesh GameObjects, add the :code:`SceneMapPatcher` component from SFCore and give it a black texture to use.
-
-25. Behind everything (with a global Z position of around 7), it is good to add a BlurPlane with a :code:`MeshFilter`, :code:`MeshRenderer` and :code:`BluePlanePatcher` component
-
-26. Add decorations, sprites should have the :code:`SpritePatcher` component on them or above them in the hierarchy.
-
-27. Add a GameObject called :code:`__Initializer` with a :code:`PatchAreaTitleController` :code:`PatchSceneManager`, :code:`PatchPlayMakerManager` & :code:`PatchTilemapSize` component
-
-28. The :code:`PatchAreaTitleController` will be set as a sub area with the area event :code:`CustomSceneTutorial_AreaTitle` and the visited bool :code:`CustomSceneTutorial_VisitedArea`
-
-29. The :code:`PatchSceneManager` can be adjusted to ones liking
-
-30. The :code:`PatchPlayMakerManager` should be given a transform of a GameObject called :code:`_Managers`
-
-31. The :code:`PatchTilemapSize` should be given the width & height of the custom scene
-
-32. Add an entry & exit by adding a GameObject with a Collder set as a trigger and a :code:`TransitionPoint` component, which can be added as a simple :code:`.cs` file in the :code:`_MonoBehaviours` folder in the assets
-
-33. Build the assetbundles and include them in the first C# project as embedded resources
-
-34. In the mod, load the assetbundles in either the constructor or the :code:`Initialize` function
-
-Accessing the custom scene
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-35. in :code:`UnityEngine.SceneManagement.SceneManager.activeSceneChanged` that did nothing until now, add code to create a GameObject with a :code:`TransitionPoint` wherever you want to access your scene from
-
-36. Build the mod
-
-37. Enjoy your first empty custom scene!
+- GameObject `__Initializer`, to which we will add 3 MonoBehaviours
+  - MonoBehaviour `PatchAreaTitleController`  
+    - Here you can leave most values as default
+    - But you can uncheck `SubArea`
+    - In `AreaEvent` write "MyFirstCustomSceneMod_AreaTitle"
+      - This key with "_SUPER", "_MAIN" and "_SUB" will be used for language lookup of the area name
+    - In `VisitedBool` write "MyFirstCustomSceneMod_VisitedArea"
+  - MonoBehaviour `SceneManagerPatcher`
+  - MonoBehaviour `PatchPlayMakerManager`
+- GameObject `_Areas`
+- GameObject `_Camera Lock Zones`
+- GameObject `_Effects`
+- GameObject `_Enemies`
+- GameObject `_Items`
+- GameObject `_Managers`
+- GameObject `_Markers`
+- GameObject `_NPCs`
+- GameObject `_Props`
+- GameObject `_Scenery`
+- GameObject `_Transition Gate`
+- GameObject `BlurPlane`
+- GameObject `TileMap`
+- GameObject `TileMap Render Data`
+  - GameObject `Scenemap`
+    - GameObject `Chunk 0 0`
