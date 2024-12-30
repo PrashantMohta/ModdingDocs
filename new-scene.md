@@ -174,6 +174,7 @@ public override List<ValueTuple<string, string>> GetPreloadNames()
 
 And the `PrefabHolder` class looks like:
 ```cs
+using UObject = UnityEngine.Object;
 class PrefabHolder
 {
   public static GameObject PopAreaTitleCtrlPrefab { get; private set; }
