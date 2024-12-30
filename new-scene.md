@@ -392,6 +392,167 @@ And with that the MonoBehaviour Project is ready for Unity.
 
 The Unity Project should be created as a 2D Project, as that enables us to use 2D components, which will be necessary.
 
+Starting, we want to add the Tags and Layers Hollow Knight has to the project, to make it easy to tag and layer GameObjects accurately.
+
+Take this data and copy and paste it into `{Unity Project Folder}/ProjectSettings/TagMamager.asset`:
+```
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - TileMap
+  - GameManager
+  - BlackOverlay
+  - HeroBox
+  - Nail Attack
+  - RespawnPoint
+  - HeroWalkable
+  - SceneManager
+  - HeroLight
+  - Battle Gate
+  - Battle Scene
+  - CameraParent
+  - Terrain
+  - Canvas
+  - UIManager
+  - Hero Spell
+  - Enemy Message
+  - Orb Target
+  - Vignette
+  - RespawnTrigger
+  - Boss Corpse
+  - Heart Piece
+  - TransitionGate
+  - UI Soul Orb
+  - Shade Marker
+  - Hud Camera
+  - Cinematic
+  - Roar
+  - Stag Grate
+  - Platform
+  - Boss
+  - GeoCounter
+  - CameraTarget
+  - StagMapMarker
+  - HeroFootsteps
+  - Save Icon
+  - HeroLightMain
+  - Beta End
+  - Shop Window
+  - Journal Up Msg
+  - Charms Pane
+  - Inventory Top
+  - Charm Get Msg
+  - Acid
+  - Soul Vessels
+  - Teleplane
+  - Water Surface
+  - Relic Get Msg
+  - Fireball Safe
+  - Baby Centipede
+  - Knight Hatchling
+  - Dream Attack
+  - Infected Flag
+  - Ghost Warrior NPC
+  - Extra Tag
+  - Dream Plant
+  - Dream Orb
+  - Geo
+  - Sharp Shadow
+  - Boss Attack
+  - Nail Beam
+  - Grub Bottle
+  - Colosseum Manager
+  - Wall Breaker
+  - Ignore Hatchling
+  - Hatchling Magnet
+  - Spell Vulnerable
+  - Hopper
+  - Set Extrapolate
+  - Orbit Shield
+  - Grimmchild
+  - WindyGrass
+  - Weaverling
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Terrain
+  - Player
+  - Transition Gates
+  - Enemies
+  - Projectiles
+  - Hero Detector
+  - Terrain Detector
+  - Enemy Detector
+  - Item
+  - Hero Attack
+  - Particle
+  - Interactive Object
+  - Hero Box
+  - Grass
+  - Enemy Attack
+  - Damage All
+  - Bouncer
+  - Soft Terrain
+  - Corpse
+  - UGUI
+  - Hero Only
+  - ActiveRegion
+  - Map Pin
+  - Orbit Shield
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Far BG 2
+    uniqueID: 3315419377
+    locked: 0
+  - name: Far BG 1
+    uniqueID: 1459018367
+    locked: 0
+  - name: Mid BG
+    uniqueID: 4015848369
+    locked: 0
+  - name: Immediate BG
+    uniqueID: 2917268371
+    locked: 0
+  - name: Actors
+    uniqueID: 1270309357
+    locked: 0
+  - name: Player
+    uniqueID: 3557629463
+    locked: 0
+  - name: Tiles
+    uniqueID: 3868594333
+    locked: 0
+  - name: MID Dressing
+    uniqueID: 3784110789
+    locked: 0
+  - name: Immediate FG
+    uniqueID: 31172181
+    locked: 0
+  - name: Far FG
+    uniqueID: 2577183099
+    locked: 0
+  - name: Vignette
+    uniqueID: 1038907033
+    locked: 0
+  - name: Over
+    uniqueID: 3945752401
+    locked: 0
+  - name: HUD
+    uniqueID: 629535577
+    locked: 0
+```
+
 In the Unity Project, we will need:
 - The `SFCoreUnity.dll` renamed to `SFCore.dll`
 - The `MyFirstCustomSceneMod.dll` from the MonoBehaviour Project
@@ -428,6 +589,7 @@ The folder-structure can look like the following, for easier management:
     - In here, there will be `.cs` source files that will add visualization or other functionality to the Unity Editor, potentially regarding some specific MonoBehaviours.
   - Materials
     - In here, every created Material can be stored, be it Texture Materials or Physics Materials.
+    - We can already create a `Physics Material 2D` with `Friction`: `0.2` and `Bouncines`: `0`
   - Meshes
     - In here, we will put the `TutorialScene.obj` file.
   - Scenes
