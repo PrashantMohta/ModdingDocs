@@ -285,8 +285,46 @@ class PatchPlayMakerManager : MonoBehaviour
 }
 ```
 
+With this the Final Mod Project is done for now!
 
+### MonoBehaviour Project
 
+This project will contain the `MonoBehaviour`s of our Final Mod Project, but without the function bodies.  
+So like this:
+```cs
+class PatchAreaTitleController : MonoBehaviour
+{
+  [Range(0, 10)]
+  public float Pause = 3f;
+  public bool AlwaysVisited = false;
+  public bool DisplayRight = false;
+  public bool OnlyOnRevisit = false;
+  public bool SubArea = true;
+  public bool WaitForTrigger = false;
+  public string AreaEvent = "";
+  public string VisitedBool = "";
+
+  public void Awake()
+  {
+  }
+}
+```
+```cs
+class PatchPlayMakerManager : MonoBehaviour
+{
+  public Transform ManagerTransform;
+
+  public void Awake()
+  {
+  }
+}
+```
+
+> Do note that both the Final Mod Project and the MonoBehaviour Project have to create Assemblies with the same name and namespaces inside.
+
+And with that the MonoBehaviour Project is ready for Unity.
+
+### Unity Project
 
 For the Unity scene, we will use the following `obj` data in a `TutorialScene.obj`:
 ```obj
@@ -309,7 +347,8 @@ s 0
 f 2/1/1 1/1/1 5/1/1 4/1/1
 f 3/1/1 7/1/1 8/1/1 9/1/1 10/1/1 11/1/1 12/1/1 6/1/1
 ```
-Yes, this is the entire mesh we will use as Terrain for the custom Scene.
+
+Yes, this is the entire mesh we will use as Terrain for the custom Scene. And since `.obj` files are just plain text files they can be easily edited using notepad or any other text editor.
 
 
 
