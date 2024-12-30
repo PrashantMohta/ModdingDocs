@@ -158,15 +158,26 @@ private void OnSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.
   if (to.name == "Town")
   {
     // we arrived in Dirtmouth
-    // todo: add code that redirects the well transition to our custom scene
+    // get the transition point in the well
+    var tp = to.Find("bot1").GetComponent<TransitionPoint>();
+    // we want to get to our custom scene
+    tp.targetScene = "MyFirstCustomSceneMod";
+    // we'll enter our custom scene from the left
+    tp.entryPoint = "left1";
   }
   else if (to.name == "Crossroads_01")
   {
     // we arrived in the Forgotten Crossroads
-    // todo: add code that redirects the well transition to our custom scene
+    // get the transition point in the well
+    var tp = to.Find("top1").GetComponent<TransitionPoint>();
+    // we want to get to our custom scene
+    tp.targetScene = "MyFirstCustomSceneMod";
+    // we'll enter our custom scene from the right
+    tp.entryPoint = "right1";
   }
 }
 ```
+> Note: For Transitions, there are the options of naming them `top#`, `left#`, `right#`, `bot#` and `door#`
 
 Now to that `PrefabHolder` class and the empty `GetPreloadNames()` method.
 
@@ -575,7 +586,88 @@ For _MonoScripts, we can create the following files:
   }
   ```
 
+For Editor, we can create the following files:
+- `CameraLockAreaEditor.cs`
+  This script displays which area the in-game camera will show when you enter a `CameraLockArea`
+  ```cs
+  using UnityEngine;
+  using System.Collections;
+  using UnityEditor;
 
+  [CustomEditor(typeof(CameraLockArea))]
+  public class CameraLockAreaEditor : Editor 
+  {
+    void OnSceneGUI()
+    {
+      var cla = target as CameraLockArea;
+      var transform = cla.transform;
+      var positions = new Vector3[5];
+      positions[0] = new Vector3(cla.cameraXMin - 14.6f, cla.cameraYMin - 8.3f);
+      positions[1] = new Vector3(cla.cameraXMax + 14.6f, cla.cameraYMin - 8.3f);
+      positions[2] = new Vector3(cla.cameraXMax + 14.6f, cla.cameraYMax + 8.3f);
+      positions[3] = new Vector3(cla.cameraXMin - 14.6f, cla.cameraYMax + 8.3f);
+      positions[4] = new Vector3(cla.cameraXMin - 14.6f, cla.cameraYMin - 8.3f);
+      Handles.DrawPolyLine(positions);
+    }
+  }
+  ```
+- `CameraModeSwitch.cs`
+  This script allows you to easily switch all `Camera`s in a Scene to either Orthographic or Perspective transparency sort mode, which is usefull since Hollow Knight's camera is a 3d camera but in Orthographic transparency sort mode.
+  ```cs
+  using UnityEngine;
+  using UnityEditor;
+
+  public static class CameraModeSwitch
+  {
+    [MenuItem("Camera/Orthographic")]
+    static public void OrthographicCamera()
+    {
+      foreach (var cam in GameObject.FindObjectsOfType<Camera>())
+        cam.transparencySortMode = TransparencySortMode.Orthographic;
+    }
+    [MenuItem("Camera/Perspective")]
+    static public void PerspectiveCamera()
+    {
+      foreach (var cam in GameObject.FindObjectsOfType<Camera>())
+        cam.transparencySortMode = TransparencySortMode.Default;
+    }
+  }
+  ```
+- `CreateAssetBundles.cs`
+  This script allows you to easily build Asset Bundles for windows, which will work for all platforms right up until you use custom shaders.
+  ```cs
+  using UnityEditor;
+  using System.IO;
+
+  public class CreateAssetBundles
+  {
+    [MenuItem("Build AssetBundles/Build AssetBundles Compressed")]
+    static void BuildAllAssetBundlesCompressed()
+    {
+      string assetBundleDirectory = "Assets/AssetBundles";
+      if(!Directory.Exists(assetBundleDirectory))
+      {
+        Directory.CreateDirectory(assetBundleDirectory);
+      }
+      BuildPipeline.BuildAssetBundles(assetBundleDirectory, 
+                                      BuildAssetBundleOptions.None, 
+                                      BuildTarget.StandaloneWindows);
+    }
+    
+    [MenuItem("Build AssetBundles/Build AssetBundles Uncompressed")]
+    static void BuildAllAssetBundlesUncompressed()
+    {
+      string assetBundleDirectory = "Assets/AssetBundles";
+      if(!Directory.Exists(assetBundleDirectory))
+      {
+        Directory.CreateDirectory(assetBundleDirectory);
+      }
+      BuildPipeline.BuildAssetBundles(assetBundleDirectory, 
+                                      BuildAssetBundleOptions.UncompressedAssetBundle, 
+                                      BuildTarget.StandaloneWindows);
+    }
+  }
+  ```
 
 
 
