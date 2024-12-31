@@ -1335,6 +1335,10 @@ So we will need a few objects for a basic Hollow Knight Scene. Most of these are
       - `Always Enter Left`: Check it.
       - `Target Scene`: Set to `Town`.
       - `Entry Point`: Set to `bot1`.
+      - `Respawn Marker`: Drag and drop the `hazard respawn` GameObject from below here.
+    - GameObject `hazard respawn`, located at (`3`, `0`, `0`), to which we will add 1 MonoBehaviour
+      - MonoBehaviour `HazardRespawnMarker`
+        - `Respawn Facing Right`: Check it.
   - GameObject `right1`, located at (`30.5`, `4`, `0`), to which we will add 2 MonoBehaviours
     - MonoBehaviour `BoxCollider2D`
       - `Is Trigger`: Check it.
@@ -1343,6 +1347,10 @@ So we will need a few objects for a basic Hollow Knight Scene. Most of these are
       - `Always Enter Right`: Check it.
       - `Target Scene`: Set to `Crossroads_01`.
       - `Entry Point`: Set to `top1`.
+      - `Respawn Marker`: Drag and drop the `hazard respawn` GameObject from below here.
+    - GameObject `hazard respawn`, located at (`-3`, `0`, `0`), to which we will add 1 MonoBehaviour
+      - MonoBehaviour `HazardRespawnMarker`
+        - `Respawn Facing Right`: Leave it unchecked.
 - GameObject `BlurPlane`, which *SOAHP-Ch2* located at (`-4.3545`, `-2.4865`, `8`) with a scale of (`9.566181`, `5.896159`, `20`), to which we will add 3 MonoBehaviours
   - MonoBehaviour `MeshFilter`
     - `Mesh`: Create a new Mesh in like Blender or something of a square, any flat plane is good and select it here.
