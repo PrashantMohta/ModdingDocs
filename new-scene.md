@@ -1327,23 +1327,23 @@ So we will need a few objects for a basic Hollow Knight Scene. Most of these are
     - This allows any sprite added as a child of `_Scenery` to be actually viewed in game as not pink boxes.
     - Alternatively, put the MonoBehaviour on a child under which you then put the sprites.
 - GameObject `_Transition Gates`
-  - GameObject `left1`, to which we will add 2 MonoBehaviours
+  - GameObject `left1`, located at (`-0.5`, `4`, `0`), to which we will add 2 MonoBehaviours
     - MonoBehaviour `BoxCollider2D`
       - `Is Trigger`: Check it.
-      - `Size`: Set to `1`x`5`.
+      - `Size`: Set to `1`x`4`.
     - MonoBehaviour `TransitionPoint`
       - `Always Enter Left`: Check it.
       - `Target Scene`: Set to `Town`.
       - `Entry Point`: Set to `bot1`.
-  - GameObject `right1`, to which we will add 2 MonoBehaviours
+  - GameObject `right1`, located at (`30.5`, `4`, `0`), to which we will add 2 MonoBehaviours
     - MonoBehaviour `BoxCollider2D`
       - `Is Trigger`: Check it.
-      - `Size`: Set to `1`x`5`.
+      - `Size`: Set to `1`x`4`.
     - MonoBehaviour `TransitionPoint`
       - `Always Enter Right`: Check it.
       - `Target Scene`: Set to `Crossroads_01`.
       - `Entry Point`: Set to `top1`.
-- GameObject `BlurPlane`, to which we will add 3 MonoBehaviours
+- GameObject `BlurPlane`, which *SOAHP-Ch2* located at (`-4.3545`, `-2.4865`, `8`) with a scale of (`9.566181`, `5.896159`, `20`), to which we will add 3 MonoBehaviours
   - MonoBehaviour `MeshFilter`
     - `Mesh`: Create a new Mesh in like Blender or something of a square, any flat plane is good and select it here.
   - MonoBehaviour `MeshRenderer`
@@ -1375,7 +1375,7 @@ So we will need a few objects for a basic Hollow Knight Scene. Most of these are
   - GameObject `Scenemap`, set the Layer to `Terrain` and to which we will add 1 MonoBehaviour
     - MonoBehaviour `SceneMapPatcher`
       - `Tex`: Set to any black square sprite.
-    - GameObject `Chunk 0 0`, which will have the Layer already set to `Terrain` and to which we will add 3 MonoBehaviours
+    - GameObject `Chunk 0 0`, located at (`0`, `0`, `-0.1`), which will have the Layer already set to `Terrain` and to which we will add 3 MonoBehaviours
       - MonoBehaviour `MeshFilter`
         - `Mesh`: Select the `TutorialScene` mesh.
       - MonoBehaviour `MeshRenderer`
