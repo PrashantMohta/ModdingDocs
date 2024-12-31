@@ -1251,7 +1251,7 @@ For Editor, we can create the following files:
 
 With that done, we can actually get to the scene content now, yay!
 
-#### Unity Project Scene Content
+#### Scene Content
 
 So we will need a few objects for a basic Hollow Knight Scene. Most of these are just for organizing. Also, all have their Transform as:  
 | Part     | X | Y | Z |
@@ -1395,3 +1395,17 @@ So we will need a few objects for a basic Hollow Knight Scene. Most of these are
         - `Material`: the `Physics Material 2D` we created.
         - `Is Trigger`: Off.
         - The shape can be either drawn manually or by right clicking the Bar of the `MeshFilter` MonoBehaviour and clicking "Create Collision"
+
+#### Lighting
+
+Under Window => Rendering => Lighting you can access the Lighting settings.
+
+There, click the New Lighting Settings button and set the values as following:
+
+- Realtime Global Illumination (Deprecated) to Off
+- Baked Global Illumination to Off
+- Light Probe Visualization to Only Selection, On, On, On
+
+#### Assetbundle
+
+### Building the Final Mod Project
