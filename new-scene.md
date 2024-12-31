@@ -1400,12 +1400,36 @@ So we will need a few objects for a basic Hollow Knight Scene. Most of these are
 
 Under Window => Rendering => Lighting you can access the Lighting settings.
 
-There, click the New Lighting Settings button and set the values as following:
+There, under Scene, click the New Lighting Settings button and set the values as following:
 
 - Realtime Global Illumination (Deprecated) to Off
 - Baked Global Illumination to Off
 - Light Probe Visualization to Only Selection, On, On, On
 
+Then under Environment, set the values as following:
+
+- Skybox Material to None
+- Sun Source to None
+- Realtime Shadow Color to 6B7AA0FF
+- Environment Lighting
+  - Source to Color
+  - Ambient Color to 54, 58, 66
+- Environment Reflections
+  - Source to Skybox
+  - Resolution to 128
+  - Compression to Auto
+  - Intensity Multiplier to 1
+  - Bounces to 1
+- Everything under Other Settings to Default
+
 #### Assetbundle
 
+For the Asset Bundle you want to select the Scene in the Project Asset window and in the Inspector at the bottom click on the AssetBundle drop down menu and click New... and put the name `my_first_assetbundle`.
+
+Now you can click Build AssetBundles => Build AssetBundles Compressed and your built Asset Bundles will show up in `{Unity Project Folder}/Assets/AssetBundles`.
+
 ### Building the Final Mod Project
+
+Now copy this AssetBundle from the Unity Project directory into the Final Mod Project's Resources Folder and make it an embedded resource.
+
+Then all that's left is to build the Final Mod Project and test out the mod!
