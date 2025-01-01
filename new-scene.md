@@ -159,21 +159,32 @@ private void OnSceneChanged(UnityEngine.SceneManagement.Scene from, UnityEngine.
   {
     // we arrived in Dirtmouth
     // get the transition point in the well
-    var tp = to.Find("bot1").GetComponent<TransitionPoint>();
+    var tp1 = to.Find("bot1").GetComponent<TransitionPoint>();
     // we want to get to our custom scene
-    tp.targetScene = "MyFirstCustomSceneMod";
+    tp1.targetScene = "MyFirstCustomSceneMod";
     // we'll enter our custom scene from the left
-    tp.entryPoint = "left1";
+    tp1.entryPoint = "left1";
   }
   else if (to.name == "Crossroads_01")
   {
     // we arrived in the Forgotten Crossroads
     // get the transition point in the well
-    var tp = to.Find("top1").GetComponent<TransitionPoint>();
+    var tp1 = to.Find("top2").GetComponent<TransitionPoint>();
     // we want to get to our custom scene
-    tp.targetScene = "MyFirstCustomSceneMod";
+    tp1.targetScene = "MyFirstCustomSceneMod";
     // we'll enter our custom scene from the right
-    tp.entryPoint = "right1";
+    tp1.entryPoint = "right1";
+
+    var tp2Go = to.Find("door1");
+    // get the transition point at the bottom
+    var tp2 = tp2Go.GetComponent<TransitionPoint>();
+    // we want to get to our custom scene
+    tp2.targetScene = "MyFirstCustomSceneMod";
+    // we'll enter our custom scene from the right
+    tp2.entryPoint = "right1";
+    var tp2Fsm = tp2Go.LocateMyFSM("Door Control");
+    tp2Fsm.GetStringVariable("New Scene").Value = tp2.targetScene;
+    tp2Fsm.GetStringVariable("Entry Gate").Value = tp2.entryPoint;
   }
 }
 ```
@@ -1346,7 +1357,7 @@ So we will need a few objects for a basic Hollow Knight Scene. Most of these are
     - MonoBehaviour `TransitionPoint`
       - `Always Enter Right`: Check it.
       - `Target Scene`: Set to `Crossroads_01`.
-      - `Entry Point`: Set to `top1`.
+      - `Entry Point`: Set to `top1` (not `top2`, as `top1` just makes the Knight drop in from lower).
       - `Respawn Marker`: Drag and drop the `hazard respawn` GameObject from below here.
     - GameObject `hazard respawn`, located at (`-3`, `0`, `0`), to which we will add 1 MonoBehaviour
       - MonoBehaviour `HazardRespawnMarker`
