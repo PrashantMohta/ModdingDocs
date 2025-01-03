@@ -877,7 +877,7 @@ For Editor, we can create the following files:
       }
       BuildPipeline.BuildAssetBundles(assetBundleDirectory, 
                                       BuildAssetBundleOptions.None, 
-                                      BuildTarget.StandaloneWindows);
+                                      BuildTarget.StandaloneWindows64);
     }
     
     [MenuItem("Build AssetBundles/Build AssetBundles Uncompressed")]
@@ -890,7 +890,7 @@ For Editor, we can create the following files:
       }
       BuildPipeline.BuildAssetBundles(assetBundleDirectory, 
                                       BuildAssetBundleOptions.UncompressedAssetBundle, 
-                                      BuildTarget.StandaloneWindows);
+                                      BuildTarget.StandaloneWindows64);
     }
   }
   ```
