@@ -79,7 +79,7 @@ so what is going on here ?
 - Next, we create our own `namespace` called `MyFirstMod`  this will contain our mod
 - `public class MyFirstMod : Mod`  we define a new public class called `MyFirstMod` that extends the `Mod` base class, this is the class that will be loaded by the Modding api, and this is where we will tell the game about our mod.
 - `public MyFirstMod() : base("My First Mod") { }` The constructor of the Mod class has a parameter that allows us to set the mods name as it will appear in game, in the top-left mods list.
-- `GetVersion` The Mod class has a few special methods that if provided by out mod allows us to do a few interesting things. `GetVersion()` for example allows us to set the version of our mod that will be displayed alongside the name in the top-left mods list.
+- `GetVersion` The Mod class has a few special methods that if provided by our mod allows us to do a few interesting things. `GetVersion()` for example allows us to set the version of our mod that will be displayed alongside the name in the top-left mods list.
 - `Initialize` is called when the Api is ready for our mod to start making modifications, this is also the place where preloads are provided (more on that in a bit)
 - `ModHooks.HeroUpdateHook` the Modding api provides us with certain *events* that we can react to, this is what allows us to code things that respond to in game events. `HeroUpdateHook` for example is an event that is invoked every frame that the player character exists, this makes it possible for us to listen for a keypress and react to that, for achieving this we use our own method `OnHeroUpdate`.
 - `OnHeroUpdate` simply checks if the `O` key was pressed down this frame, if it was then it adds the string "Key Pressed" to the `Modlog.txt`
