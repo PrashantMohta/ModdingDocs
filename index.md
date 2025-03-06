@@ -6,51 +6,52 @@ nav_order: 1
 
 > Please note that this documentation is being written with the latest patch of the game in mind, for older patches you can refer to the documentation at [radiance.host](https://radiance.synthagen.net/apidocs/_images/Getting-Started.html)
 
-## Introduction:  
+## Introduction:
+
 Hollow Knight (patch 1.5.x.x onwards) is a game built with Unity 2020.2.2 and C# (.NET Framework 4.7.2), this means that a mod in the context of hollow knight is a `dll` or a Dynamic-Link Library that allows players to modify the behavior of the game, fix issues or add new features. This is achieved with the help of a Modding Api that handles the loading of mods and giving us ways of injecting our own code in the middle of normal logic.
 
 The [Hollow Knight Modding Api](https://github.com/hk-modding/api) is based on [MonoMod](https://github.com/MonoMod/MonoMod), a General purpose .NET assembly modding "basework".
 
-If you're just getting started with modding hollow knight, you should start with the [Getting Started Guide](getting-started.md) to get your system setup for modding.  
+If you're just getting started with modding hollow knight, you should start with the [Getting Started Guide](getting-started.md) to get your system setup for modding.
 
 ## Your first mod
 
-  Once you have your system set-up, you can move on to creating [your first mod](your-first-mod.md).  
-  
+Once you have your system set-up, you can move on to creating [your first mod](your-first-mod.md).
+
 ## Deeper dive into modding
 
-The next few sections will give you a better idea of what modding hollow knight looks like beyond simple mods, Covering the concepts, tools & techniques that exist to make the job easier. It goes without saying that the [Unity Scripting Reference](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/) and [Microsoft .NET API browser](https://docs.microsoft.com/en-us/dotnet/api/?view=netframework-4.7.2) are absolutely invaluable references when working within unity. In the context of hollow knight modding though, there are a few more concepts and resources that you want to be looking at. 
+The next few sections will give you a better idea of what modding hollow knight looks like beyond simple mods, Covering the concepts, tools & techniques that exist to make the job easier. It goes without saying that the [Unity Scripting Reference](https://docs.unity3d.com/2020.2/Documentation/ScriptReference/) and [Microsoft .NET API browser](https://docs.microsoft.com/en-us/dotnet/api/?view=netframework-4.7.2) are absolutely invaluable references when working within unity. In the context of hollow knight modding though, there are a few more concepts and resources that you want to be looking at.
 
- - Concepts
-	 - [The Mod Class](mod-baseclass.md)
-	 - [The Mod Lifecycle](mod-lifecycle.md) 
-	 - [Preloading game objects](preloads.md)
-	 - [Logging](logging.md)
-	 - [Hooks](Hooks/hooks.md)
-	 - [Saving Mod Data](saving-mod-data.md)
-	 - [Mod Menu](modmenu.md)
-	 - [Hollow Knight Classes](hkclasses.md)
-	 - [PlaymakerFSMs](understanding-fsms.md)
-	 - [Dependency Mods](dependencymods.md)
-	 - [Scripting](#todo-section)
+- Concepts
+  - [The Mod Class](mod-baseclass.md)
+  - [The Mod Lifecycle](mod-lifecycle.md)
+  - [Preloading game objects](preloads.md)
+  - [Logging](logging.md)
+  - [Hooks](Hooks/hooks.md)
+  - [Saving Mod Data](saving-mod-data.md)
+  - [Mod Menu](modmenu.md)
+  - [Hollow Knight Classes](hkclasses.md)
+  - [PlaymakerFSMs](understanding-fsms.md)
+  - [Dependency Mods](dependencymods.md)
+  - [Scripting](#todo-section)
 
- - Investigative tools
-	   <br>These tools can help investigate how a system works in the game so that you can figure out the best way to modify it.
-	 - [ILspy](Tools/decompilers.md)
-	 - [FSM Viewer](Tools/fsmviewer.md)
-	 - [Unity Explorer](https://github.com/sinai-dev/UnityExplorer/blob/master/README.md#features)
-	 - [Scene Dump](Tools/scenedump.md)
+- Investigative tools  
+  These tools can help investigate how a system works in the game so that you can figure out the best way to modify it.
+  - [ILspy](Tools/decompilers.md)
+  - [FSM Viewer](Tools/fsmviewer.md)
+  - [Unity Explorer](https://github.com/sinai-dev/UnityExplorer/blob/master/README.md#features)
+  - [Scene Dump](Tools/scenedump.md)
 
- - Advanced Concepts
-	 - [Reflection](reflection.md)
-	 - [IL Hooks](Hooks/ilhooks.md)
-	 - [Custom NPC](#todo-section)
-	 - [Custom Enemy](#todo-section)
-	 - [Custom Scene](#todo-section)
+- Advanced Concepts
+  - [Reflection](reflection.md)
+  - [IL Hooks](Hooks/ilhooks.md)
+  - [Custom NPC](#todo-section)
+  - [Custom Enemy](#todo-section)
+  - [Custom Scene](#todo-section)
 
 ## Publishing and distributing your mod
 
-Once you have created a mod that you want to share with the world, you should look into [publishing your mod on github](#todo-section). This will allow others to look at the source code and get inspired from your creation. They might even contribute to it, making your mod all the better! Once that is done you can share the link of your published github release with all your friends. If you want to add your mod to the mod installer (scarab) then you can [add your mod to the modlinks](#adding-your-mod-to-modlinks).  
+Once you have created a mod that you want to share with the world, you should look into [publishing your mod on github](#todo-section). This will allow others to look at the source code and get inspired from your creation. They might even contribute to it, making your mod all the better! Once that is done you can share the link of your published github release with all your friends. If you want to add your mod to the mod installer (scarab) then you can [add your mod to the modlinks](#adding-your-mod-to-modlinks).
 
 ## Adding your mod to modlinks
 
@@ -59,6 +60,7 @@ To add your mod to the mod installer:
 - [Visit the modlinks page](https://github.com/hk-modding/modlinks/blob/main/ModLinks.xml)
 - Instead of forking the entire repository, click the pencil at the top right corner to edit the `Modlinks.xml` file.
 - Make your changes to the file.
+
 Example mod manifest:
 
 ```xml
@@ -101,26 +103,26 @@ Example:
     <![CDATA[https://github.com/Hallownest-Vocalized/Hallownest-Vocalized/releases/download/0.0.1.2/HKVocal.zip]]>
     </Link>
     <Dependencies>
-      <Dependency>Satchel</Dependency>
-      <Dependency>Core.FsmUtil</Dependency>
-      <Dependency>HKMirror</Dependency>
-      <Dependency>Osmi</Dependency>
-      <Dependency>SFCore</Dependency>
-      <Dependency>FrogCore</Dependency>
-      <Dependency>Hallownest-Vocalized-AudioLoader</Dependency>
+        <Dependency>Satchel</Dependency>
+        <Dependency>Core.FsmUtil</Dependency>
+        <Dependency>HKMirror</Dependency>
+        <Dependency>Osmi</Dependency>
+        <Dependency>SFCore</Dependency>
+        <Dependency>FrogCore</Dependency>
+        <Dependency>Hallownest-Vocalized-AudioLoader</Dependency>
     </Dependencies>
     <Repository>
-      <![CDATA[https://github.com/Hallownest-Vocalized/Hallownest-Vocalized]]>
+        <![CDATA[https://github.com/Hallownest-Vocalized/Hallownest-Vocalized]]>
     </Repository>
     <Tags>
-      <Tag>Gameplay</Tag>
+        <Tag>Gameplay</Tag>
     </Tags>
     <Authors>
-      <Author>RedFrog</Author>
-      <Author>Mulhima</Author>
-      <Author>Link459</Author>
-      <Author>Clove</Author>
-      <Author>Zickles</Author>
+        <Author>RedFrog</Author>
+        <Author>Mulhima</Author>
+        <Author>Link459</Author>
+        <Author>Clove</Author>
+        <Author>Zickles</Author>
     </Authors>
 </Manifest>
 ```

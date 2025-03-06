@@ -2,14 +2,16 @@
 nav_order: 6
 ---
 # Preloading game objects
+
 ## Introduction
+
 To modify in game behaviors you typically need access to the GameObject that controls that behavior. To get access to said GameObject, you need to be in the same "scene" or level as it. This creates a problem such that, if you want to spawn a copy of an enemy, you need access to that enemy without needing the player to be in that scene before you can spawn it.
 
 This is where preloads come in, preloading is a way for a mod to tell the modding api that a certain gameobject is required. The modding api then attempts to load the GameObject while the game is first loading, thus giving you access to that gameobject.
 
 ## How to preload an object
 
-To preload a gameobject your mod class must implement a method `GetPreloadNames` like so :
+To preload a gameobject your mod class must implement a method `GetPreloadNames` like so:
 
 ```cs
 public override List<(string, string)> GetPreloadNames()
@@ -18,9 +20,10 @@ public override List<(string, string)> GetPreloadNames()
     {
         ("GG_Hornet_2", "Boss Holder/Hornet Boss 2"),
         ("Cliffs_01","Cornifer Card")
-    };   
+    };
 }
 ```
+
 In the list returned by `GetPreloadNames` each element is of the form `(SceneName, GameObjectPath)`.
 
 `SceneName` is the internal name of a level and `GameObjectPath` is the path of the GameObjects going from the root of the scene to the desired object.
@@ -39,7 +42,8 @@ public override void Initialize(Dictionary<string, Dictionary<string, GameObject
    Object.DontDestroyOnLoad(BossPrefab);
    Object.DontDestroyOnLoad(CardPrefab);
 }
-``` 
+```
+
 You can then access your GameObject by doing `preloadedObjects[SceneName][GameObjectPath]`.
 
-> Note: Preloading objects increases the overall loading time for the game to start. If possible, you should preload the minimum number of objects that you need. 
+> Note: Preloading works by loading specified scenes before the game loads to the main menu and thus increases the overall loading time for the game to start. As such, you should preload the minimum number of objects and have as many objects as possible from the same scene.

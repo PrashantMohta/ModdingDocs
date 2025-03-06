@@ -4,7 +4,7 @@ nav_exclude : true
 
 # ModdingDocs
 Hollow Knight Modding documentation.
- 
+
 Live page : https://prashantmohta.github.io/ModdingDocs/ 
 
 ## Vision
